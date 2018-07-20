@@ -1,0 +1,61 @@
+{% extends "layout-full-width.html" %}
+{%- from "tag/macro.njk" import govukTag -%}
+
+{% block pageTitle %}
+  {{"app_title" | translate}} Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <div class="homepage-header">
+    <div class="govuk-width-container">
+      <h1 class="govuk-heading-xl">
+        {{"app_title" | translate}}
+        <span class="govuk-caption-xl">Prototypes</span>
+      </h1>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <article class="latest-version">
+        <section>
+          {{ govukTag({
+            text: "Most Recent",
+            classes: "most-recent-tag"
+          }) }}
+          {% include latestPrototypes[0] %}
+        </section>
+      </article>
+    </div>
+  </div>
+
+  <details class="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">Prototypes</span>
+    </summary>
+
+    {# Below is each prototype version's index page,
+    copy template.html and put in a directory as index.html to see it appear #}
+
+    {% for item in latestPrototypes %}
+      {% if loop.index != 1 %}
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+            <article class="previous-version govuk-details__text">
+              <section>
+                {% include item %}
+              </section>
+            </article>
+          </div>
+        </div>
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+      {% endif %}
+    {% endfor %}
+  </details>
+
+
+{% endblock %}
+
+

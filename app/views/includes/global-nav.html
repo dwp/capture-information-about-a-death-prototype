@@ -1,0 +1,20 @@
+<nav class="navigation-global">
+  <ul>
+    <li>
+      <a href="new-notification" class="{{globalNavClasses}}" aria-current="page">New notification</a>
+    </li>
+    <li class="search-group">
+      <form class="search-form" method="get" action="search-results">
+        {{ govukInput({
+          label: {
+            text: "national_insurance_number" | translate,
+            classes: "govuk-visually-hidden"
+          },
+          id: "search-national-insurance",
+          name: "search-national-insurance"
+        }) }}
+        <button class="button-search">Search</button>
+      </form>
+    </li>
+  </ul>
+</nav>

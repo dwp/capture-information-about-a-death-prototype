@@ -1,0 +1,220 @@
+// global styles for <a> and <p> tags
+$govuk-global-styles: true;
+
+//Import GOV.UK Frontend
+@import "govuk-frontend/all";
+
+// Patterns that aren't in Frontend
+@import 'patterns/check-your-answers';
+@import 'patterns/related-items';
+@import 'patterns/task-list';
+@import 'patterns/global-nav';
+@import 'patterns/autocomplete';
+
+//cookie-banner
+@import "../../../docs/assets/sass/cookie-banner";
+
+.code {
+  color: $govuk-text-colour;
+  background-color: govuk-colour("grey-4");
+
+  text-shadow: 0 1px govuk-colour("white");
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  border: 1px solid $govuk-border-colour;
+  padding: 4px 4px 2px;
+}
+
+
+// Local fixes to GOV.UK frontend
+
+.markdown hr {
+  @include govuk-responsive-margin(6, "top");
+  @include govuk-responsive-margin(6, "bottom");
+}
+
+.govuk-list + .govuk-heading-l,
+.govuk-list + .govuk-heading-m,
+.govuk-list + .govuk-heading-s {
+  @include govuk-responsive-margin(4, "top");
+}
+
+// Take a look at in app/assets/sass/patterns/ to see which files are imported.
+// @import 'patterns/check-your-answers';
+// @import 'patterns/task-list';
+
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+
+.homepage-header {
+  background: $govuk-link-colour;
+  color: #fff;
+  margin-top: -10px; // to negate the blue border on header
+  padding: 50px 0 1px; // Space the heading, 1px for collapsing marigns
+  position: relative;
+
+  h1 {
+    span, & {
+      color: #fff;
+    }
+  }
+}
+
+.latest-version {
+  border: 1px solid $govuk-border-colour;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+article {
+  .govuk-heading-s {
+    margin-bottom: 15px;
+  }
+}
+
+.previous-version,
+.latest-version {
+  dd {
+    margin: 0;
+  }
+}
+
+.most-recent-tag {
+  background: $govuk-border-colour;
+  margin-left: -20px;
+  position: relative;
+  top: -20px;
+}
+
+.search-group {
+  .govuk-form-group {
+    margin: 8px 0 0;
+  }
+
+  .button-search {
+    @include govuk-focusable;
+
+    background: govuk-colour("blue") url('/public/images/search.png') no-repeat center center;
+    background-position: 85% 50%;
+    background-size: 80px;
+    border: 0;
+    margin-right: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    text-indent: -100px;
+
+    &:hover, &:focus {
+      cursor: pointer;
+      background-color: $govuk-link-hover-colour;
+    }
+  }
+}
+
+.search-form {
+  @include govuk-clearfix;
+
+  display: block;
+
+  .govuk-form-group,
+  .button-search {
+    float: left;
+  }
+
+  .button-search {
+    margin-top: 8px;
+  }
+}
+
+.button-secondary {
+  background-color: govuk-colour("light-blue");
+  color: govuk-colour("black");
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: govuk-colour("blue");
+  }
+}
+
+.postcode-group {
+  @include govuk-clearfix;
+
+  > .govuk-form-group {
+    float: left;
+    margin-bottom: 10px;
+  }
+}
+
+.postcode-lookup {
+  float: left;
+  margin-left: 15px;
+  margin-top: 25px;
+  margin: 25px 0 10px 15px;
+  width: auto;
+
+  @include govuk-media-query($from: tablet) {
+    margin-top: 30px;
+  }
+}
+
+.address-details {
+  float: left;
+  width: 100%;
+}
+
+legend {
+  .govuk-hint {
+    margin-bottom: 0;
+  }
+}
+
+.inset-address {
+  padding: 15px 0 0 15px;
+  border-left: 4px solid govuk-colour("grey-2");
+}
+
+.address-group {
+  margin-bottom: 20px;
+
+  @include govuk-media-query($from: tablet) {
+    margin-bottom: 30px;
+  }
+}
+
+.spouse-group,
+.executor-group {
+  .address-group {
+    legend {
+      display: none;
+    }
+  }
+}
+
+.govuk-radios__conditional {
+  label {
+    @include govuk-typography-weight-regular($important: true);
+  }
+}
+
+.highlight {
+  border-bottom: 3px solid govuk-colour("yellow");
+  background-color: #fff2d3;
+  text-decoration: none;
+}
