@@ -2,25 +2,26 @@ const errors = require('../utils/errors');
 const relationships = ['wife', 'husband'];
 
 module.exports = [
-  {
-    type: 'input',
-    name: 'caller-name',
-    message: "What's your name?",
-  },
-  {
-    type: 'input',
-    name: 'phone',
-    message: "What's your phone number?",
-  },
+  // {
+  //   type: 'input',
+  //   name: 'caller-name',
+  //   message: "What's your name?",
+  // },
+  // {
+  //   type: 'input',
+  //   name: 'phone',
+  //   message: "What's your phone number?",
+  // },
+    // see if theres any kids for BSP eligibility...
   {
     type: 'input',
     name: 'caller_age',
     message: "How old are you?",
     validate: (val) => {
-      if (65 > val) {
+      if (65 < val) {
         errors.generateError('age', 'bsp');
       } else {
-        errors.bspEligibility.push({ eligible: true, reason: 'age' });
+        errors.generateSuccess('age', 'bsp');
       }
       return true;
     }
@@ -31,7 +32,7 @@ module.exports = [
     message: "What was your relationship to the deceased?",
     validate: (val) => {
       if (relationships.includes(val)) {
-        errors.bspEligibility.push({ eligible: true, reason: 'relationship' });
+        errors.generateSuccess('relationship', 'bsp');
       } else {
         errors.generateError('relationship', 'bsp');
       }
@@ -39,4 +40,33 @@ module.exports = [
       return true;
     },
   },
+  {
+    type: 'confirm',
+    name: 'caller_children',
+    message: 'Did you and the deceased have any dependants/children',
+    when: (val) => {
+      if (relationships.includes(val.caller_relationship)) {
+        return true;
+      }
+
+      return false;
+    }
+  },
+  {
+    type: 'confirm',
+    name: 'caller_children',
+    message: 'Did you and the deceased have any dependants/children',
+    when: (val) => {
+      if (val.caller_children) {
+        errors.generateSuccess('children', 'bsp');
+      }
+
+      return false;
+    }
+  }
 ];
+
+/**
+ * qualifying benefits? list of
+ *
+ */
