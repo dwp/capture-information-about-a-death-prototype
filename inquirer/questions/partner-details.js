@@ -1,14 +1,7 @@
 const errors = require('../utils/errors');
 const eligiblity = require('../utils/eligibility');
+
 module.exports = [
-//   Income Support
-// income-based Jobseeker’s Allowance
-// income-related Employment and Support Allowance
-// Pension Credit
-// Housing Benefit
-// the disability or severe disability element of Working Tax Credit
-// Child Tax Credit
-// Universal Credit
   {
     type: 'checkbox',
     name: 'eligible_benefits',
@@ -101,6 +94,40 @@ module.exports = [
       errors.generateError('no_partner')
       eligiblity.logEligibility();
 
+      return false;
+    }
+  },
+  {
+    type: 'confirm',
+    name: 'date_of_death',
+    message: 'Did the deceased die in the last 6 months?',
+  },
+  {
+    type: 'confirm',
+    name: 'date_of_death_failed',
+    message: 'The deceased died longer than 6 months ago',
+    when: val => {
+      if (!val.date_of_death) {
+        errors.generateError('date_of_death')
+        eligiblity.logEligibility();
+      }
+      return false;
+    }
+  },
+  {
+    type: 'confirm',
+    name: 'resident_of_uk',
+    message: 'Was the deceased a resident of the UK?'
+  },
+  {
+    type: 'confirm',
+    name: 'not-resident-of-uk',
+    message: 'The deceased is not a resident of the uk',
+    when: (val) => {
+      if (!val.resident_of_uk) {
+        errors.generateError('not_uk_resident')
+        eligiblity.logEligibility();
+      }
       return false;
     }
   }

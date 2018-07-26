@@ -1,5 +1,6 @@
 const callerDetails = require('./caller-details');
 const partnerDetails = require('./partner-details');
+const funeralDetails = require('./funeral-details');
 
 /**
  * The aim is to kill the journey as quick as possible, so that the user
@@ -9,5 +10,6 @@ const partnerDetails = require('./partner-details');
  */
 module.exports = [
   ...callerDetails,
+  ...funeralDetails,
   ...partnerDetails
 ]
