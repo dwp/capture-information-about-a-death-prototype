@@ -167,20 +167,6 @@
   value: data["caller-phone-number"]
 }) }}
 
-{{ govukInput({
-  label: {
-    text: "email" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "caller-email-group"
-    }
-  },
-  id: "caller-email",
-  name: "caller-email",
-  classes: "govuk-!-width-two-thirds",
-  value: data["caller-email"]
-}) }}
-
 {{ govukRadios({
   idPrefix: "is-caller-executor-conditional",
   name: "is-caller-executor",
