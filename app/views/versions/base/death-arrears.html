@@ -1,0 +1,40 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{"death_arrears_heading" | translate}}</h1>
+      <form method="post" action="payee">
+        {{ govukRadios({
+          id: "death-arrears-caller",
+          name: "death-arrears-caller",
+          fieldset: {
+            legend: {
+              text: "death_arrears_question" | translate,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes",
+              checked: true if data['death-arrears-caller'] == 'true' else false
+            },
+            {
+              value: "false",
+              text: "No",
+              checked: true if data['death-arrears-caller'] == 'false' else false
+            }
+          ]
+          })
+        }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

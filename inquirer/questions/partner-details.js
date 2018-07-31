@@ -14,7 +14,8 @@ module.exports = [
       'Housing Benefit',
       'the disability or severe disability element of Working Tax Credit',
       'Child Tax Credit',
-      'Universal Credit'
+      'Universal Credit',
+      'Support for Mortgage Interest loan'
     ]
   },
   {

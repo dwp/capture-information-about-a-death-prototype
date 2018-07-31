@@ -2,11 +2,11 @@ const gutil = require('gulp-util');
 const c = gutil.colors;
 const eligibility = require('./eligibility');
 const illegibleBsp = (reason => `The caller is not eligible for BSP due to ${reason}`);
-const illegibleSffp = (reason => `The caller is not eligible for SFFP due to ${reason}`);
+const illegibleFep = (reason => `The caller is not eligible for FEP due to ${reason}`);
 
-const generateError = (reason, benefit = 'sffp') => {
-  let benefitType = illegibleSffp;
-  let benefitEffors = eligibility.sffp;
+const generateError = (reason, benefit = 'fep') => {
+  let benefitType = illegibleFep;
+  let benefitEffors = eligibility.fep;
   if (benefit === 'bsp') {
     benefitType = illegibleBsp;
     benefitEffors = eligibility.bsp;
@@ -15,8 +15,8 @@ const generateError = (reason, benefit = 'sffp') => {
   benefitEffors.push({ eligible: false, reason });
 }
 
-const generateSuccess = (reason, benefit = 'sffp') => {
-  let benefitType = eligibility.sffp;
+const generateSuccess = (reason, benefit = 'fep') => {
+  let benefitType = eligibility.fep;
   if (benefit === 'bsp') {
     benefitType =  eligibility.bsp;
   }

@@ -1,0 +1,13 @@
+{% set hospitalValues = [{value: '', text: ''}] %}
+{% for hospital in hospitals %}
+  {% set hospitalValues = (hospitalValues.push({value: hospital.OrganisationName, text: hospital.OrganisationName}), hospitalValues) %}
+{% endfor %}
+
+{{ govukSelect({
+  id: "hospital-location",
+  name: "hospital-location",
+  label: {
+    text: "hospital_location" | translate
+  },
+  items: hospitalValues
+}) }}

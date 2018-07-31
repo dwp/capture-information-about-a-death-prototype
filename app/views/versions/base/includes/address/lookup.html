@@ -1,0 +1,10 @@
+{% call govukFieldset({
+  classes: 'address-group',
+  legend: {
+    html: "address" | translate + "<span class='govuk-hint'>" + "address_hint" | translate + "</span>",
+    classes: "govuk-fieldset__legend--s",
+    isPageHeading: false
+  }
+}) %}
+  {% include "versions/base/includes/address/find.html" %}
+{% endcall %}

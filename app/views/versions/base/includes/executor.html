@@ -1,0 +1,41 @@
+{% call govukFieldset({
+  legend: {
+    text: "executor_question" | translate,
+    classes: "govuk-fieldset__legend--s",
+    isPageHeading: false
+  },
+  classes: "executor-group"
+}) %}
+  {{ govukInput({
+    label: {
+      text: "full_name" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "executor-full-name-group"
+      }
+    },
+    id: "executor-full-name",
+    name: "executor-full-name",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-full-name"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "phone_number" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "executor-phone-number-group"
+      }
+    },
+    id: "executor-phone-number",
+    name: "executor-phone-number",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-phone-number"]
+  }) }}
+
+  <div class="govuk-form-group">
+    {% set prefix = "executor" %}
+    {% include "includes/address-lookup.html" %}
+  </div>
+{% endcall %}
