@@ -218,3 +218,8 @@ legend {
   background-color: #fff2d3;
   text-decoration: none;
 }
+
+.summary {
+  @include govuk-font($size: 19);
+  @include govuk-text-colour;
+}

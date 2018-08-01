@@ -1,1 +1,41 @@
-personal details here
+{{ govukInput({
+  label: {
+    text: "full_name" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "dap-full-name-group"
+    }
+  },
+  id: "dap-full-name",
+  name: "dap-full-name",
+  classes: "govuk-!-width-two-thirds",
+  value: data["dap-full-name"]
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "company_name" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "dap-company-name-group"
+    }
+  },
+  id: "dap-company-name",
+  name: "dap-company-name",
+  classes: "govuk-!-width-two-thirds",
+  value: data["dap-company-name"]
+}) }}
+
+
+{% call govukFieldset({
+    legend: {
+      html: "death_arrears_address" | translate,
+      classes: "govuk-fieldset__legend--s",
+      isPageHeading: false
+    }
+}) %}
+  <div class="govuk-form-group">
+    {% set prefix = "dap" %}
+    {% include "versions/base/includes/address/find.html" %}
+  </div>
+{% endcall %}

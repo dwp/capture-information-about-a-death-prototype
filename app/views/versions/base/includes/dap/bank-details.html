@@ -1,5 +1,30 @@
 <h2 class="govuk-heading-m">{{"bank_details_heading" | translate}}</h2>
 
+{{ govukRadios({
+  idPrefix: "bank-or-building",
+  name: "bank-or-building",
+  fieldset: {
+    classes: 'js-bank-or-building',
+    legend: {
+      text: "bank_building_question" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "bank-account",
+      text: "bank_account" | translate,
+      checked: true if data['bank-or-building'] == 'bank' else true
+    },
+    {
+      value: "building-society",
+      text: "building_society" | translate,
+      checked: true if data['bank-or-building'] == 'buildsoc' else false
+    }
+  ]
+}) }}
+
 {{ govukInput({
   label: {
     text: "bank_name" | translate,
@@ -42,19 +67,12 @@
   value: data["bank-sort-code"]
 }) }}
 
-{{ govukInput({
-  label: {
-    text: "building_soc_roll" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "dap-building-soc-roll-group"
-    }
-  },
-  hint: {
-    text: "building_soc_roll_hint" | translate
-  },
-  id: "building-soc-roll",
-  name: "building-soc-roll",
-  classes: "govuk-!-width-two-thirds",
-  value: data["building-soc-roll"]
-}) }}
+<div class="govuk-form-group js-roll-number js-hidden">
+  <label class="govuk-label govuk-!-font-weight-bold" id="dap-building-soc-roll-group" for="building-soc-roll">
+    {{ "building_soc_roll" | translate}}
+  </label>
+  <span id="building-soc-roll-hint" class="govuk-hint">
+    {{ "building_soc_roll_hint" | translate}}
+  </span>
+  <input class="govuk-input govuk-!-width-two-thirds" id="building-soc-roll" name="building-soc-roll" type="text" aria-describedby="building-soc-roll-hint">
+</div>

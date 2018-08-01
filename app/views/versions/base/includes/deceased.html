@@ -48,33 +48,6 @@
 }}
 
 {{ govukRadios({
-  idPrefix: "is-uk-resident-conditional",
-  name: "is-uk-resident",
-  fieldset: {
-    legend: {
-      text: "is_uk_resident" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  items: [
-    {
-      value: "true",
-      text: "Yes",
-      checked: true if data['is-uk-resident'] == 'true' else false
-    },
-    {
-      value: "false",
-      text: "No",
-      conditional: {
-        html: deceasedAddressHtml
-      },
-      checked: true if data['is-uk-resident'] == 'false' else false
-    }
-  ]
-}) }}
-
-{{ govukRadios({
   idPrefix: "hospital-death-conditional",
   name: "hospital-death",
   fieldset: {
@@ -121,6 +94,26 @@
       text: "income_support" | translate
     },
     {
+      value: "disability-living-allowance",
+      text: "dla" | translate
+    },
+    {
+      value: "severe-disablement-allowance",
+      text: "sda" | translate
+    },
+    {
+      value: "widowed-parent-allowance",
+      text: "wpa" | translate
+    },
+    {
+      value: "carers-allowance",
+      text: "carers_allowance" | translate
+    },
+    {
+      value: "industrial-injury-disablement-allowances",
+      text: "iida" | translate
+    },
+    {
       value: "income-jsa",
       text: "income_jsa" | translate
     },
@@ -129,24 +122,28 @@
       text: "income_esa" | translate
     },
     {
-      value: "pension-credit",
-      text: "pension_credit" | translate
+      value: "incapacity-benefit",
+      text: "incapacity_benefit" | translate
     },
     {
-      value: "housing-benefit",
-      text: "housing_benefit" | translate
+      value: "bereavement-allowance",
+      text: "bereavement_allowance" | translate
     },
     {
-      value: "sd-wtc",
-      text: "sd_wtc" | translate
+      value: "bsp",
+      text: "bsp" | translate
     },
     {
-      value: "child-tax-credit",
-      text: "child_tax_credit" | translate
+      value: "universal-credit",
+      text: "universal_credit" | translate
     },
     {
-      value: "smi",
-      text: "smi" | translate
+      value: "pip",
+      text: "pip" | translate
+    },
+    {
+      value: "attendance-allowance",
+      text: "attendance_allowance" | translate
     }
   ]
 }) }}

@@ -11,14 +11,16 @@ $(document).ready(function () {
    */
   const setupHospitalAutoComplete = () => {
     const hospitalLocationEl = document.getElementById('hospital-location');
-    const isSelectEl = hospitalLocationEl.tagName.toLowerCase() === 'select';
+    if (hospitalLocationEl) {
+      const isSelectEl = hospitalLocationEl.tagName.toLowerCase() === 'select';
 
-    if (hospitalLocationEl && isSelectEl) {
-      accessibleAutocomplete.enhanceSelectElement({
-        selectElement: hospitalLocationEl,
-        classes: "govuk-!-width-two-thirds",
-        name: "hospital-location-autocomplete"
-      });
+      if (isSelectEl) {
+        accessibleAutocomplete.enhanceSelectElement({
+          selectElement: hospitalLocationEl,
+          classes: "govuk-!-width-two-thirds",
+          name: "hospital-location-autocomplete"
+        });
+      }
     }
   }
 
@@ -96,8 +98,21 @@ $(document).ready(function () {
     }
   };
 
+  const conditionalBankSetup = () => {
+    const bankRadioEl = document.querySelector('.js-bank-or-building');
+    if (bankRadioEl) {
+     const answersEl = bankRadioEl.querySelectorAll('.govuk-radios__item');
+      [...answersEl].forEach(el => {
+        el.addEventListener('change', event => {
+          document.querySelector('.js-roll-number').classList.toggle('js-hidden')
+        })
+      })
+    }
+  }
+
   getRelationshipStatus();
   setupHospitalAutoComplete();
+  conditionalBankSetup();
 })
 
 
