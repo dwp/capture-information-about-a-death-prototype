@@ -99,6 +99,7 @@ $(document).ready(function () {
   };
 
   const conditionalBankSetup = () => {
+    // this will be different if no is preselected.
     const bankRadioEl = document.querySelector('.js-bank-or-building');
     if (bankRadioEl) {
      const answersEl = bankRadioEl.querySelectorAll('.govuk-radios__item');

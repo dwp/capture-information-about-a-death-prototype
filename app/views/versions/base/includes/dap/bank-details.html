@@ -2,7 +2,7 @@
 
 {{ govukRadios({
   idPrefix: "bank-or-building",
-  name: "bank-or-building",
+  name: "dap-bank-or-building",
   fieldset: {
     classes: 'js-bank-or-building',
     legend: {
@@ -34,7 +34,7 @@
     }
   },
   id: "bank-name",
-  name: "bank-name",
+  name: "dap-bank-name",
   classes: "govuk-!-width-two-thirds",
   value: data["bank-name"]
 }) }}
@@ -48,7 +48,7 @@
     }
   },
   id: "bank-account-no",
-  name: "bank-account-no",
+  name: "dap-bank-account-no",
   classes: "govuk-!-width-two-thirds",
   value: data["bank-account-no"]
 }) }}
@@ -62,7 +62,7 @@
     }
   },
   id: "bank-sort-code",
-  name: "bank-sort-code",
+  name: "dap-bank-sort-code",
   classes: "govuk-!-width-two-thirds",
   value: data["bank-sort-code"]
 }) }}
@@ -74,5 +74,5 @@
   <span id="building-soc-roll-hint" class="govuk-hint">
     {{ "building_soc_roll_hint" | translate}}
   </span>
-  <input class="govuk-input govuk-!-width-two-thirds" id="building-soc-roll" name="building-soc-roll" type="text" aria-describedby="building-soc-roll-hint">
+  <input class="govuk-input govuk-!-width-two-thirds" id="building-soc-roll" name="dap-building-soc-roll" type="text" aria-describedby="building-soc-roll-hint">
 </div>

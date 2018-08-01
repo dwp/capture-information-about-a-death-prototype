@@ -74,7 +74,32 @@
   ]
 }) }}
 
-{# This is actually the FEP benefits, make checked #}
+{{ govukRadios({
+  idPrefix: "deceased-address-conditional",
+  name: "deceased-address",
+  fieldset: {
+    legend: {
+      text: "caller_same_address" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: true,
+      text: "Yes",
+      checked: true if data['deceased-address'] == 'true' else false
+    },
+    {
+      value: false,
+      text: "No",
+      conditional: {
+        html: deceasedAddressHtml
+      }, checked: true if data['deceased-address'] == 'false' else false
+    }
+  ]
+}) }}
+
 {{ govukCheckboxes({
   idPrefix: "qualifying-benefits",
   name: "deceased-qualifying-benefits",
@@ -90,43 +115,43 @@
   },
   items: [
     {
-      value: "income-support",
+      value: "income_support",
       text: "income_support" | translate
     },
     {
-      value: "disability-living-allowance",
-      text: "dla" | translate
+      value: "disability_living_allowance",
+      text: "disability_living_allowance" | translate
     },
     {
-      value: "severe-disablement-allowance",
-      text: "sda" | translate
+      value: "severe_disablement_allowance",
+      text: "severe_disablement_allowance" | translate
     },
     {
-      value: "widowed-parent-allowance",
-      text: "wpa" | translate
+      value: "widowed_parent_allowance",
+      text: "widowed_parent_allowance" | translate
     },
     {
-      value: "carers-allowance",
+      value: "carers_allowance",
       text: "carers_allowance" | translate
     },
     {
-      value: "industrial-injury-disablement-allowances",
-      text: "iida" | translate
+      value: "industrial_injury_disablement_allowances",
+      text: "industrial_injury_disablement_allowances" | translate
     },
     {
-      value: "income-jsa",
+      value: "income_jsa",
       text: "income_jsa" | translate
     },
     {
-      value: "income-esa",
+      value: "income_esa",
       text: "income_esa" | translate
     },
     {
-      value: "incapacity-benefit",
+      value: "incapacity_benefit",
       text: "incapacity_benefit" | translate
     },
     {
-      value: "bereavement-allowance",
+      value: "bereavement_allowance",
       text: "bereavement_allowance" | translate
     },
     {
@@ -134,7 +159,7 @@
       text: "bsp" | translate
     },
     {
-      value: "universal-credit",
+      value: "universal_credit",
       text: "universal_credit" | translate
     },
     {
@@ -142,7 +167,7 @@
       text: "pip" | translate
     },
     {
-      value: "attendance-allowance",
+      value: "attendance_allowance",
       text: "attendance_allowance" | translate
     }
   ]
