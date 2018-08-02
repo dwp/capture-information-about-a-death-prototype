@@ -1,0 +1,21 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{"fep" | translate}}</h1>
+      <h2 class="govuk-heading-m">Before you carry on</h2>
+      <p>Ask the caller whether they have the following:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Funeral date</li>
+          <li>Qualifying benefits</li>
+        </ul>
+      </p>
+      <p>A bit more contnet will go here to explain a few more things, maybe include about the UK residency?</p>
+      <a href="funeral-date" role="button" class="govuk-button govuk-button--start">
+        Continue with eligibility check
+      </a>
+    </div>
+  </div>
+{% endblock %}

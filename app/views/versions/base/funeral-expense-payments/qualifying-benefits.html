@@ -1,0 +1,68 @@
+{% extends "versions/base/funeral-expense-payments/index.html" %}
+{% block formContent %}
+  {% if data.funeralBenefitsError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.funeralBenefitsError,
+          href: "#fep-qualifying-benefits-1"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check-qualifying-benefits">
+    {{ govukCheckboxes({
+      idPrefix: "fep-qualifying-benefits",
+      name: "fep-qualifying-benefits",
+      fieldset: {
+        legend: {
+          text: "fep_qualifying_benefits" | translate,
+          isPageHeading: false,
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      hint: {
+        text: "fep_qualifying_benefits_hint" | translate
+      },
+      items: [
+        {
+          value: "income-support",
+          text: "income_support" | translate
+        },
+        {
+          value: "income-jsa",
+          text: "income_jsa" | translate
+        },
+        {
+          value: "income-esa",
+          text: "income_esa" | translate
+        },
+        {
+          value: "pension-credit",
+          text: "pension_credit" | translate
+        },
+        {
+          value: "housing-benefit",
+          text: "housing_benefit" | translate
+        },
+        {
+          value: "sd-wtc",
+          text: "sd_wtc" | translate
+        },
+        {
+          value: "child-tax-credit",
+          text: "child_tax_credit" | translate
+        },
+        {
+          value: "smi",
+          text: "smi" | translate
+        }
+      ]
+    }) }}
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

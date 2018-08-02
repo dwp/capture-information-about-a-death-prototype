@@ -1,0 +1,45 @@
+{% extends "versions/base/funeral-expense-payments/index.html" %}
+{% block formContent %}
+  {% if data.funeralResponsibilityError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.funeralResponsibilityError,
+          href: "#fep-funeral-responsibility-1"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check-funeral-responsibility">
+    {{ govukRadios({
+      idPrefix: "fep-funeral-responsibility",
+      name: "fep-funeral-responsibility",
+      fieldset: {
+        legend: {
+          text: "fep_responsibility" | translate,
+          isPageHeading: false,
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate,
+          checked: true if (data.funeralResponsibilityError and (data['fep-funeral-responsibility'] == 'true')) else false
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}
+
+
