@@ -22,6 +22,8 @@ const locales = {
     caller_heading: 'About the caller',
     caller_relationship: 'Relationship to the person who died',
     caller_same_address: `Was their address the same as the caller's?`,
+    caller_sex: 'Sex',
+    caller_sex_hint: 'We need this to know your state pension age',
     caller_tab: 'Caller Details',
     carers_allowance: `Carer's Allowance`,
     company_name: 'Company name',
