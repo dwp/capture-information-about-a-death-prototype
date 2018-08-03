@@ -19,6 +19,20 @@
 
 {{ govukInput({
   label: {
+    text: "phone_number" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "spouse-phone-number-group"
+    }
+  },
+  id: "spouse-phone-number",
+  name: "spouse-phone-number",
+  classes: "govuk-!-width-two-thirds",
+  value: data["spouse-phone-number"]
+}) }}
+
+{{ govukInput({
+  label: {
     text: "national_insurance" | translate,
     classes: "govuk-!-font-weight-bold",
     attributes: {
@@ -111,20 +125,6 @@
     value: data["spouse-full-name"]
     }) }}
 
-    {{ govukInput({
-      label: {
-        text: "phone_number" | translate,
-        classes: "govuk-!-font-weight-bold",
-        attributes: {
-          id: "spouse-phone-number-group"
-        }
-      },
-      id: "spouse-phone-number",
-      name: "spouse-phone-number",
-      classes: "govuk-!-width-two-thirds",
-      value: data["spouse-phone-number"]
-    }) }}
-
     <div class="govuk-form-group">
       {% set prefix = "spouse" %}
       {% include "includes/address-lookup.html" %}
@@ -165,20 +165,6 @@
   {% include "includes/address-lookup.html" %}
 </div>
 
-{{ govukInput({
-  label: {
-    text: "phone_number" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "caller-phone-number-group"
-    }
-  },
-  id: "caller-phone-number",
-  name: "caller-phone-number",
-  classes: "govuk-!-width-two-thirds",
-  value: data["caller-phone-number"]
-}) }}
-
 {{ govukRadios({
   idPrefix: "is-caller-executor-conditional",
   name: "is-caller-executor",
@@ -188,6 +174,9 @@
       isPageHeading: false,
       classes: "govuk-fieldset__legend--s"
     }
+  },
+  hint: {
+    text: "executor_hint" | translate
   },
   items: [
     {
