@@ -55,7 +55,7 @@ router.get('*/handle-eligibility', (req, res, next) => {
   let desiredRoute = 'check';
   const value = req.session.data['select-eligibility'];
   if (value === 'fep') {
-    if (req.session.data['is-caller-spouse']) {
+    if (req.session.data['is-caller-spouse'] === 'true') {
       desiredRoute = 'funeral-expense-payments/funeral-date.html'
     } else {
       desiredRoute = 'funeral-expense-payments/relationship.html'
