@@ -227,3 +227,7 @@ legend {
   @include govuk-font($size: 19);
   @include govuk-text-colour;
 }
+
+.js-enabled .js-hidden {
+  display: none;
+}
