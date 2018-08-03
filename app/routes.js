@@ -9,9 +9,7 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
-// move this
 const validateProps = (props, data) => props.filter(prop => !data[prop]);
-
 
 const checkDapEligibility = (data => data['deceased-qualifying-benefits'] ? data['deceased-qualifying-benefits'].length : false);
 
@@ -35,6 +33,20 @@ router.get('*/check', (req, res, next) => {
 
 router.get('*/payee', (req, res, next) => {
   res.locals.isCallerDap = req.session.data['death-arrears-caller'] === 'true';
+  next();
+});
+
+router.get('*/select-eligibility', (req, res, next) => {
+  const isDap = checkDapEligibility(req.session.data);
+  const dapProps = ['dap-bank-or-building', 'dap-bank-name', 'dap-bank-account-no', 'dap-bank-sort-code'];
+  const isDapComplete = validateProps(dapProps, req.session.data).length === 0;
+  if (isDap && !isDapComplete) {
+    res.redirect(req.params[0] + '/death-arrears.html');
+    res.locals.isDapComplete = true;
+  }
+  const isEligibleBsp = '';
+  const isEligibleFep = '';
+  console.log(fepEligibility.isEligibleForFep(req.session.data));
   next();
 });
 
@@ -167,6 +179,5 @@ const handleMissingVersionRoute = (version, route, res) => {
   }
   return res.render(`${renderedRoute.slice(1)}`)
 };
-
 
 module.exports = router
