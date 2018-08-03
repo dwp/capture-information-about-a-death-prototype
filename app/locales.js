@@ -81,6 +81,7 @@ const locales = {
     is_uk_resident: 'Is the person who died normally a UK resident?',
     marital_status: 'Marital status',
     marriage_certificate: 'Has the claimant provided proof of a marriage certificate or is it available on eNirs?',
+    married_couple: 'Was the caller living with the deceased as a married couple?',
     national_insurance: 'National Insurance number',
     no_results_found: 'Sorry, no results were found.',
     none: 'None of the above',

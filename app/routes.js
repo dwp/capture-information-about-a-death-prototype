@@ -55,13 +55,30 @@ router.get('*/handle-eligibility', (req, res, next) => {
   let desiredRoute = 'check';
   const value = req.session.data['select-eligibility'];
   if (value === 'fep') {
-    desiredRoute = 'funeral-expense-payments/funeral-date.html'
+    if (req.session.data['is-caller-spouse']) {
+      desiredRoute = 'funeral-expense-payments/funeral-date.html'
+    } else {
+      desiredRoute = 'funeral-expense-payments/relationship.html'
+    }
   }
 
   if (value === 'bsp') {
     desiredRoute = 'bereavement-support-payments/nino-contributions.html'
   }
   res.redirect(prefix + desiredRoute);
+});
+
+router.get('*/check-relationship', (req, res, next) => {
+  const prefix = req.params[0] + '/';
+  const data = req.session.data;
+
+  if (data['living-as-married'] === 'true') {
+    req.session.data.funeralRelationshipError = undefined;
+    res.redirect(prefix + 'funeral-date');
+  } else {
+    req.session.data.funeralRelationshipError = 'The caller must be living together as a married couple';
+    res.redirect(prefix + 'relationship');
+  }
 });
 
 router.get('*/check-funeral-date', (req, res, next) => {
