@@ -43,6 +43,8 @@ const locales = {
     deceased_details_heading: 'About the person who died',
     deceased_heading: 'About the person who died',
     deceased_tab: 'Person who died',
+    deceased_qualifying_benefits: 'Does the caller get at least one of the following benefits?',
+    deceased_qualifying_benefits_hint: 'They can include any benefits they are waiting to hear about',
     dependants: 'Does the claimant have any children? (pregnancy allowed)',
     disability_living_allowance: 'Disability Living Allowance',
     dob_hint: 'For example, 31 3 1980',

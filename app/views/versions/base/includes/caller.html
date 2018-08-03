@@ -88,20 +88,6 @@
   ]
 }) }}
 
-{{ govukInput({
-  label: {
-    text: "caller_relationship" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "caller-relationship-group"
-    }
-  },
-  id: "caller-relationship",
-  name: "caller-relationship",
-  classes: "govuk-!-width-two-thirds",
-  value: data["caller-relationship"]
-}) }}
-
 {% set isNotSpouseHtml %}
   {% call govukFieldset({
     legend: {
