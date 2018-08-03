@@ -53,7 +53,7 @@ const locales = {
     dod_title: 'Date of death',
     executor: 'Is the caller dealing with the estate?',
     executor_details_heading: `Executor's details`,
-    executor_hint: 'This is sometimes called being an 'executor'',
+    executor_hint: `This is sometimes called being an 'executor'`,
     executor_label: 'Executor',
     executor_question: 'Who is the executor?',
     expand_address: 'Address outside the UK?',
