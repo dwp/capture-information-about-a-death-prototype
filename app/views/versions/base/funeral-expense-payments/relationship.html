@@ -1,0 +1,44 @@
+{% extends "versions/base/funeral-expense-payments/index.html" %}
+
+{% block formContent %}
+  {% if data.funeralRelationshipError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.funeralRelationshipError,
+          href: "#fep-relationship"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check-relationship">
+    {{ govukRadios({
+      idPrefix: "living-as-married",
+      name: "living-as-married",
+      fieldset: {
+        legend: {
+          text: "married_couple" | translate,
+          isPageHeading: false,
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate,
+          checked: true if data['fep-funeral-location'] == 'true' else false
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}
