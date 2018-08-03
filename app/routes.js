@@ -44,8 +44,6 @@ router.get('*/select-eligibility', (req, res, next) => {
     res.redirect(req.params[0] + '/death-arrears.html');
     res.locals.isDapComplete = true;
   }
-  const isEligibleBsp = '';
-  const isEligibleFep = '';
   console.log(fepEligibility.isEligibleForFep(req.session.data));
   next();
 });
@@ -55,11 +53,7 @@ router.get('*/handle-eligibility', (req, res, next) => {
   let desiredRoute = 'check';
   const value = req.session.data['select-eligibility'];
   if (value === 'fep') {
-    if (req.session.data['is-caller-spouse'] === 'true') {
-      desiredRoute = 'funeral-expense-payments/funeral-date.html'
-    } else {
-      desiredRoute = 'funeral-expense-payments/relationship.html'
-    }
+    desiredRoute = 'funeral-expense-payments/landing.html';
   }
 
   if (value === 'bsp') {

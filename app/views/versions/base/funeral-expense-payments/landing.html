@@ -13,9 +13,15 @@
         </ul>
       </p>
       <p>A bit more content will go here to explain a few more things, maybe include about the UK residency?</p>
-      <a href="funeral-date" role="button" class="govuk-button govuk-button--start">
-        Continue with eligibility check
-      </a>
+      {% if data['is-caller-spouse'] == 'true' %}
+        <a href="funeral-date" role="button" class="govuk-button govuk-button--start">
+          Continue with eligibility check
+        </a>
+      {% else %}
+        <a href="relationship" role="button" class="govuk-button govuk-button--start">
+          Continue with eligibility check
+        </a>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
