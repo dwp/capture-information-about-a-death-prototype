@@ -3,7 +3,6 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">{{"page_heading" | translate}}</h1>
       <form method="post" action="handle-eligibility">
         {{ govukRadios({
           id: "select-eligibility",
@@ -12,7 +11,7 @@
             legend: {
               text: "select_eligibility" | translate,
               isPageHeading: true,
-              classes: "govuk-fieldset__legend--m"
+              classes: "govuk-fieldset__legend--l"
             }
           },
           items: [
