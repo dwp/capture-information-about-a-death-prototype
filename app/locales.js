@@ -32,6 +32,7 @@ const locales = {
     check_title: 'Check this information',
     child_tax_credit: 'Child Tax Credit',
     consent_message: 'The information you have provided will be passed on to the organisations. Do I have your consent?',
+    continue: 'Continue',
     complete_application_title: 'Now send your application',
     correct_answers: 'By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.',
     county: 'County',
