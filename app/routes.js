@@ -43,15 +43,13 @@ router.get('*/handle-eligibility', (req, res, next) => {
   let desiredRoute = 'check';
   const value = req.session.data['select-eligibility'];
   if (value === 'fep') {
-    desiredRoute = 'funeral-expense-payments/index.html'
+    desiredRoute = 'funeral-expense-payments/funeral-date.html'
   }
 
   if (value === 'bsp') {
-    desiredRoute = 'bereavement-support-payments/index.html'
+    desiredRoute = 'bereavement-support-payments/nino-contributions.html'
   }
-  // res.redirect(req.params[0] + '/death-arrears.html');
   res.redirect(prefix + desiredRoute);
-  // next();
 });
 
 router.get('*/check-funeral-date', (req, res, next) => {
@@ -107,29 +105,58 @@ router.get('*/check-funeral-location', (req, res, next) => {
   }
 });
 
-// This is messy and needs tidying up
+router.get('*/check-bsp-nino', (req, res, next) => {
+  const prefix = req.params[0] + '/';
+  const data = req.session.data;
+
+  if (data['bsp-nino'] === 'true') {
+    req.session.data.bspNinoError = undefined;
+    res.redirect(prefix + 'marriage-certificate');
+  } else {
+    req.session.data.bspNinoError = 'The claimant must have met the minimum NI contributions.';
+    res.redirect(prefix + 'nino-contributions');
+  }
+});
+
+router.get('*/check-bsp-marriage-cert', (req, res, next) => {
+  const prefix = req.params[0] + '/';
+  const data = req.session.data;
+
+  // I dont think we need to validate this, they may have to post it...
+  if (data['bsp-marriage-cert'] /*=== 'true'*/) {
+    req.session.data.bspNinoError = undefined;
+    res.redirect(prefix + 'dependants');
+  } else {
+    req.session.data.bspNinoError = 'The claimant must have met the minimum NI contributions.';
+    res.redirect(prefix + 'marriage-certificate');
+  }
+});
+
+router.get('*/check-bsp-dependants', (req, res, next) => {
+  const prefix = req.params[0] + '/';
+  const data = req.session.data;
+  res.redirect(prefix + 'confirm');
+});
+
+const benefitsRedirect = (req, res, prefix) => {
+  req.session.data.funeralBenefitsError = 'The caller must be in receipt or have one of the following benefits pending';
+  res.redirect(prefix + 'qualifying-benefits');
+};
+
 router.get('*/check-qualifying-benefits', (req, res, next) => {
   const prefix = req.params[0] + '/';
   const data = req.session.data;
   const benefits = data['fep-qualifying-benefits'] || [];
   if (benefits.length) {
     if (benefits.length === 1 && benefits[0] === '_unchecked') {
-    req.session.data.funeralBenefitsError = 'The caller must be in receipt or have one of the following benefits pending';
-    res.redirect(prefix + 'qualifying-benefits');
+      benefitsRedirect(req, res, prefix);
     } else {
-    req.session.data.funeralBenefitsError = undefined;
+      req.session.data.funeralBenefitsError = undefined;
       res.redirect(prefix + 'confirm');
     }
   } else {
-    req.session.data.funeralBenefitsError = 'The caller must be in receipt or have one of the following benefits pending';
-    res.redirect(prefix + 'qualifying-benefits');
+    benefitsRedirect(req, res, prefix);
   }
-  // if (data['fep-funeral-location'] === 'true') {
-  //   res.redirect(prefix + 'confirm');
-  // } else {
-  //   req.session.data.funeralLocationError = 'The caller must be in receipt or have one of the following benefits pending';
-  //   res.redirect(prefix + 'qualifying-benefits');
-  // }
 });
 
 const handleMissingVersionRoute = (version, route, res) => {

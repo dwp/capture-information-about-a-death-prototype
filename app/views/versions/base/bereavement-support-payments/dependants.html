@@ -1,0 +1,47 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/base/bereavement-support-payments/index.html" %}
+
+{% block formContent %}
+  {% if data.bspDependantError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.bspDependantError,
+          href: "#bsp-dependants"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check-bsp-dependants">
+    {{ govukRadios({
+      id: "bsp-dependants",
+      name: "bsp-dependants",
+      fieldset: {
+        legend: {
+          text: "dependants" | translate,
+          isPageHeading: false,
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}
+
+

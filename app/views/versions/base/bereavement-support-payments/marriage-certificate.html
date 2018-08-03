@@ -1,0 +1,47 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/base/bereavement-support-payments/index.html" %}
+
+{% block formContent %}
+  {% if data.bspMarriageError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.bspMarriageError,
+          href: "#bsp-marriage-cert"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check-bsp-marriage-cert">
+    {{ govukRadios({
+      id: "bsp-marriage-cert",
+      name: "bsp-marriage-cert",
+      fieldset: {
+        legend: {
+          text: "marriage_certificate" | translate,
+          isPageHeading: false,
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}
+
+
