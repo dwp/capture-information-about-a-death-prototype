@@ -9,6 +9,20 @@ const validateFuneralDate = (year, month, day) => {
   return differenceInMonths(date, new Date(year, parsedMonth, formattedDay));
 }
 
+const fepRelationships = ['girlfriend', 'boyfriend', 'partner', 'wife', 'husband', 'civilpartner'];
+
+/**
+ * Takes data from Death notification and calculates whether they can proceed with FEP
+ * @param {object} data
+ */
+const isEligibleForFep = (data) => {
+  const relationship = data['caller-relationship'] || '';
+  const parsedRelationship = relationship.toLowerCase().replace(/(\s)|(-)/g, '').trim();
+  const isCouple = fepRelationships.includes(parsedRelationship);
+  return isCouple;
+};
+
 module.exports = {
-  validateFuneralDate
+  validateFuneralDate,
+  isEligibleForFep
 }
