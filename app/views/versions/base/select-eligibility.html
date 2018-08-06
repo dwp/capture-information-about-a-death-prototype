@@ -17,11 +17,13 @@
           items: [
             {
               value: "bsp",
-              text: "check_bsp" | translate
+              text: "check_bsp" | translate,
+              disabled: true if bspComplete == true else false
             },
             {
               value: "fep",
-              text: "fep" | translate
+              text: "fep" | translate,
+              disabled: true if fepComplete == true else false
             },
             {
               "divider": "or"

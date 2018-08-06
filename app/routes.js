@@ -44,7 +44,9 @@ router.get('*/select-eligibility', (req, res, next) => {
     res.redirect(req.params[0] + '/death-arrears.html');
     res.locals.isDapComplete = true;
   }
-  console.log(fepEligibility.isEligibleForFep(req.session.data));
+  if (res.app.locals.bspComplete && res.app.locals.fepComplete) {
+    res.redirect(req.params[0] + '/check.html');
+  }
   next();
 });
 
@@ -159,6 +161,18 @@ router.get('*/check-bsp-dependants', (req, res, next) => {
   const data = req.session.data;
   res.redirect(prefix + 'confirm');
 });
+
+router.get('*/complete', (req, res, next) => {
+  const url = req.params[0].split('/');
+  const eligiblityType = url[(url.length - 1)];
+  if (eligiblityType.includes('bereavement')) {
+    res.app.locals.bspComplete = true;
+  }
+  if (eligiblityType.includes('funeral')) {
+    res.app.locals.fepComplete = true;
+  }
+  next();
+})
 
 const benefitsRedirect = (req, res, prefix) => {
   req.session.data.funeralBenefitsError = 'The caller must be in receipt or have one of the following benefits pending';
