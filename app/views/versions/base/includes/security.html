@@ -58,4 +58,76 @@
   ]
 }) }}
 
+{% set securityPassedHtml %}
+  {{ govukCheckboxes({
+    idPrefix: "security",
+    name: "security-questions",
+    fieldset: {
+      legend: {
+        text: "security_questions_title" | translate,
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: "security-address",
+        text: "security_q1" | translate
+      },
+      {
+        value: "security-postcode",
+        text: "security_q2" | translate
+      },
+      {
+        value: "security-phone",
+        text: "security_q3" | translate
+      },
+      {
+        value: "security-marital-status",
+        text: "security_q4" | translate
+      }
+    ]
+  }) }}
+{% endset -%}
+
+{% set securityFailedHtml %}
+  <div>
+    <p class="govuk-!-font-weight-bold">Caller should contact Bereavement Service</p>
+    <p>Telephone: 0800 731 0469</p>
+    <p>Welsh language: 0800 731 0453</p>
+    <p>Textphone: 0800 731 0464</p>
+    <p>Welsh language: 0800 731 0456</p>
+    <p>Monday to Friday, 8am to 6pm</p>
+    <p>Bereavement Service only deals with DWP benefits and services. All other organisations should be contacted separately.</p>
+  </div>
+{% endset -%}
+
+{{ govukRadios({
+  idPrefix: "security-check-conditional",
+  name: "security-check",
+  fieldset: {
+    legend: {
+      text: "security_title" | translate,
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: true,
+      text: "Yes",
+      conditional: {
+        html: securityPassedHtml
+      }
+    },
+    {
+      value: false,
+      text: "No",
+      conditional: {
+        html: securityFailedHtml
+      }
+    }
+  ]
+}) }}
+
 <a href="#deceased-tab" class="govuk-button">{{"save_continue" | translate}}</a>

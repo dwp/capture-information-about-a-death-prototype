@@ -1,4 +1,11 @@
-<h1>Confirm bsp!!</h1>
-{% if data['bsp-dependants'] == 'true' %}
-  The cliamant also has children
-{% endif %}
+{% extends "versions/base/bereavement-support-payments/index.html" %}
+
+{% block formContent %}
+  <form action="complete" method="post">
+    {{ govukWarningText({
+      text: "consent_message" | translate,
+      iconFallbackText: "Warning"
+    }) }}
+    <a href="complete" class="govuk-button" role="button">{{"confirm_application" | translate}}</a>
+  </form>
+{% endblock %}
