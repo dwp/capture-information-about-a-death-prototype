@@ -1,1 +1,11 @@
-<h1>Confirm fep!!</h1>
+{% extends "versions/base/funeral-expense-payments/index.html" %}
+
+{% block formContent %}
+  <form action="complete" method="post">
+    {{ govukWarningText({
+      text: "consent_message" | translate,
+      iconFallbackText: "Warning"
+    }) }}
+    <a href="complete" class="govuk-button" role="button">{{"confirm_application" | translate}}</a>
+  </form>
+{% endblock %}
