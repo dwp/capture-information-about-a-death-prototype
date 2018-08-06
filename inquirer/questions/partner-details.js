@@ -12,7 +12,7 @@ module.exports = [
       'income-related Employment and Support Allowance',
       'Pension Credit',
       'Housing Benefit',
-      'the disability or severe disability element of Working Tax Credit',
+      'The disability or severe disability element of Working Tax Credit',
       'Child Tax Credit',
       'Universal Credit',
       'Support for Mortgage Interest loan'
