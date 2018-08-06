@@ -1,6 +1,9 @@
 {% extends "versions/base/funeral-expense-payments/index.html" %}
 
 {% block formContent %}
+
+<p>The information you have collected will be used to apply for a Funeral Expenses Payment.</p>
+
   <form action="complete" method="post">
     {{ govukWarningText({
       text: "consent_message" | translate,
