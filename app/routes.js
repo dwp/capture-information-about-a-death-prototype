@@ -57,7 +57,7 @@ router.get('*/handle-eligibility', (req, res, next) => {
   }
 
   if (value === 'bsp') {
-    desiredRoute = 'bereavement-support-payments/nino-contributions.html'
+    desiredRoute = 'bereavement-support-payments/landing.html'
   }
   res.redirect(prefix + desiredRoute);
 });
@@ -145,12 +145,11 @@ router.get('*/check-bsp-marriage-cert', (req, res, next) => {
   const prefix = req.params[0] + '/';
   const data = req.session.data;
 
-  // I dont think we need to validate this, they may have to post it...
-  if (data['bsp-marriage-cert'] /*=== 'true'*/) {
-    req.session.data.bspNinoError = undefined;
+  if (data['bsp-marriage-cert'] === 'true') {
+    req.session.data.bspMarriageError = undefined;
     res.redirect(prefix + 'dependants');
   } else {
-    req.session.data.bspNinoError = 'The claimant must have met the minimum NI contributions.';
+    req.session.data.bspMarriageError = 'The claimant must be married or be in a civil partnership with the deceased';
     res.redirect(prefix + 'marriage-certificate');
   }
 });
