@@ -16,6 +16,7 @@
     type: "button"
   }) }}
 
+
   <details class="address-details">
     <summary><span class="summary">{{"expand_address" | translate}}</span></summary>
     <div class="inset-address">
@@ -23,3 +24,13 @@
     </div>
   </details>
 </div>
+
+{{ govukSelect({
+  id: prefix + "-results",
+  name: prefix + "-results",
+  label: {
+    text: "Results"
+  },
+  items: [
+  ]
+}) }}

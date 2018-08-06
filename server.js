@@ -143,6 +143,7 @@ const hospitalResponse = hospitals.sort((a, b) => {
   return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
 });
 app.locals.hospitals = hospitalResponse;
+app.locals.addresses = JSON.stringify(config.addresses);
 
 // Support session data
 app.use(session({

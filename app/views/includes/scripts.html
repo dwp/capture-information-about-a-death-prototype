@@ -6,6 +6,9 @@
 <script src="/public/javascripts/all.js"></script>
 <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
 <script>window.GOVUKFrontend.initAll()</script>
+<script>
+  const addresses = JSON.parse('{{ addresses | safe}}');
+</script>
 
 {% if useAutoStoreData %}
   <script src="/public/javascripts/auto-store-data.js"></script>

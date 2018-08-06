@@ -111,9 +111,40 @@ $(document).ready(function () {
     }
   }
 
+  const fillManualFields = (el, result) => {
+    const context = el.dataset.context;
+    el.querySelector(`[name="${context}-line-1"]`).value = result.line1;
+    el.querySelector(`[name="${context}-line-2"]`).value = result.line2;
+    el.querySelector(`[name="${context}-town-city"]`).value = result.town;
+    el.querySelector(`[name="${context}-county"]`).value = result.county;
+    el.querySelector(`[name="${context}-postcode"]`).value = result.postcode;
+
+  }
+
+  const addressLookup = () => {
+    const postcodeLookupEl = document.querySelectorAll('.js-postcode-lookup');
+    if ([...postcodeLookupEl].length) {
+      [...postcodeLookupEl].forEach(el => {
+        el.addEventListener('click', event => {
+          const postcode = event.target.previousElementSibling.querySelector('input').value.toLowerCase().replace(/(\s)|(-)/g, '').trim();
+          const parentEl = event.target.parentElement;
+          const resultEl = parentEl.querySelector('select');
+          const resultParent = parentEl.querySelector('.js-results-group');
+          const result = document.createElement('option');
+          const manualFields = parentEl.querySelector('.inset-address');
+          fillManualFields(manualFields, addresses[postcode]);
+          result.text = addresses[postcode].summary;
+          resultEl.add(result);
+          resultParent.classList.remove('js-hidden');
+        })
+      })
+    }
+  }
+
   getRelationshipStatus();
   setupHospitalAutoComplete();
   conditionalBankSetup();
+  addressLookup();
 })
 
 

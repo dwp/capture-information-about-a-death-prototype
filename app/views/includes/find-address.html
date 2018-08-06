@@ -16,9 +16,15 @@
     type: "button"
   }) }}
 
+  <div class="govuk-!-width-two-thirds js-hidden js-results-group results-group" style="clear: both;">
+    {{ govukSelect({
+      id: prefix + "-results",
+      name: prefix + "-results"
+    }) }}
+  </div>
   <details class="address-details">
     <summary><span class="summary">{{"expand_address" | translate}}</span></summary>
-    <div class="inset-address">
+    <div class="inset-address" data-context={{prefix}}>
       {% include "includes/manual-address.html" %}
     </div>
   </details>

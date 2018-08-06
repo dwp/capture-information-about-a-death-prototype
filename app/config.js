@@ -25,5 +25,19 @@ module.exports = {
   cookieText: 'GOV.UK uses cookies to make the site simpler. <a href="#">Find out more about cookies</a>',
 
   // Enable or disable Browser Sync
-  useBrowserSync: 'true'
+  useBrowserSync: 'true',
+
+  addresses: {
+    'ne244na': {
+      line1: 'Line 1'
+    },
+    'ne463jr': {
+      line1: '2 Windsor Terrace',
+      line2: '',
+      town: 'Hexham',
+      county: 'Northumberland',
+      postcode: 'NE46 3JR',
+      summary: '2 Windsor Terrace, Hexham, NE46 3JR'
+    }
+  }
 }
