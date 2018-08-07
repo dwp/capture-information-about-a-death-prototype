@@ -20,15 +20,23 @@ router.get('*/versions*', (req, res, next) => {
   next();
 });
 
-router.get('*/check', (req, res, next) => {
+const isDapAvailable = (req, res, next) => {
   const isDap = checkDapEligibility(req.session.data);
   const dapProps = ['dap-bank-or-building', 'dap-bank-name', 'dap-bank-account-no', 'dap-bank-sort-code'];
   const isDapComplete = validateProps(dapProps, req.session.data).length === 0;
   if (isDap && !isDapComplete) {
     res.redirect(req.params[0] + '/death-arrears.html');
     res.locals.isDapComplete = true;
+    return true;
   }
-  next();
+  if (next) {
+    next();
+  }
+  return false;
+}
+
+router.get('*/check', (req, res, next) => {
+  return isDapAvailable(req, res, next);
 })
 
 router.get('*/payee', (req, res, next) => {
@@ -37,17 +45,18 @@ router.get('*/payee', (req, res, next) => {
 });
 
 router.get('*/select-eligibility', (req, res, next) => {
-  const isDap = checkDapEligibility(req.session.data);
-  const dapProps = ['dap-bank-or-building', 'dap-bank-name', 'dap-bank-account-no', 'dap-bank-sort-code'];
-  const isDapComplete = validateProps(dapProps, req.session.data).length === 0;
-  if (isDap && !isDapComplete) {
-    res.redirect(req.params[0] + '/death-arrears.html');
-    res.locals.isDapComplete = true;
-  }
+  isDapAvailable(req, res);
+
+  // if BSP and FEP are complete, skip this page and go straight to check
   if (res.app.locals.bspComplete && res.app.locals.fepComplete) {
     res.redirect(req.params[0] + '/check.html');
+    return;
   }
-  next();
+
+  // If either BSP or FEP isn't complete, carry on to select-eligibility
+  if (!res.app.locals.bspComplete || !res.app.locals.fepComplete) {
+    next();
+  }
 });
 
 router.get('*/handle-eligibility', (req, res, next) => {
