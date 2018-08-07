@@ -3,7 +3,7 @@ const locales = {
     address: 'Address',
     address_hint: `We'll use this to contact the caller if we need to`,
     attendance_allowance: 'Attendance Allowance',
-    app_title: 'Collect information about a death',
+    app_title: 'Capture information about a death',
     bank_account: 'Bank account',
     bank_building_question: 'Does the caller have a bank account or building society account?',
     bank_details_heading: 'Bank details',
