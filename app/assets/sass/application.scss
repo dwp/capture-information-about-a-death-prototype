@@ -196,10 +196,6 @@ legend {
   @include govuk-media-query($from: tablet) {
     margin-bottom: 30px;
   }
-
-  .govuk-hint {
-    margin-top: 15px;
-  }
 }
 
 .spouse-group,
@@ -236,4 +232,10 @@ legend {
   padding: 10px 10px 10px 33px;
   border-left: 4px solid #bfc1c3;
   margin-bottom: 5px;
+}
+
+.govuk-fieldset__legend--s {
+  + .govuk-hint {
+    margin-top: -15px;
+  }
 }
