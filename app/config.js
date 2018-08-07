@@ -29,7 +29,12 @@ module.exports = {
 
   addresses: {
     'ne244na': {
-      line1: 'Line 1'
+      line1: 'Benton Park View',
+      line2: '',
+      town: 'Newcastle Upon Tyne',
+      county: 'Tyne and Wear',
+      postcode: 'NE98 1YX',
+      summary: 'Benton Park View, Newcastle Upon Tyne, NE98 1YX'
     },
     'ne463jr': {
       line1: '2 Windsor Terrace',
