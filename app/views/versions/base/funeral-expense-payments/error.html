@@ -7,10 +7,10 @@
     <article>
       <p>The eligibility check failed due to the following reason:</p>
       <ul class="govuk-list--bullet govuk-list">
-        <li>{{data.bspFailure}}</li>
+        <li>{{data.fepFailure}}</li>
       </ul>
       {{ govukWarningText({
-        text: "bsp_eligibility_failed" | translate,
+        text: "fep_eligibility_failed" | translate,
         iconFallbackText: "Warning"
       }) }}
       <a href="../select-eligibility" class="govuk-button" role="button">{{"continue" | translate}}</a>
