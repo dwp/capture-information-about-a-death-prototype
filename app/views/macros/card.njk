@@ -1,0 +1,19 @@
+{% macro card(p) %}
+  <div class="govuk-card govuk-card--contained govuk-card--selectable">
+    <a href="#"></a>
+    <div class="govuk-card__content">
+      {% if p.heading %}
+        <h3 class="govuk-heading-m">{{p.heading | translate}}</h3>
+      {% endif %}
+      {% if p.body %}
+        <p class="govuk-body">
+          {{p.body | translate}}
+        </p>
+      {% endif %}
+
+      {% if p.link and (p.complete != true) and (p.eligible == true)  %}
+        <a href={{p.link.url}} class="govuk-button govuk-!-margin-bottom-0 govuk-!-margin-top-2 govuk-button--start">{{p.link.text | translate}}</a>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}

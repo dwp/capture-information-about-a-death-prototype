@@ -4,6 +4,8 @@ const config = require('./config.js')
 const fs = require('fs');
 const bspRoutes = require('./routes/bsp.js');
 const fepRoutes = require('./routes/fep.js');
+const bspEligibility = require('./bsp-eligibility.js');
+const fepEligibility = require('./fep-eligibility.js');
 
 // Route index page
 router.get('/', function (req, res) {
@@ -63,6 +65,29 @@ router.get('*/select-eligibility', (req, res, next) => {
   }
 });
 
+router.get('*/select-eligibility-cards', (req, res, next) => {
+  const isBspFailed = false;
+  const isBspComplete = res.app.locals.bspComplete;
+  const isBspEligible = bspEligibility.isEligibleForBsp(req.session.data);
+  const isFepFailed = false;
+  const isFepComplete = res.app.locals.fepComplete;
+  const isFepEligible = true; // currently always true
+
+  // TODO: refactor
+  res.render(req.params[0].substr(1) + '/select-eligibility-cards.html', {
+    bspEligibility: {
+      failed: isBspFailed,
+      complete: isBspComplete,
+      eligible: isBspEligible
+    },
+    fepEligibility: {
+      failed: isFepFailed,
+      complete: isFepComplete,
+      eligible: isFepEligible
+    }
+  });
+});
+
 router.get('*/handle-eligibility', (req, res, next) => {
   const prefix = req.params[0] + '/';
   let desiredRoute = 'check';
@@ -76,8 +101,6 @@ router.get('*/handle-eligibility', (req, res, next) => {
   }
   res.redirect(prefix + desiredRoute);
 });
-
-
 
 router.get('*/complete', (req, res, next) => {
   const url = req.params[0].split('/');
