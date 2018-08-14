@@ -1,5 +1,5 @@
 {% macro card(p) %}
-  <div class="govuk-card govuk-card--contained govuk-card--selectable">
+  <div class="govuk-card govuk-card--contained govuk-card--selectable {{p.classes}}">
     <a href="#"></a>
     <div class="govuk-card__content">
       {% if p.heading %}

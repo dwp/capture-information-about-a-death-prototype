@@ -16,9 +16,26 @@
       }}
     </div>
     <div class="govuk-grid-column-one-third">
+      {# Move this into the js #}
+      {% set bspClasses = "" %}
+      {% if (bspEligibility.failed == true or (bspEligibility.eligible == false and bspEligiblity.complete == false)) %}
+        {% set bspClasses = "govuk-card--error" %}
+      {% elif (bspEligibility.complete == true) %}
+        {% set bspClasses = "govuk-card--success" %}
+      {% endif %}
+
+      {% set bspBody = "new_bsp_claim_body" %}
+      {% if (bspEligibility.failed == true) %}
+        {% set bspBody = "fail_bsp_claim_body" %}
+      {% elif (bspEligibility.complete == true) %}
+        {% set bspBody = "complete_bsp_claim_body" %}
+      {% elif (bspEligibility.eligible == false) %}
+        {% set bspBody = "ineligible_bsp_claim_body" %}
+      {% endif %}
       {{ card({
           heading: 'check_bsp',
-          body: 'new_bsp_claim_body',
+          body: bspBody,
+          classes: bspClasses,
           link: {
             text: 'start_bsp',
             url: 'bereavement-support-payments/landing'
@@ -30,9 +47,25 @@
       }}
     </div>
     <div class="govuk-grid-column-one-third">
+      {% set fepClasses = "" %}
+      {% if (fepEligibility.failed == true or (fepEligibility.eligible == false and fepEligiblity.complete == false)) %}
+        {% set fepClasses = "govuk-card--error" %}
+      {% elif (fepEligibility.complete == true) %}
+        {% set fepClasses = "govuk-card--success" %}
+      {% endif %}
+
+      {% set fepBody = "new_fep_claim_body" %}
+      {% if (fepEligibility.failed == true) %}
+        {% set fepBody = "fail_fep_claim_body" %}
+      {% elif (fepEligibility.complete == true) %}
+        {% set fepBody = "complete_fep_claim_body" %}
+      {% elif (fepEligibility.eligible == false) %}
+        {% set fepBody = "ineligible_fep_claim_body" %}
+      {% endif %}
       {{ card({
           heading: 'check_fep',
-          body: 'new_fep_claim_body',
+          body: fepBody,
+          classes: fepClasses,
           link: {
             text: 'start_fep',
             url: 'funeral-expense-payments/landing'
