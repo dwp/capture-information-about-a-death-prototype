@@ -1,5 +1,10 @@
 var differenceInMonths = require('date-fns/difference_in_months')
-// month, day, year
+/**
+ * Takes in 3 values from the given funeral date and returns the difference in months between todays date
+ * @param {string} year
+ * @param {string} month
+ * @param {string} day
+ */
 const validateFuneralDate = (year, month, day) => {
   const parsedMonth = parseInt(month) - 1;
   const parsedDay = parseInt(day);
