@@ -1,7 +1,7 @@
 const sra = require('sra');
 const isAfter = require('date-fns/is_after')
 
-const isCallerSpouse = (data => (data['is-caller-spouse'] || '') === 'true');
+const isCallerSpouse = (data => data['is-caller-spouse'] === 'true');
 
 const isWorkingAge = data => {
   const date = new Date(`${data['caller-dob-year']}-${data['caller-dob-month']}-${data['caller-dob-day']}`);

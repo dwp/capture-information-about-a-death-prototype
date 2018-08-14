@@ -18,7 +18,7 @@
     <div class="govuk-grid-column-one-third">
       {# Move this into the js #}
       {% set bspClasses = "" %}
-      {% if (bspEligibility.failed == true or (bspEligibility.eligible == false and bspEligiblity.complete == false)) %}
+      {% if (bspEligibility.failed == true or (bspEligibility.eligible == false and bspEligiblity.complete != true)) %}
         {% set bspClasses = "govuk-card--error" %}
       {% elif (bspEligibility.complete == true) %}
         {% set bspClasses = "govuk-card--success" %}
@@ -53,7 +53,6 @@
       {% elif (fepEligibility.complete == true) %}
         {% set fepClasses = "govuk-card--success" %}
       {% endif %}
-
       {% set fepBody = "new_fep_claim_body" %}
       {% if (fepEligibility.failed == true) %}
         {% set fepBody = "fail_fep_claim_body" %}
