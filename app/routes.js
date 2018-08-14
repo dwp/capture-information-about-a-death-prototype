@@ -66,10 +66,10 @@ router.get('*/select-eligibility', (req, res, next) => {
 });
 
 router.get('*/select-eligibility-cards', (req, res, next) => {
-  const isBspFailed = false;
+  const isBspFailed = res.app.locals.bspFailed;
   const isBspComplete = res.app.locals.bspComplete;
   const isBspEligible = bspEligibility.isEligibleForBsp(req.session.data);
-  const isFepFailed = false;
+  const isFepFailed = res.app.locals.fepFailed;
   const isFepComplete = res.app.locals.fepComplete;
   const isFepEligible = true; // currently always true
 

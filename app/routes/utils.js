@@ -3,6 +3,7 @@ const handleFailure = (msg, type, req, res) => {
   const service = (type === 'bsp' ? 'bsp' : 'fep');
   req.session.data[service + 'Failure'] = msg;
   res.app.locals[service + 'Complete'] = true;
+  res.app.locals[service + 'Failed'] = true;
   res.redirect(prefix + 'error');
 }
 
