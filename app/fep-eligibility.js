@@ -21,13 +21,14 @@ const fepRelationships = ['girlfriend', 'boyfriend', 'partner', 'wife', 'husband
  * @param {object} data
  */
 const isEligibleForFep = (data) => {
-  const relationship = data['caller-relationship'] || '';
-  const parsedRelationship = relationship.toLowerCase().replace(/(\s)|(-)/g, '').trim();
-  const isCouple = fepRelationships.includes(parsedRelationship);
-  return isCouple;
+  // const relationship = data['caller-relationship'] || '';
+  // const parsedRelationship = relationship.toLowerCase().replace(/(\s)|(-)/g, '').trim();
+  // const isCouple = fepRelationships.includes(parsedRelationship);
+  // return isCouple;
+  return true;
 };
 
 module.exports = {
   validateFuneralDate,
   isEligibleForFep
-}
+};

@@ -47,24 +47,10 @@
       }}
     </div>
     <div class="govuk-grid-column-one-third">
-      {% set fepClasses = "" %}
-      {% if (fepEligibility.failed == true or (fepEligibility.eligible == false and fepEligiblity.complete == false)) %}
-        {% set fepClasses = "govuk-card--error" %}
-      {% elif (fepEligibility.complete == true) %}
-        {% set fepClasses = "govuk-card--success" %}
-      {% endif %}
-      {% set fepBody = "new_fep_claim_body" %}
-      {% if (fepEligibility.failed == true) %}
-        {% set fepBody = "fail_fep_claim_body" %}
-      {% elif (fepEligibility.complete == true) %}
-        {% set fepBody = "complete_fep_claim_body" %}
-      {% elif (fepEligibility.eligible == false) %}
-        {% set fepBody = "ineligible_fep_claim_body" %}
-      {% endif %}
       {{ card({
           heading: 'check_fep',
-          body: fepBody,
-          classes: fepClasses,
+          body: fepEligibility.body,
+          classes: fepEligibility.classes,
           link: {
             text: 'start_fep',
             url: 'funeral-expense-payments/landing'

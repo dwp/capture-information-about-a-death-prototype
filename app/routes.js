@@ -6,6 +6,7 @@ const bspRoutes = require('./routes/bsp.js');
 const fepRoutes = require('./routes/fep.js');
 const bspEligibility = require('./bsp-eligibility.js');
 const fepEligibility = require('./fep-eligibility.js');
+const utils = require('./routes/utils.js');
 
 // Route index page
 router.get('/', function (req, res) {
@@ -65,26 +66,10 @@ router.get('*/select-eligibility', (req, res, next) => {
   }
 });
 
-router.get('*/select-eligibility-cards', (req, res, next) => {
-  const isBspFailed = res.app.locals.bspFailed;
-  const isBspComplete = res.app.locals.bspComplete;
-  const isBspEligible = bspEligibility.isEligibleForBsp(req.session.data);
-  const isFepFailed = res.app.locals.fepFailed;
-  const isFepComplete = res.app.locals.fepComplete;
-  const isFepEligible = true; // currently always true
-
-  // TODO: refactor
+router.get('*/select-eligibility-cards', (req, res) => {
   res.render(req.params[0].substr(1) + '/select-eligibility-cards.html', {
-    bspEligibility: {
-      failed: isBspFailed,
-      complete: isBspComplete,
-      eligible: isBspEligible
-    },
-    fepEligibility: {
-      failed: isFepFailed,
-      complete: isFepComplete,
-      eligible: isFepEligible
-    }
+    bspEligibility: utils.generateCard(req, res, 'bsp'),
+    fepEligibility: utils.generateCard(req, res, 'fep')
   });
 });
 
@@ -107,9 +92,11 @@ router.get('*/complete', (req, res, next) => {
   const eligiblityType = url[(url.length - 1)];
   if (eligiblityType.includes('bereavement')) {
     res.app.locals.bspComplete = true;
+    res.app.locals.bspFailed = false;
   }
   if (eligiblityType.includes('funeral')) {
     res.app.locals.fepComplete = true;
+    res.app.locals.fepFailed = false;
   }
   next();
 })
