@@ -137,6 +137,7 @@ app.locals.promoMode = promoMode
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
 app.locals.latestPrototypes = custom;
+
 const hospitalResponse = hospitals.sort((a, b) => {
   var textA = a.OrganisationName.toUpperCase();
   var textB = b.OrganisationName.toUpperCase();
