@@ -16,26 +16,10 @@
       }}
     </div>
     <div class="govuk-grid-column-one-third">
-      {# Move this into the js #}
-      {% set bspClasses = "" %}
-      {% if (bspEligibility.failed == true or (bspEligibility.eligible == false and bspEligiblity.complete != true)) %}
-        {% set bspClasses = "govuk-card--error" %}
-      {% elif (bspEligibility.complete == true) %}
-        {% set bspClasses = "govuk-card--success" %}
-      {% endif %}
-
-      {% set bspBody = "new_bsp_claim_body" %}
-      {% if (bspEligibility.failed == true) %}
-        {% set bspBody = "fail_bsp_claim_body" %}
-      {% elif (bspEligibility.complete == true) %}
-        {% set bspBody = "complete_bsp_claim_body" %}
-      {% elif (bspEligibility.eligible == false) %}
-        {% set bspBody = "ineligible_bsp_claim_body" %}
-      {% endif %}
       {{ card({
           heading: 'check_bsp',
-          body: bspBody,
-          classes: bspClasses,
+          body: bspEligibility.body,
+          classes: bspEligibility.classes,
           link: {
             text: 'start_bsp',
             url: 'bereavement-support-payments/landing'
