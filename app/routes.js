@@ -67,6 +67,10 @@ router.get('*/select-eligibility', (req, res, next) => {
 });
 
 router.get('*/select-eligibility-cards', (req, res) => {
+  const isDap = isDapAvailable(req, res);
+  if (isDap) {
+    return true;
+  }
   res.render(req.params[0].substr(1) + '/select-eligibility-cards.html', {
     bspEligibility: utils.generateCard(req, res, 'bsp'),
     fepEligibility: utils.generateCard(req, res, 'fep')

@@ -43,6 +43,7 @@ const generateBody = (state, type) => {
 const generateProps = (state, type) => {
   const body = generateBody(state, type);
   const classes = generateClasses(state);
+
   return {
     body,
     classes
@@ -51,17 +52,17 @@ const generateProps = (state, type) => {
 
 /**
  * Uses the request and response data to determine eligibly for FEP
- * @param {object} res
  * @param {object} req
+ * @param {object} res
  */
-const generateState = (res, req, type) => {
+const generateState = (req, res, type) => {
   let eligiblityCheck = fepEligibility.isEligibleForFep;
   if (type !== 'fep') {
     eligiblityCheck = bspEligibility.isEligibleForBsp;
   }
-  const complete = res.app.locals[type + 'Complete']
-  const eligible = eligiblityCheck(req);
-  const failed = res.app.locals[type + 'Failed']
+  const complete = req.app.locals[type + 'Complete']
+  const eligible = eligiblityCheck(req.session.data);
+  const failed = req.app.locals[type + 'Failed']
 
   return {
     complete,
@@ -72,12 +73,13 @@ const generateState = (res, req, type) => {
 
 /**
  * Returns an object of the eligiblity state and properties required to generate a card.
- * @param {object} res
  * @param {object} req
+ * @param {object} res
  */
-const generateCard = (res, req, type = 'fep') => {
-  const state = generateState(res, req, type);
+const generateCard = (req, res, type = 'fep') => {
+  const state = generateState(req, res, type);
   const props = generateProps(state, type);
+
   return {
     ...state,
     ...props
