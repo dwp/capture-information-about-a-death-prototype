@@ -240,3 +240,10 @@ legend {
     margin-top: -15px;
   }
 }
+
+.hide-border {
+  &.govuk-header__container {
+    border: 0;
+    margin-bottom: 0;
+  }
+}

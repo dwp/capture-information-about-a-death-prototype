@@ -1,4 +1,11 @@
-{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width-nav.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% block beforeContent %}
+  {% set newNotificationClass = "active" %}
+  {% set newBspClass = "" %}
+  {% set newFepClass = "" %}
+  {% include "includes/global-nav.html" %}
+
+{% endblock %}
 
 {% block content %}
   {% set callerHtml %}
