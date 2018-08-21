@@ -1,0 +1,18 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width-nav.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% block beforeContent %}
+  {% set newNotificationClass = "" %}
+  {% set newBspClass = "active" %}
+  {% set newFepClass = "" %}
+  {% set navUrlPrefix = "/versions/v1/" %}
+  {% include "includes/global-nav.html" %}
+{% endblock %}
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{"check_bsp" | translate}}</h1>
+      {% block formContent %}
+      {% endblock %}
+    </div>
+  </div>
+{% endblock %}

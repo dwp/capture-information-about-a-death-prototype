@@ -13,16 +13,12 @@ $task-list-indent: 35px;
 .app-task-list {
   list-style: none;
   padding: 0;
-  margin-top: $govuk-gutter;
-  @include govuk-media-query($from: tablet) {
-    margin-top: ($govuk-gutter * 2);
-  }
 }
 
 .app-task-list__section {
   display: table;
 
-  @include govuk-font(24, $weight: bold);
+  @include govuk-font(19, $weight: bold);
   padding-bottom: ($govuk-gutter / 6);
 }
 
@@ -54,7 +50,22 @@ $task-list-indent: 35px;
   border-bottom: 1px solid $govuk-border-colour;
   padding-top: govuk-spacing(2);
   padding-bottom: govuk-spacing(2);
-  @include govuk-clearfix
+  @include govuk-clearfix;
+
+  .govuk-tag {
+    font-size: 14px;
+  }
+
+  &::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border: 2px solid black;
+    float: left;
+    position: absolute;
+    margin-left: -35px;
+    margin-top: 1px;
+  }
 }
 
 .app-task-list__item:first-child {
@@ -62,8 +73,7 @@ $task-list-indent: 35px;
 }
 
 .app-task-list__task-name {
-  @include govuk-font($size: 19)
-  width: 15em;
+  @include govuk-font($size: 19);
   float: left;
 }
 

@@ -1,13 +1,14 @@
+{% set urlPrefix = (navUrlPrefix if navUrlPrefix else "") %}
 <nav class="navigation-global">
   <ul>
     <li>
-      <a href="eligibility" class="{{newNotificationClass}}" aria-current="page">New notification</a>
+      <a href="{{navUrlPrefix}}eligibility" class="{{newNotificationClass}}" aria-current="page">{{"nav_notification" | translate}}</a>
     </li>
     <li>
-      <a href="select-eligibility-cards" class="{{newBspClass}}" aria-current="page">BSP</a>
+      <a href="{{navUrlPrefix}}select-eligibility-cards" class="{{newBspClass}}" aria-current="page">{{"nav_bsp" | translate}}</a>
     </li>
     <li>
-      <a href="select-eligibility-cards" class="{{newFepClass}}" aria-current="page">FEP</a>
+      <a href="{{navUrlPrefix}}select-eligibility-cards" class="{{newFepClass}}" aria-current="page">{{"nav_fep" | translate}}</a>
     </li>
     <li class="search-group">
       <form class="search-form" method="get" action="search-results">

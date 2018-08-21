@@ -1,4 +1,4 @@
-{% extends "versions/base/funeral-expense-payments/layout.html" %}
+{% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
 {% block formContent %}
   {% if data.funeralResponsibilityError %}
     {{ govukErrorSummary({
