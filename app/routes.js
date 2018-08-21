@@ -1,17 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const config = require('./config.js')
-const fs = require('fs');
 const bspRoutes = require('./routes/bsp.js');
 const fepRoutes = require('./routes/fep.js');
-const bspEligibility = require('./bsp-eligibility.js');
-const fepEligibility = require('./fep-eligibility.js');
 const utils = require('./routes/utils.js');
 
 // Route index page
 router.get('/', function (req, res) {
   res.render('index')
-})
+});
 
 bspRoutes(router);
 fepRoutes(router);
@@ -47,11 +43,11 @@ const isDapAvailable = (req, res, next) => {
     next();
   }
   return false;
-}
+};
 
 router.get('*/check', (req, res, next) => {
   return isDapAvailable(req, res, next);
-})
+});
 
 router.get('*/payee', (req, res, next) => {
   const deathArrears = req.session.data['death-arrears-caller'];
@@ -79,17 +75,17 @@ router.get('*/select-eligibility', (req, res, next) => {
 });
 
 router.get('*/select-eligibility-cards', (req, res) => {
-  const isDap = isDapAvailable(req, res);
-  if (isDap) {
+  if (isDapAvailable(req, res)) {
     return true;
   }
+
   res.render(req.params[0].substr(1) + '/select-eligibility-cards.html', {
     bspEligibility: utils.generateCard(req, res, 'bsp'),
     fepEligibility: utils.generateCard(req, res, 'fep')
   });
 });
 
-router.get('*/handle-eligibility', (req, res, next) => {
+router.get('*/handle-eligibility', (req, res) => {
   const prefix = req.params[0] + '/';
   let desiredRoute = 'check';
   const value = req.session.data['select-eligibility'];
@@ -106,6 +102,7 @@ router.get('*/handle-eligibility', (req, res, next) => {
 router.get('*/complete', (req, res, next) => {
   const url = req.params[0].split('/');
   const eligiblityType = url[(url.length - 1)];
+
   if (eligiblityType.includes('bereavement')) {
     res.app.locals.bspComplete = true;
     res.app.locals.bspFailed = false;
@@ -115,7 +112,7 @@ router.get('*/complete', (req, res, next) => {
     res.app.locals.fepFailed = false;
   }
   next();
-})
+});
 
 const benefitsRedirect = (req, res, prefix) => {
   req.session.data.funeralBenefitsError = 'The caller must be in receipt or have one of the following benefits pending';
@@ -138,13 +135,4 @@ router.get('*/check-qualifying-benefits', (req, res, next) => {
   }
 });
 
-const handleMissingVersionRoute = (version, route, res) => {
-  const fileExists = fs.existsSync(`app/views/${route}`);
-  let renderedRoute = route;
-  if (!fileExists) {
-    renderedRoute = route.replace(version, 'base');
-  }
-  return res.render(`${renderedRoute.slice(1)}`)
-};
-
-module.exports = router
+module.exports = router;
