@@ -28,6 +28,13 @@ router.get('*/versions*', (req, res, next) => {
 });
 
 const isDapAvailable = (req, res, next) => {
+  const arrearsCaller = req.session.data['death-arrears-caller'];
+  if (arrearsCaller && arrearsCaller.toLowerCase() === 'unknown') {
+    if (next) {
+      next();
+    }
+    return false;
+  }
   const isDap = checkDapEligibility(req.session.data);
   const dapProps = ['dap-bank-or-building', 'dap-bank-name', 'dap-bank-account-no', 'dap-bank-sort-code'];
   const isDapComplete = validateProps(dapProps, req.session.data).length === 0;
@@ -47,7 +54,12 @@ router.get('*/check', (req, res, next) => {
 })
 
 router.get('*/payee', (req, res, next) => {
-  res.locals.isCallerDap = req.session.data['death-arrears-caller'] === 'true';
+  const deathArrears = req.session.data['death-arrears-caller'];
+  if (deathArrears.toLowerCase() === 'unknown') {
+    res.redirect(req.params[0] + '/select-eligibility-cards');
+    return;
+  }
+  res.locals.isCallerDap = deathArrears === 'true';
   next();
 });
 

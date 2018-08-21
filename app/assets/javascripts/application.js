@@ -118,7 +118,6 @@ $(document).ready(function () {
     el.querySelector(`[name="${context}-town-city"]`).value = result.town;
     el.querySelector(`[name="${context}-county"]`).value = result.county;
     el.querySelector(`[name="${context}-postcode"]`).value = result.postcode;
-
   }
 
   const addressLookup = () => {

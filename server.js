@@ -176,6 +176,15 @@ app.get('/prototype-admin/clear-data', function (req, res) {
   res.render('prototype-admin/clear-data')
 })
 
+app.get('*/eligibility/clear', (req, res) => {
+  req.session.destroy()
+  res.app.locals.bspComplete = false;
+  res.app.locals.bspFailed = false;
+  res.app.locals.fepComplete = false;
+  res.app.locals.fepFailed = false;
+  res.redirect(req.params[0] + '/eligibility');
+})
+
 // Redirect root to /docs when in promo mode.
 if (promoMode === 'true') {
   console.log('Prototype Kit running in promo mode')
