@@ -4,7 +4,6 @@
   {% set newBspClass = "" %}
   {% set newFepClass = "" %}
   {% include "includes/global-nav.html" %}
-
 {% endblock %}
 
 {% block content %}
@@ -50,5 +49,6 @@
         }) }}
       </form>
     </div>
+    {% include "versions/base/includes/agent-sidebar.html" %}
   </div>
 {% endblock %}
