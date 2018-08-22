@@ -28,7 +28,7 @@ module.exports = {
   useBrowserSync: 'true',
 
   addresses: {
-    'ne244na': {
+    'ne981yx': {
       line1: 'Benton Park View',
       line2: '',
       town: 'Newcastle Upon Tyne',

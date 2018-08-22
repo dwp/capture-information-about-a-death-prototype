@@ -1,0 +1,101 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width-nav.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% set prefix ="test" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l">1. Postcode empty state</h1>
+      {% call govukFieldset({
+        classes: 'address-group',
+        legend: {
+          html: "address" | translate + "<span class='govuk-hint'>" + "address_hint" | translate + "</span>",
+          classes: "govuk-fieldset__legend--s",
+          isPageHeading: false
+        }
+      }) %}
+        <div class="postcode-group-new">
+          {{ govukInput({
+            label: {
+              text: "postcode" | translate
+            },
+            classes: "govuk-input--width-10",
+            id:  prefix + "-postcode-lookup",
+            name:  prefix + "-postcode-lookup",
+            value: data[prefix + "-postcode-lookup"]
+          }) }}
+
+          {{ govukButton({
+            text: "Find address",
+            id: prefix + "-find-address",
+            classes: "js-postcode-lookup-test button-secondary postcode-lookup-test",
+            type: "button"
+          }) }}
+
+
+          <details class="address-details">
+            <summary><span class="summary">Address outside of UK or need to enter manually?</span></summary>
+            <div class="inset-address" data-context={{prefix}}>
+              {% include "versions/base/includes/address/manual.html" %}
+            </div>
+          </details>
+        </div>
+      {% endcall %}
+
+      <h2 class="govuk-heading-l">2. Postcode Found</h2>
+      {% call govukFieldset({
+        classes: 'address-group',
+        legend: {
+          html: "address" | translate + "<span class='govuk-hint'>" + "address_hint" | translate + "</span>",
+          classes: "govuk-fieldset__legend--s",
+          isPageHeading: false
+        }
+      }) %}
+        <div class="postcode-group-new">
+          {{ govukInput({
+            label: {
+              text: "postcode" | translate
+            },
+            classes: "govuk-input--width-10",
+            id:  prefix + "-postcode-lookup",
+            name:  prefix + "-postcode-lookup",
+            value: "NE98 1YX"
+          }) }}
+
+          {{ govukButton({
+            text: "Find address",
+            id: prefix + "-find-address",
+            classes: "js-postcode-lookup-test button-secondary postcode-lookup-test",
+            type: "button"
+          }) }}
+          <div class="govuk-!-width-two-thirds js-hidden js-results-group-test results-group-test" style="clear: both;">
+            {{ govukSelect({
+              id: prefix + "-results",
+              name: prefix + "-results",
+              label: {
+                text: "Select an address"
+              },
+              items: [
+                {
+                  value: "",
+                  text: "Select an address from the list",
+                  disabled: true,
+                  selected: true
+                },
+                {
+                  value: "BentonParkView",
+                  text: "Benton Park View, Longbenton, NE98 1YX"
+                }
+              ]
+            }) }}
+          </div>
+          <details class="address-details">
+            <summary><span class="summary">Address outside of UK or need to enter manually?</span></summary>
+            <div class="inset-address" data-context={{prefix}}>
+              {% include "versions/base/includes/address/manual.html" %}
+            </div>
+          </details>
+        </div>
+      {% endcall %}
+    </div>
+  </div>
+{% endblock %}
