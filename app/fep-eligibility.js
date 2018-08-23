@@ -28,6 +28,32 @@ const isEligibleForFep = (data) => {
   return true;
 };
 
+const mockResponse = () => {
+  const valid = {
+    isEligible: true,
+    funeralDate: {
+      isEligible: true
+    },
+    funeralResidency: {
+      isEligible: true
+    }
+  };
+
+  const error = {
+    isEligible: false,
+    funeralDate: {
+      isEligible: true
+    },
+    funeralResidency: {
+      isEligible: false,
+      error: 'error_fep_funeral_residency',
+      message: 'the funeral must be within the UK'
+    }
+  };
+};
+
+const isEligible = response => response.find(item => !item.isEligible);
+
 module.exports = {
   validateFuneralDate,
   isEligibleForFep
