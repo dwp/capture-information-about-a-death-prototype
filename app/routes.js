@@ -3,6 +3,7 @@ const router = express.Router()
 const bspRoutes = require('./routes/bsp.js');
 const fepRoutes = require('./routes/fep.js');
 const utils = require('./routes/utils.js');
+const fs = require('fs');
 
 // Route index page
 router.get('/', function (req, res) {
@@ -47,6 +48,24 @@ const isDapAvailable = (req, res, next) => {
 
 router.get('*/check', (req, res, next) => {
   return isDapAvailable(req, res, next);
+});
+
+// If a start page in the version exists,
+router.get('*/eligibility', (req, res, next) => {
+  const url = req.params[0];
+  const startExists = fs.existsSync('app/views' + url + '/start.html')
+
+  if (startExists) {
+    const data = req.session.data;
+    // probably create an array of props and check the obj includes them all
+    if (data['caller-full-name'] && data['caller-phone-number'] && data['deceased-national-insurance'] && data['deceased-full-name']) {
+      next();
+    } else {
+      res.redirect(req.params[0] + '/start');
+    }
+  }
+  console.log(startExists)
+  next();
 });
 
 router.get('*/payee', (req, res, next) => {

@@ -1,5 +1,23 @@
-<div class="govuk-grid-column-one-third">
-  <h2 class="govuk-heading-m govuk-!-margin-top-5">Agent information</h2>
+<div class="govuk-grid-column-one-third agent-sidebar">
+  <h2 class="govuk-heading-m govuk-!-margin-top-3">Agent information</h2>
+  <dl class="govuk-list govuk-list--description">
+    {% if data['caller-full-name'] %}
+      <dt class="govuk-heading-s">Caller name: </dt>
+      <dd>{{data['caller-full-name']}}</dd>
+    {% endif %}
+    {% if data['caller-phone-number'] %}
+      <dt class="govuk-heading-s">Caller phone number: </dt>
+      <dd>{{data['caller-phone-number']}}</dd>
+    {% endif %}
+    {% if data['deceased-full-name'] %}
+      <dt class="govuk-heading-s">Deceased name: </dt>
+      <dd>{{data['deceased-full-name']}}</dd>
+    {% endif %}
+    {% if data['deceased-national-insurance'] %}
+      <dt class="govuk-heading-s">Deceased National Insurance Number: </dt>
+      <dd>{{data['deceased-national-insurance']}}</dd>
+    {% endif %}
+  </dl>
   <ol class="app-task-list">
     <li>
       <h2 class="app-task-list__section">

@@ -131,6 +131,7 @@ const locales = {
     spouse_question: 'Who is the surviving spouse?',
     start_bsp: 'Start BSP',
     start_fep: 'Start FEP',
+    start_page_heading: 'Start Page Heading',
     submit_notification: 'Send death notification',
     town_city: 'Town or city',
     universal_credit: 'Universal Credit',
