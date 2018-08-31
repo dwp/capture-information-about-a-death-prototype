@@ -1,4 +1,5 @@
-var differenceInMonths = require('date-fns/difference_in_months')
+const differenceInMonths = require('date-fns/difference_in_months')
+const differenceInYears = require('date-fns/difference_in_years');
 /**
  * Takes in 3 values from the given funeral date and returns the difference in months between todays date
  * @param {string} year
@@ -16,6 +17,21 @@ const validateFuneralDate = (year, month, day) => {
 
 const fepRelationships = ['girlfriend', 'boyfriend', 'partner', 'wife', 'husband', 'civilpartner'];
 
+const getClaimantAge = (data) => {
+  const callerDob = new Date(data['caller-dob-year'], data['caller-dob-month'], data['caller-dob-day']);
+  const diff = differenceInYears(new Date(), callerDob);
+  const isAdult = diff >= 16;
+
+  // if 16 or over and 19 or under
+  if (isAdult && diff <= 19) {
+    console.log('ask if theyre a student');
+  }
+  // return isAdult;
+  console.log(isAdult);
+  console.log(differenceInYears(new Date(), callerDob))
+  console.log(callerDob)
+}
+
 /**
  * Takes data from Death notification and calculates whether they can proceed with FEP
  * @param {object} data
@@ -25,6 +41,7 @@ const isEligibleForFep = (data) => {
   // const parsedRelationship = relationship.toLowerCase().replace(/(\s)|(-)/g, '').trim();
   // const isCouple = fepRelationships.includes(parsedRelationship);
   // return isCouple;
+  getClaimantAge(data)
   return true;
 };
 
