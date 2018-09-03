@@ -12,15 +12,16 @@
           <li>details of any benefits they get</li>
         </ul>
       </p>
-      {% if data['is-caller-spouse'] == 'true' %}
-        <a href="funeral-date" role="button" class="govuk-button govuk-button--start">
-          Continue
-        </a>
-      {% else %}
-        <a href="relationship" role="button" class="govuk-button govuk-button--start">
-          Continue
-        </a>
+      {% set startUrl = "funeral-date" %}
+      <h1>{{startUrl}}hi</h1>
+      {% if fepStart %}
+        {% set startUrl = fepStart %}
       {% endif %}
+      <h1>{{startUrl}}hi</h1>
+
+      <a href="{{startUrl}}" role="button" class="govuk-button govuk-button--start">
+        Continue
+      </a>
     </div>
   </div>
 {% endblock %}

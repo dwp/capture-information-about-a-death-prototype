@@ -1,36 +1,22 @@
 {% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
 
 {% block formContent %}
-  {% if data.funeralRelationshipError %}
-    {{ govukErrorSummary({
-      titleText: "There is a problem",
-      errorList: [
-        {
-          text: data.funeralRelationshipError,
-          href: "#fep-relationship"
-        }
-      ]
-    }) }}
-  {% endif %}
-  <form method="post" action="check-relationship">
+  <form method="post" action="check-student">
     {{ govukRadios({
-      idPrefix: "living-as-married",
-      name: "living-as-married",
+      idPrefix: "student-or-training",
+      name: "student-or-training",
       fieldset: {
         legend: {
-          text: "married_couple" | translate,
+          text: "student_training" | translate,
           isPageHeading: false,
           classes: "govuk-fieldset__legend--s"
         }
-      },
-      hint:{
-        text:"married_couple_hint" | translate
       },
       items: [
         {
           value: "true",
           text: "Yes" | translate,
-          checked: true if data['living-as-married'] == 'true' else false
+          checked: true if data['student-or-training'] == 'true' else false
         },
         {
           value: "false",

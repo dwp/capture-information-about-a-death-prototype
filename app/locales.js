@@ -132,6 +132,7 @@ const locales = {
     start_bsp: 'Start BSP',
     start_fep: 'Start FEP',
     start_page_heading: 'Start Page Heading',
+    student_training: 'Was the deceased in full time education or training?',
     submit_notification: 'Send death notification',
     town_city: 'Town or city',
     universal_credit: 'Universal Credit',

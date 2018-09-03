@@ -17,20 +17,14 @@ const validateFuneralDate = (year, month, day) => {
 
 const fepRelationships = ['girlfriend', 'boyfriend', 'partner', 'wife', 'husband', 'civilpartner'];
 
-const getClaimantAge = (data) => {
-  const callerDob = new Date(data['caller-dob-year'], data['caller-dob-month'], data['caller-dob-day']);
-  const diff = differenceInYears(new Date(), callerDob);
-  const isAdult = diff >= 16;
+const isClaimantAdult = (age = 0) => !(age <= 19 && age >= 16);
 
-  // if 16 or over and 19 or under
-  if (isAdult && diff <= 19) {
-    console.log('ask if theyre a student');
-  }
-  // return isAdult;
-  console.log(isAdult);
-  console.log(differenceInYears(new Date(), callerDob))
-  console.log(callerDob)
-}
+const getClaimantAge = (data) => {
+  const callerDob = new Date(data['deceased-dob-year'], data['deceased-dob-month'], data['deceased-dob-day']);
+  return differenceInYears(new Date(), callerDob);
+};
+
+const isCallerSpouse = ((data) => data['is-caller-spouse'] === 'true');
 
 /**
  * Takes data from Death notification and calculates whether they can proceed with FEP
@@ -73,5 +67,8 @@ const isEligible = response => response.find(item => !item.isEligible);
 
 module.exports = {
   validateFuneralDate,
-  isEligibleForFep
+  isEligibleForFep,
+  isClaimantAdult,
+  getClaimantAge,
+  isCallerSpouse
 };
