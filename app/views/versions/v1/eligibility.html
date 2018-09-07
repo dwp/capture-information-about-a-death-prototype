@@ -1,4 +1,6 @@
 {% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width-nav.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "../../macros/error-summary.njk" import tabErrorSummary %}
+
 {% block beforeContent %}
   {% set newNotificationClass = "active" %}
   {% set newBspClass = "" %}
@@ -7,6 +9,23 @@
 {% endblock %}
 
 {% block content %}
+  {# {{ tabErrorSummary({
+    titleText: "There is a problem",
+    errorList: [
+      {
+        text: "Date of birth must be in the past",
+        href: "#caller-dob"
+      },
+      {
+        text: "Problem with deceased date of death",
+        href: "#deceased-dod",
+        attributes: {
+          'data-tab': 'deceased-tab'
+        }
+      }
+    ]
+  }) }} #}
+
   {% set callerHtml %}
     {% include "versions/base/includes/caller.html" %}
   {% endset %}

@@ -1,5 +1,6 @@
 const differenceInMonths = require('date-fns/difference_in_months')
 const differenceInYears = require('date-fns/difference_in_years');
+
 /**
  * Takes in 3 values from the given funeral date and returns the difference in months between todays date
  * @param {string} year
@@ -31,10 +32,6 @@ const isCallerSpouse = ((data) => data['is-caller-spouse'] === 'true');
  * @param {object} data
  */
 const isEligibleForFep = (data) => {
-  // const relationship = data['caller-relationship'] || '';
-  // const parsedRelationship = relationship.toLowerCase().replace(/(\s)|(-)/g, '').trim();
-  // const isCouple = fepRelationships.includes(parsedRelationship);
-  // return isCouple;
   getClaimantAge(data)
   return true;
 };
