@@ -143,18 +143,20 @@ $(document).ready(function () {
   // use a data attribute in the error summary for the tab its encapsulated in
   const testValidation = () => {
     const validationGroup = document.querySelector('.govuk-error-summary__list');
-    const errors = validationGroup.querySelectorAll('li');
-    [...errors].forEach(errEl => {
-      errEl.addEventListener('click', (el) => {
-        el.preventDefault()
-        const targetEl = document.getElementById(el.target.hash.substr(1));
-        window.location.hash = el.target.parentElement.dataset.tab;
-        // 😱
-        setTimeout(() => {
-          targetEl.scrollIntoView();
-        }, 0)
+    if (validationGroup) {
+      const errors = validationGroup.querySelectorAll('li');
+      [...errors].forEach(errEl => {
+        errEl.addEventListener('click', (el) => {
+          el.preventDefault()
+          const targetEl = document.getElementById(el.target.hash.substr(1));
+          window.location.hash = el.target.parentElement.dataset.tab;
+          // 😱
+          setTimeout(() => {
+            targetEl.scrollIntoView();
+          }, 0)
+        })
       })
-    })
+    }
   }
 
   const showTab = (tab) => {

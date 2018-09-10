@@ -9,22 +9,20 @@
 {% endblock %}
 
 {% block content %}
-  {# {{ tabErrorSummary({
-    titleText: "There is a problem",
-    errorList: [
-      {
-        text: "Date of birth must be in the past",
-        href: "#caller-dob"
-      },
-      {
-        text: "Problem with deceased date of death",
-        href: "#deceased-dod",
-        attributes: {
-          'data-tab': 'deceased-tab'
+  {% if data.eligibilityError %}
+    {{ tabErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: "Problem with deceased date of death",
+          href: "#deceased-dod",
+          attributes: {
+            'data-tab': 'deceased-tab'
+          }
         }
-      }
-    ]
-  }) }} #}
+      ]
+    }) }}
+  {% endif %}
 
   {% set callerHtml %}
     {% include "versions/base/includes/caller.html" %}

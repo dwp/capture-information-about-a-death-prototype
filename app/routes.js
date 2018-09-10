@@ -64,7 +64,7 @@ router.get('*/eligibility', (req, res, next) => {
       res.redirect(req.params[0] + '/start');
     }
   }
-  console.log(startExists)
+
   next();
 });
 
@@ -94,6 +94,12 @@ router.get('*/select-eligibility', (req, res, next) => {
 });
 
 router.get('*/select-eligibility-cards', (req, res) => {
+  if (req.session.data['deceased-dod-year'] === '1901') {
+    req.session.data.eligibilityError = true;
+    res.redirect(req.params[0] + '/eligibility');
+    return true;
+  }
+  req.session.data.eligibilityError = false;
   if (isDapAvailable(req, res)) {
     return true;
   }
