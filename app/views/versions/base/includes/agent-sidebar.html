@@ -1,47 +1,39 @@
 <div class="govuk-grid-column-one-third agent-sidebar">
-  <h2 class="govuk-heading-m govuk-!-margin-top-3">Agent information</h2>
+  <h2 class="govuk-heading-m govuk-!-margin-top-3">About this call</h2>
   <dl class="govuk-list govuk-list--description">
     {% if data['caller-full-name'] %}
-      <dt class="govuk-heading-s">Caller name: </dt>
+      <dt class="govuk-heading-s">Caller </dt>
       <dd>{{data['caller-full-name']}}</dd>
     {% endif %}
-    {% if data['caller-phone-number'] %}
-      <dt class="govuk-heading-s">Caller phone number: </dt>
-      <dd>{{data['caller-phone-number']}}</dd>
-    {% endif %}
     {% if data['deceased-full-name'] %}
-      <dt class="govuk-heading-s">Deceased name: </dt>
+      <dt class="govuk-heading-s">Person who died </dt>
       <dd>{{data['deceased-full-name']}}</dd>
-    {% endif %}
-    {% if data['deceased-national-insurance'] %}
-      <dt class="govuk-heading-s">Deceased National Insurance Number: </dt>
-      <dd>{{data['deceased-national-insurance']}}</dd>
     {% endif %}
   </dl>
   <ol class="app-task-list">
     <li>
       <h2 class="app-task-list__section">
-        <span class="app-task-list__section-number">1. </span> Check in Searchlight for:
+        Check Searchlight for [deceased name]'s:
       </h2>
       <ul class="app-task-list__items">
         <li class="app-task-list__item">
           <span class="app-task-list__task-name" href="#" aria-describedby="eligibility-completed">
-            Deceased's first line of address
+            first line of address
           </span>
         </li>
         <li class="app-task-list__item">
           <span class="app-task-list__task-name" href="#" aria-describedby="read-declaration-completed">
-            Deceased's postcode
+            postcode
           </span>
         </li>
         <li class="app-task-list__item">
           <span class="app-task-list__task-name" href="#" aria-describedby="read-declaration-completed">
-            Deceased's telephone or mobile number
+            telephone or mobile number
           </span>
         </li>
         <li class="app-task-list__item">
           <span class="app-task-list__task-name" href="#" aria-describedby="read-declaration-completed">
-            Deceased's marital status
+            marital status
           </span>
         </li>
       </ul>
