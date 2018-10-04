@@ -11,13 +11,14 @@
       <form method="post" action="eligibility">
         {% call govukFieldset({
           legend: {
-            classes: "govuk-fieldset__legend--m",
-            isPageHeading: false
+            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-4",
+            isPageHeading: false,
+            text: "Caller"
           }
         }) %}
           {{ govukInput({
             label: {
-              text: "Caller " + "full_name" | translate,
+              text: "full_name" | translate,
               classes: "govuk-!-font-weight-bold",
               attributes: {
                 id: "caller-full-name-group"
@@ -26,12 +27,12 @@
             id: "caller-full-name",
             name: "caller-full-name",
             classes: "govuk-!-width-two-thirds",
-            value: "caller-full-name"
+            value: data["caller-full-name"]
           }) }}
 
           {{ govukInput({
             label: {
-              text: "Caller " + "phone_number" | translate,
+              text: "phone_number" | translate,
               classes: "govuk-!-font-weight-bold",
               attributes: {
                 id: "caller-phone-number-group"
@@ -40,19 +41,20 @@
             id: "caller-phone-number",
             name: "caller-phone-number",
             classes: "govuk-!-width-two-thirds",
-            value: "caller-phone-number"
+            value: data["caller-phone-number"]
           }) }}
         {% endcall %}
 
         {% call govukFieldset({
           legend: {
-            classes: "govuk-fieldset__legend--m",
-            isPageHeading: false
+            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-4",
+            isPageHeading: false,
+            text: "Person who died"
           }
         }) %}
           {{ govukInput({
             label: {
-              text: "Deceased " + "full_name" | translate,
+              text: "full_name" | translate,
               classes: "govuk-!-font-weight-bold",
               attributes: {
                 id: "deceased-full-name-group"
@@ -61,11 +63,11 @@
             id: "deceased-full-name",
             name: "deceased-full-name",
             classes: "govuk-!-width-two-thirds",
-            value: "deceased-full-name"
+            value: data["deceased-full-name"]
           }) }}
           {{ govukInput({
             label: {
-              text: "Deceased " +  "national_insurance" | translate,
+              text: "national_insurance" | translate,
               classes: "govuk-!-font-weight-bold",
               attributes: {
                 id: "deceased-national-insurance-group"
@@ -74,7 +76,36 @@
             id: "deceased-national-insurance",
             name: "deceased-national-insurance",
             classes: "govuk-!-width-two-thirds",
-            value: "deceased-national-insurance"
+            value: data["deceased-national-insurance"]
+          }) }}
+          {{ govukDateInput({
+            id: "deceased-dob",
+            name: "deceased-dob",
+            value: data["deceased-dob"],
+            fieldset: {
+              legend: {
+                text: "dob_title" | translate,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: "dob_hint" | translate
+            },
+            items: [
+              {
+                name: "day",
+                value: data['deceased-dod-day']
+              },
+              {
+                name: "month",
+                value: data['deceased-dod-month']
+              },
+              {
+                name: "year",
+                value: data['deceased-dod-year']
+              }
+            ]
           }) }}
         {% endcall %}
         {{ govukButton({
