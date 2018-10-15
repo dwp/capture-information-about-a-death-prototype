@@ -73,7 +73,7 @@ var appViews = [
 var nunjucksAppEnv = nunjucks.configure(appViews, {
   autoescape: true,
   express: app,
-  noCache: true,
+  noCache: false,
   watch: true
 });
 
@@ -84,8 +84,8 @@ utils.addNunjucksFilters(nunjucksAppEnv)
 app.set('view engine', 'html')
 
 // Middleware to serve static assets
-app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/assets')))
-app.use('/public', express.static(path.join(__dirname, '/public')))
+app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/assets'), { maxAge: 0 }))
+app.use('/public', express.static(path.join(__dirname, '/public'), { maxAge: 0 }))
 
 // load govuk-frontend 'all' js
 app.use('/public/javascripts', express.static(path.join(__dirname, '/node_modules/govuk-frontend')))
@@ -103,7 +103,7 @@ if (useDocumentation) {
   var nunjucksDocumentationEnv = nunjucks.configure(documentationViews, {
     autoescape: true,
     express: documentationApp,
-    noCache: true,
+    noCache: false,
     watch: true
   })
   // Nunjucks filters

@@ -5,6 +5,10 @@
       <dt class="govuk-heading-s">Caller </dt>
       <dd>{{data['caller-full-name']}}</dd>
     {% endif %}
+    {% if data['caller-phone-number'] %}
+      <dt class="govuk-heading-s">Phone number</dt>
+      <dd>{{data['caller-phone-number']}}</dd>
+    {% endif %}
     {% if data['deceased-full-name'] %}
       <dt class="govuk-heading-s">Person who died </dt>
       <dd>{{data['deceased-full-name']}}</dd>

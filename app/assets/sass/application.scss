@@ -258,3 +258,9 @@ legend {
     margin-bottom: 0;
   }
 }
+
+.hide-address-fix {
+  .postcode-group +.govuk-form-group {
+    display: none;
+  }
+}

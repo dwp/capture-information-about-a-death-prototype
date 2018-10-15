@@ -124,7 +124,7 @@ router.get('*/handle-eligibility', (req, res) => {
   res.redirect(prefix + desiredRoute);
 });
 
-router.get('*/complete', (req, res, next) => {
+router.get('*/confirm', (req, res, next) => {
   const url = req.params[0].split('/');
   const eligiblityType = url[(url.length - 1)];
 

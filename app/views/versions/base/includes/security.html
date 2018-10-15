@@ -45,19 +45,19 @@
   items: [
     {
       name: "day",
-      value: data['deceased-dod-day']
+      value: data['deceased-dob-day']
     },
     {
       name: "month",
-      value: data['deceased-dod-month']
+      value: data['deceased-dob-month']
     },
     {
       name: "year",
-      value: data['deceased-dod-year']
+      value: data['deceased-dob-year']
     }
   ]
 }) }}
-
+{#
 {% set securityPassedHtml %}
   {{ govukCheckboxes({
     idPrefix: "security",
@@ -128,6 +128,6 @@
       }
     }
   ]
-}) }}
+}) }} #}
 
 <a href="#deceased-tab" class="govuk-button">{{"save_continue" | translate}}</a>
