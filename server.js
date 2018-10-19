@@ -34,6 +34,7 @@ var useHttps = process.env.USE_HTTPS || config.useHttps
 var useBrowserSync = config.useBrowserSync
 var analyticsId = process.env.ANALYTICS_TRACKING_ID
 var gtmId = process.env.GOOGLE_TAG_MANAGER_TRACKING_ID
+var staticAssetsMaxAge = process.env.ASSETS_MAX_AGE || config.assetsMaxAge;
 
 env = env.toLowerCase()
 useAuth = useAuth.toLowerCase()
@@ -84,14 +85,14 @@ utils.addNunjucksFilters(nunjucksAppEnv)
 app.set('view engine', 'html')
 
 // Middleware to serve static assets
-app.use('/assets', express.static(path.join(__dirname, '/node_modules/govuk-frontend/assets'), { maxAge: 0 }))
-app.use('/public', express.static(path.join(__dirname, '/public'), { maxAge: 0 }))
+app.use('/public', express.static(path.join(__dirname, '/public'), { maxAge: staticAssetsMaxAge || 0 }))
+app.use('/assets', express.static(path.join(__dirname, 'node_modules', 'govuk-frontend', 'assets'), { maxAge: staticAssetsMaxAge || 0 }))
 
 // load govuk-frontend 'all' js
-app.use('/public/javascripts', express.static(path.join(__dirname, '/node_modules/govuk-frontend')))
+app.use('/public/javascripts', express.static(path.join(__dirname, '/node_modules/govuk-frontend'), { maxAge: staticAssetsMaxAge || 0 }))
 
 // hightlightJS styles
-app.use('/public/vendor/highlight', express.static(path.join(__dirname, '/node_modules/highlight.js/styles')))
+app.use('/public/vendor/highlight', express.static(path.join(__dirname, '/node_modules/highlight.js/styles'), { maxAge: staticAssetsMaxAge || 0 }))
 
 // Set up documentation app
 if (useDocumentation) {

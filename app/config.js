@@ -26,7 +26,7 @@ module.exports = {
 
   // Enable or disable Browser Sync
   useBrowserSync: 'true',
-
+  // assetsMaxAge: 10000,
   addresses: {
     'ne981yx': {
       line1: 'Benton Park View',
