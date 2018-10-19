@@ -1,0 +1,241 @@
+<h2 class="govuk-heading-m">{{"deceased_heading" | translate}}</h2>
+
+{{ govukInput({
+  label: {
+    text: "full_name" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "deceased-full-name-group"
+    }
+  },
+  id: "deceased-full-name",
+  name: "deceased-full-name",
+  classes: "govuk-!-width-two-thirds",
+  value: data["deceased-full-name"]
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "national_insurance" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "deceased-national-insurance-group"
+    }
+  },
+  id: "deceased-national-insurance",
+  name: "deceased-national-insurance",
+  classes: "govuk-!-width-two-thirds",
+  value: data["deceased-national-insurance"]
+}) }}
+
+{{ govukDateInput({
+  id: "deceased-dob",
+  name: "deceased-dob",
+  value: data["deceased-dob"],
+  fieldset: {
+    legend: {
+      text: "dob_title" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "dob_hint" | translate
+  },
+  items: [
+    {
+      name: "day",
+      value: data['deceased-dob-day']
+    },
+    {
+      name: "month",
+      value: data['deceased-dob-month']
+    },
+    {
+      name: "year",
+      value: data['deceased-dob-year']
+    }
+  ]
+}) }}
+
+{% set deceasedAddressHtml %}
+  {% call govukFieldset({
+    classes: 'address-group',
+    legend: {
+      html: "deceased_address" | translate,
+      classes: "govuk-fieldset__legend--s",
+      isPageHeading: false
+    }
+  }) %}
+    <div class="govuk-form-group">
+      {% set prefix = "deceased" %}
+      {% include "versions/base/includes/address/find.html" %}
+    </div>
+  {% endcall %}
+{% endset %}
+
+{% set hospitalInfoHtml %}
+  {% include "versions/base/includes/hospital/autocomplete.html" %}
+{% endset %}
+
+{{ govukDateInput({
+  id: "deceased-dod",
+  name: "deceased-dod",
+  fieldset: {
+    legend: {
+      text: "dod_title" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "dod_hint" | translate
+  },
+  items: [
+    {
+      name: "day",
+      value: data['deceased-dod-day']
+    },
+    {
+      name: "month",
+      value: data['deceased-dod-month']
+    },
+    {
+      name: "year",
+      value: data['deceased-dod-year']
+    }
+  ]
+  })
+}}
+
+{{ govukRadios({
+  idPrefix: "hospital-death-conditional",
+  name: "hospital-death",
+  fieldset: {
+    legend: {
+      text: "hospital_question" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: true,
+      text: "Yes",
+      conditional: {
+        html: hospitalInfoHtml
+      },
+      checked: true if data['hospital-death'] == 'true' else false
+    },
+    {
+      value: false,
+      text: "No",
+      checked: true if data['hospital-death'] == 'false' else false
+    }
+  ]
+}) }}
+
+{{ govukRadios({
+  idPrefix: "deceased-address-conditional",
+  name: "deceased-address",
+  fieldset: {
+    classes: "hide-address-fix",
+    legend: {
+      text: "caller_same_address" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: true,
+      text: "Yes",
+      checked: true if data['deceased-address'] == 'true' else false
+    },
+    {
+      value: false,
+      text: "No",
+      conditional: {
+        html: deceasedAddressHtml
+      }, checked: true if data['deceased-address'] == 'false' else false
+    }
+  ]
+}) }}
+
+{{ govukCheckboxes({
+  idPrefix: "qualifying-benefits",
+  name: "deceased-qualifying-benefits",
+  fieldset: {
+    legend: {
+      text: "deceased_qualifying_benefits" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "Include any benefits they were waiting to hear about"
+  },
+  items: [
+    {
+      value: "income_support",
+      text: "income_support" | translate
+    },
+    {
+      value: "disability_living_allowance",
+      text: "disability_living_allowance" | translate
+    },
+    {
+      value: "severe_disablement_allowance",
+      text: "severe_disablement_allowance" | translate
+    },
+    {
+      value: "widowed_parent_allowance",
+      text: "widowed_parent_allowance" | translate
+    },
+    {
+      value: "carers_allowance",
+      text: "carers_allowance" | translate
+    },
+    {
+      value: "industrial_injury_disablement_allowances",
+      text: "industrial_injury_disablement_allowances" | translate
+    },
+    {
+      value: "income_jsa",
+      text: "income_jsa" | translate
+    },
+    {
+      value: "income_esa",
+      text: "income_esa" | translate
+    },
+    {
+      value: "incapacity_benefit",
+      text: "incapacity_benefit" | translate
+    },
+    {
+      value: "bereavement_allowance",
+      text: "bereavement_allowance" | translate
+    },
+    {
+      value: "bsp",
+      text: "bsp" | translate
+    },
+    {
+      value: "universal_credit",
+      text: "universal_credit" | translate
+    },
+    {
+      value: "pip",
+      text: "pip" | translate
+    },
+    {
+      value: "attendance_allowance",
+      text: "attendance_allowance" | translate
+    }
+  ]
+}) }}
+
+{{ govukButton({
+  text: "final_step_continue" | translate,
+  id: "continue-to-deceased"
+}) }}
