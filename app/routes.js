@@ -60,7 +60,9 @@ router.get('*/eligibility', (req, res, next) => {
     const data = req.session.data;
     // probably create an array of props and check the obj includes them all
     if (data['caller-full-name'] && data['caller-phone-number'] && data['deceased-national-insurance'] && data['deceased-full-name']) {
-      if (duplicateNinos.includes(data['deceased-national-insurance'].replace(/\s+/g, ''))) {
+      let normalisedNino = data['deceased-national-insurance'].replace(/\s+/g, '');
+
+      if (duplicateNinos.includes(normalisedNino)) {
         res.redirect(req.params[0] + '/already-notified');
       }
 
