@@ -136,7 +136,8 @@ const locales = {
     submit_notification: 'Send death notification',
     town_city: 'Town or city',
     universal_credit: 'Universal Credit',
-    widowed_parent_allowance: `Widowed Parent's Allowance`
+    widowed_parent_allowance: `Widowed Parent's Allowance`,
+    back_to_start: 'Back to start'
   }
 };
 

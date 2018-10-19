@@ -44,5 +44,11 @@ module.exports = {
       postcode: 'NE46 3JR',
       summary: '2 Windsor Terrace, Hexham, NE46 3JR'
     }
-  }
+  },
+  // fake ninos for testing
+  duplicateNinos: [
+    'ZK538099C',
+    'CZ116319A',
+    'OC172390C'
+  ]
 }

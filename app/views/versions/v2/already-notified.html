@@ -1,0 +1,13 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width-nav.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-l">Death notification failed</h2>
+    <article>
+      <p>You cannot continue because there is already a notificaton for {{ data['deceased-national-insurance'] }} in our system.</p>
+      <a href="eligibility/clear" class="govuk-button" role="button">{{"back_to_start" | translate}}</a>
+    </article>
+  </div>
+</div>
+{% endblock %}
