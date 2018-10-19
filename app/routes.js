@@ -76,7 +76,7 @@ router.get('*/eligibility', (req, res, next) => {
 router.get('*/already-notified', (req, res, next) => {
   const data = req.session.data;
 
-  if (!data['deceased-national-insurance'] || data['deceased-national-insurance'] === '') {
+  if (!data['deceased-national-insurance']) {
     res.redirect(req.params[0] + '/start');
   }
 
