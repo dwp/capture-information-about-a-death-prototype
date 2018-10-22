@@ -51,11 +51,6 @@ router.get('*/check', (req, res, next) => {
   return isDapAvailable(req, res, next);
 });
 
-// router.get('*/start', (req, res, next) => {
-//   req.session.data.skipStartPageValidation = skipStartPageValidation;
-//   next();
-// });
-
 // If a start page in the version exists,
 router.get('*/eligibility', (req, res, next) => {
   const url = req.params[0];
