@@ -50,5 +50,6 @@ module.exports = {
     'ZK538099C',
     'CZ116319A',
     'OC172390C'
-  ]
+  ],
+  skipStartPageValidation: false
 }
