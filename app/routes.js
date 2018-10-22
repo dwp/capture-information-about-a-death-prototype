@@ -4,7 +4,7 @@ const bspRoutes = require('./routes/bsp.js');
 const fepRoutes = require('./routes/fep.js');
 const utils = require('./routes/utils.js');
 const fs = require('fs');
-const { duplicateNinos } = require('./config.js');
+const { duplicateNinos, skipStartPageValidation } = require('./config.js');
 
 // Route index page
 router.get('/', function (req, res) {
@@ -51,6 +51,11 @@ router.get('*/check', (req, res, next) => {
   return isDapAvailable(req, res, next);
 });
 
+router.get('*/start', (req, res, next) => {
+  req.session.data.skipStartPageValidation = skipStartPageValidation;
+  next();
+});
+
 // If a start page in the version exists,
 router.get('*/eligibility', (req, res, next) => {
   const url = req.params[0];
@@ -58,8 +63,9 @@ router.get('*/eligibility', (req, res, next) => {
 
   if (startExists) {
     const data = req.session.data;
+
     // probably create an array of props and check the obj includes them all
-    if (data['caller-full-name'] && data['caller-phone-number'] && data['deceased-national-insurance'] && data['deceased-full-name']) {
+    if (data['skip-start-validation'] || (data['caller-full-name'] && data['caller-phone-number'] && data['deceased-national-insurance'] && data['deceased-full-name'])) {
       let normalisedNino = data['deceased-national-insurance'].replace(/\s+/g, '');
 
       if (duplicateNinos.includes(normalisedNino)) {
