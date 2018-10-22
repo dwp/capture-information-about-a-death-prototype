@@ -9,10 +9,6 @@
       </h1>
       {# <p>We need some information about the caller and the deceased to check if theres already been a claim, content along these lines...</p> #}
       <form method="post" action="eligibility">
-        {% if data['skipStartPageValidation'] === true %}
-          <input type="hidden" name="skip-start-validation" value="true">
-        {% endif %}
-
         {% call govukFieldset({
           legend: {
             classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-4",

@@ -51,10 +51,10 @@ router.get('*/check', (req, res, next) => {
   return isDapAvailable(req, res, next);
 });
 
-router.get('*/start', (req, res, next) => {
-  req.session.data.skipStartPageValidation = skipStartPageValidation;
-  next();
-});
+// router.get('*/start', (req, res, next) => {
+//   req.session.data.skipStartPageValidation = skipStartPageValidation;
+//   next();
+// });
 
 // If a start page in the version exists,
 router.get('*/eligibility', (req, res, next) => {
@@ -65,7 +65,9 @@ router.get('*/eligibility', (req, res, next) => {
     const data = req.session.data;
 
     // probably create an array of props and check the obj includes them all
-    if (data['skip-start-validation'] || (data['caller-full-name'] && data['caller-phone-number'] && data['deceased-national-insurance'] && data['deceased-full-name'])) {
+    if (skipStartPageValidation) {
+      next();
+    } else if (data['skip-start-validation'] || (data['caller-full-name'] && data['caller-phone-number'] && data['deceased-national-insurance'] && data['deceased-full-name'])) {
       let normalisedNino = data['deceased-national-insurance'].replace(/\s+/g, '');
 
       if (duplicateNinos.includes(normalisedNino)) {
