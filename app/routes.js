@@ -89,13 +89,35 @@ router.get('*/already-notified', (req, res, next) => {
 });
 
 router.get('*/payee', (req, res, next) => {
-  const deathArrears = req.session.data['death-arrears-caller'];
-  if (deathArrears.toLowerCase() === 'unknown') {
+  const deathArrearsPayee = req.session.data['death-arrears-caller'] || '';
+  const payee = deathArrearsPayee.toLowerCase();
+  const isSomeoneElse = 'someone-else';
+  const isCaller = 'caller';
+  const isKnownPayee = (payee === isCaller) || (payee === isSomeoneElse);
+  const version = getVersion(req.params[0], 1);
+
+  let route = req.params[0] + '/payee-bank';
+
+  if (version === 'v2') {
+    if (isKnownPayee) {
+      if (payee === isSomeoneElse) {
+        route = req.params[0] + '/payee-details';
+      }
+      res.redirect(route);
+    } else {
+      res.redirect(req.params[0] + '/select-eligibility-cards');
+      return;
+    }
+
+    res.locals.isCallerDap = (payee === isCaller);
+    next();
+  } else if (payee === 'unknown') {
     res.redirect(req.params[0] + '/select-eligibility-cards');
     return;
+  } else {
+    res.locals.isCallerDap = (payee === 'true');
+    next();
   }
-  res.locals.isCallerDap = deathArrears === 'true';
-  next();
 });
 
 router.get('*/select-eligibility', (req, res, next) => {
