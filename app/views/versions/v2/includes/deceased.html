@@ -74,6 +74,33 @@
   {% endcall %}
 {% endset %}
 
+{{ govukRadios({
+  idPrefix: "deceased-address-conditional",
+  name: "deceased-address",
+  fieldset: {
+    classes: "hide-address-fix",
+    legend: {
+      text: "caller_same_address" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: true,
+      text: "Yes",
+      checked: true if data['deceased-address'] == 'true' else false
+    },
+    {
+      value: false,
+      text: "No",
+      conditional: {
+        html: deceasedAddressHtml
+      }, checked: true if data['deceased-address'] == 'false' else false
+    }
+  ]
+}) }}
+
 {% set hospitalInfoHtml %}
   {% include "versions/base/includes/hospital/autocomplete.html" %}
 {% endset %}
@@ -131,33 +158,6 @@
       value: false,
       text: "No",
       checked: true if data['hospital-death'] == 'false' else false
-    }
-  ]
-}) }}
-
-{{ govukRadios({
-  idPrefix: "deceased-address-conditional",
-  name: "deceased-address",
-  fieldset: {
-    classes: "hide-address-fix",
-    legend: {
-      text: "caller_same_address" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  items: [
-    {
-      value: true,
-      text: "Yes",
-      checked: true if data['deceased-address'] == 'true' else false
-    },
-    {
-      value: false,
-      text: "No",
-      conditional: {
-        html: deceasedAddressHtml
-      }, checked: true if data['deceased-address'] == 'false' else false
     }
   ]
 }) }}
