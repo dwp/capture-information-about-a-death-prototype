@@ -19,6 +19,8 @@ const locales = {
     building_soc_roll_hint: 'If your building society uses a roll or reference number, you will find it on your passbook',
     bsp: 'Bereavement Support Payment',
     bsp_eligibility_failed: 'Based on the information provided we believe you are not eligible for Bereavement Support Payments. You can apply again directly via this form or ring BSP team information here.',
+    bsp_use_bank: 'Would you like to give your bank details so we can use if your claim is successful?',
+    bsp_use_bank_hint: 'By providing the bank details we may be able to process the payment and claim withouth reaching out to the claimant',
     caller_details_heading: `About the caller`,
     caller_heading: 'About the caller',
     caller_relationship: 'Relationship to the person who died',
