@@ -1,9 +1,7 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-
-<p>The information you have collected will be used to apply for Bereavement Support Payment.</p>
-
+  <p>The information you have collected will be used to apply for Bereavement Support Payment.</p>
   <form action="complete" method="post">
     {{ govukWarningText({
       text: "consent_message" | translate,
