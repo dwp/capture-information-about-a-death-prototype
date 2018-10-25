@@ -103,19 +103,20 @@ router.get('*/payee', (req, res, next) => {
       if (payee === isSomeoneElse) {
         route = req.params[0] + '/payee-details';
       }
+
+      res.app.locals.isCallerDap = (payee === isCaller);
       res.redirect(route);
     } else {
       res.redirect(req.params[0] + '/select-eligibility-cards');
       return;
     }
 
-    res.locals.isCallerDap = (payee === isCaller);
     next();
   } else if (payee === 'unknown') {
     res.redirect(req.params[0] + '/select-eligibility-cards');
     return;
   } else {
-    res.locals.isCallerDap = (payee === 'true');
+    res.app.locals.isCallerDap = (payee === 'true');
     next();
   }
 });

@@ -264,3 +264,16 @@ legend {
     display: none;
   }
 }
+
+.bank-summary {
+  font-family: "nta", Arial, sans-serif;
+
+  dt {
+    font-weight: bold;
+    margin: govuk-em(12, 19) 4em govuk-em(4,19) 0;
+  }
+
+  dd {
+    margin-left: 0;
+  }
+}
