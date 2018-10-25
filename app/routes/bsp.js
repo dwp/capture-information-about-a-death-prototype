@@ -35,6 +35,15 @@ const generateRoutes = (router) => {
     }
     res.redirect(req.params[0] + route);
   });
+
+  router.get('*/handle-bank-details', (req, res) => {
+    const useDapDetails = req.session.data['bsp-use-dap'] === 'true';
+    let route = '/add-bank';
+    if (useDapDetails) {
+      route = '/confirm';
+    }
+    res.redirect(req.params[0] + route);
+  });
 };
 
 module.exports = generateRoutes;

@@ -2,7 +2,7 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-  <form method="post" action="bank-details">
+  <form method="post" action="handle-bank-details">
     {{ govukRadios({
       id: "bsp-use-dap",
       name: "bsp-use-dap",
@@ -34,4 +34,31 @@
       id: "continue-eligibility"
     }) }}
   </form>
+{% endblock %}
+
+{% block sidebarContent %}
+  {% if data['dap-bank-sort-code'] != undefined or data['dap-bank-account-no'] != undefined %}
+    <h2 class="govuk-heading-s">Death Arrears Payee bank account</h2>
+    <dl class="bank-summary">
+      {% if data['dap-bank-name'] != undefined %}
+        <dt>{{"bank_account" | translate}}</dt>
+        <dd>{{data['dap-bank-name']}}</dd>
+      {% endif %}
+
+      {% if data['dap-bank-account-no'] != undefined %}
+        <dt>{{"bank_account_no" | translate}}</dt>
+        <dd>{{data['dap-bank-account-no']}}</dd>
+      {% endif %}
+
+      {% if data['dap-bank-sort-code'] != undefined %}
+        <dt>{{"bank_sort_code" | translate}}</dt>
+        <dd>{{data['dap-bank-sort-code']}}</dd>
+      {% endif %}
+
+      {% if data['dap-building-soc-roll'] != undefined %}
+        <dt>{{"building_soc_roll" | translate}}</dt>
+        <dd>{{data['dap-building-soc-roll']}}</dd>
+      {% endif %}
+    </dl>
+  {% endif %}
 {% endblock %}

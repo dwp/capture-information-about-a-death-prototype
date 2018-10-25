@@ -105,7 +105,6 @@ router.get('*/payee', (req, res, next) => {
       }
 
       res.app.locals.isCallerDap = (payee === isCaller);
-      console.log(res.app.locals)
       res.redirect(route);
     } else {
       res.redirect(req.params[0] + '/select-eligibility-cards');
