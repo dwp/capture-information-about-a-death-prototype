@@ -19,8 +19,6 @@ gulp.task('server', function () {
     ignore: [config.paths.public + '*',
       config.paths.assets + '*',
       config.paths.nodeModules + '*']
-  }).on('crash', function (e) {
-    console.log('error!!!!!!!', e)
   }).on('quit', function () {
     // remove .port.tmp if it exists
     try {

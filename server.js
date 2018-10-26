@@ -134,6 +134,7 @@ app.locals.gtmId = gtmId
 app.locals.asset_path = '/public/'
 app.locals.useAutoStoreData = (useAutoStoreData === 'true')
 app.locals.cookieText = config.cookieText
+app.locals.qualifyingBenefits = config.qualifyingBenefits;
 app.locals.promoMode = promoMode
 app.locals.releaseVersion = 'v' + releaseVersion
 app.locals.serviceName = config.serviceName
