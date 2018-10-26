@@ -36,25 +36,25 @@
 {% endblock %}
 
 {% block sidebarContent %}
-  {% if data['dap-bank-sort-code'] != undefined or data['dap-bank-account-no'] != undefined %}
+  {% if data['dap-bank-sort-code'] or data['dap-bank-account-no'] %}
     <h2 class="govuk-heading-s">Death Arrears Payee bank account</h2>
     <dl class="bank-summary">
-      {% if data['dap-bank-name'] != undefined %}
+      {% if data['dap-bank-name'] %}
         <dt>{{"bank_account" | translate}}</dt>
         <dd>{{data['dap-bank-name']}}</dd>
       {% endif %}
 
-      {% if data['dap-bank-account-no'] != undefined %}
+      {% if data['dap-bank-account-no'] %}
         <dt>{{"bank_account_no" | translate}}</dt>
         <dd>{{data['dap-bank-account-no']}}</dd>
       {% endif %}
 
-      {% if data['dap-bank-sort-code'] != undefined %}
+      {% if data['dap-bank-sort-code'] %}
         <dt>{{"bank_sort_code" | translate}}</dt>
         <dd>{{data['dap-bank-sort-code']}}</dd>
       {% endif %}
 
-      {% if data['dap-building-soc-roll'] != undefined %}
+      {% if data['dap-building-soc-roll'] %}
         <dt>{{"building_soc_roll" | translate}}</dt>
         <dd>{{data['dap-building-soc-roll']}}</dd>
       {% endif %}

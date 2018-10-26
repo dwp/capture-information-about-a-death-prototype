@@ -121,6 +121,18 @@ router.get('*/payee', (req, res, next) => {
   }
 });
 
+router.get('*/benefits-handler', (req, res, next) => {
+  const selectedBenefits = req.session.data['deceased-qualifying-benefits'] || [];
+  const qualifyingBenefits = (benefits) => res.app.locals.qualifyingBenefits.find(benefit => benefits === benefit.value)
+  const matches = selectedBenefits.map(item => qualifyingBenefits(item));
+  const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
+  let route = '/select-eligibility';
+  if (isHospitalCheckRequired) {
+    route = '/hospital-lookup';
+  }
+  res.redirect(req.params[0] + route);
+});
+
 router.get('*/select-eligibility', (req, res, next) => {
   isDapAvailable(req, res);
 
