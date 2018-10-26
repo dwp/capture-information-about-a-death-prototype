@@ -101,10 +101,6 @@
   ]
 }) }}
 
-{% set hospitalInfoHtml %}
-  {% include "versions/base/includes/hospital/autocomplete.html" %}
-{% endset %}
-
 {{ govukDateInput({
   id: "deceased-dod",
   name: "deceased-dod",
@@ -134,33 +130,6 @@
   ]
   })
 }}
-
-{{ govukRadios({
-  idPrefix: "hospital-death-conditional",
-  name: "hospital-death",
-  fieldset: {
-    legend: {
-      text: "hospital_question" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  items: [
-    {
-      value: true,
-      text: "Yes",
-      conditional: {
-        html: hospitalInfoHtml
-      },
-      checked: true if data['hospital-death'] == 'true' else false
-    },
-    {
-      value: false,
-      text: "No",
-      checked: true if data['hospital-death'] == 'false' else false
-    }
-  ]
-}) }}
 
 {{ govukButton({
   text: "final_step_continue" | translate,
