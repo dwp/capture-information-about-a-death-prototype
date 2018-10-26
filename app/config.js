@@ -1,4 +1,4 @@
-const t = require('./filters.js')().translate;
+const { translate } = require('./filters.js')();
 // Use this file to change prototype configuration.
 
 // Note: prototype config can be overridden using environment variables (eg on heroku)
@@ -56,79 +56,79 @@ module.exports = {
   qualifyingBenefits: [
     {
       value: "attendance_allowance",
-      text: t("attendance_allowance"),
+      text: translate("attendance_allowance"),
       hospitalInterest: true
     },
     {
       value: "bereavement_benefits",
-      text: t("bereavement_benefits")
+      text: translate("bereavement_benefits")
     },
     {
       value: "bsp",
-      text: t("bsp")
+      text: translate("bsp")
     },
     {
       value: "carers_allowance",
-      text: t("carers_allowance"),
+      text: translate("carers_allowance"),
       hospitalInterest: true
     },
     {
       value: "disability_living_allowance_65",
-      text: t("disability_living_allowance_65"),
+      text: translate("disability_living_allowance_65"),
       hospitalInterest: true
     },
     {
       value: "disability_living_allowance_child",
-      text: t("disability_living_allowance_child")
+      text: translate("disability_living_allowance_child")
     },
     {
       value: "disability_living_allowance_working_age",
-      text: t("disability_living_allowance_working_age"),
+      text: translate("disability_living_allowance_working_age"),
       hospitalInterest: true
     },
     {
       value: "esa",
-      text: t("esa"),
+      text: translate("esa"),
       hospitalInterest: true
     },
     {
       value: "incapacity_benefit",
-      text: t("incapacity_benefit")
+      text: translate("incapacity_benefit")
     },
     {
       value: "income_support",
-      text: t("income_support"),
+      text: translate("income_support"),
       hospitalInterest: true
     },
     {
       value: "industrial_injury_disablement_allowances",
-      text: t("industrial_injury_disablement_allowances"),
+      text: translate("industrial_injury_disablement_allowances"),
       hospitalInterest: true
     },
     {
       value: "jsa",
-      text: t("jsa")
+      text: translate("jsa")
     },
     {
       value: "maternity_allowance",
-      text: t("maternity_allowance")
+      text: translate("maternity_allowance")
     },
     {
       value: "pip",
-      text: t("pip"),
+      text: translate("pip"),
       hospitalInterest: true
     },
     {
       value: "severe_disablement_allowance",
-      text: t("severe_disablement_allowance")
+      text: translate("severe_disablement_allowance")
     },
     {
       value: "universal_credit",
-      text: t("universal_credit")
+      text: translate("universal_credit")
     },
     {
       value: "widowed_parent_allowance",
-      text: t("widowed_parent_allowance")
+      text: translate("widowed_parent_allowance")
     }
   ]
 }
