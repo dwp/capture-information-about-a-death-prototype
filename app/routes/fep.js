@@ -67,6 +67,19 @@ const generateRoutes = (router) => {
     }
   })
 
+  router.get('*/check-funeral-information', (req, res, next) => {
+    const prefix = req.params[0] + '/';
+    const data = req.session.data;
+    const dateDiff = fepEligibility.validateFuneralDate(data['fep-funeral-date-year'], data['fep-funeral-date-month'], data['fep-funeral-date-day']);
+
+    if (data['fep-funeral-date'] && dateDiff >= 6 && data['fep-funeral-date'] !== 'false') {
+      const error = 'The date supplied is longer than 6 months ago.';
+      return handleFailure(error, 'fep', req, res);
+    } else {
+      res.redirect(prefix + 'location');
+    }
+  })
+
   router.get('*/check-funeral-responsibility', (req, res, next) => {
     const prefix = req.params[0] + '/';
     const data = req.session.data;
