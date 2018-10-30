@@ -1,0 +1,20 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Before you cosntinue</h1>
+      <p>Ask the caller to check whether they have:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>a funeral date</li>
+          <li>details of any benefits they get</li>
+        </ul>
+      </p>
+
+      <a href="funeral-information" role="button" class="govuk-button govuk-button--start">
+        Continue
+      </a>
+    </div>
+  </div>
+{% endblock %}
