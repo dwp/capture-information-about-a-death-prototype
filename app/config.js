@@ -52,7 +52,7 @@ module.exports = {
     'CZ116319A',
     'OC172390C'
   ],
-  skipStartPageValidation: false,
+  skipStartPageValidation: true,
   qualifyingBenefits: [
     {
       value: "attendance_allowance",
@@ -60,8 +60,12 @@ module.exports = {
       hospitalInterest: true
     },
     {
-      value: "bereavement_benefits",
-      text: translate("bereavement_benefits")
+      value: "bereavement_allowance",
+      text: translate("bereavement_allowance")
+    },
+    {
+      value: "bereavement_benefit",
+      text: translate("bereavement_benefit")
     },
     {
       value: "bsp",
@@ -70,11 +74,6 @@ module.exports = {
     {
       value: "carers_allowance",
       text: translate("carers_allowance"),
-      hospitalInterest: true
-    },
-    {
-      value: "disability_living_allowance_65",
-      text: translate("disability_living_allowance_65"),
       hospitalInterest: true
     },
     {
@@ -101,8 +100,8 @@ module.exports = {
       hospitalInterest: true
     },
     {
-      value: "industrial_injury_disablement_allowances",
-      text: translate("industrial_injury_disablement_allowances"),
+      value: "industrial_injury_disablement_benefit",
+      text: translate("industrial_injury_disablement_benefit"),
       hospitalInterest: true
     },
     {
