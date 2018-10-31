@@ -1,0 +1,65 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row anchors">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="deceased-benefits">
+        <nav class="navigation-secondary">
+          <ul>
+            <li><a href="#caller-heading" class="active">Caller Details</a></li>
+            <li><a href="#deceased-heading">Security</a></li>
+            <li><a href="death-arrears">DAP</a></li>
+            <li><a href="#hospital-death-conditional-1">Hospital</a></li>
+            <li><a href="#is-caller-spouse-conditional-1">Spouse</a></li>
+          </ul>
+        </nav>
+        {% include "versions/v2/includes/caller.html" %}
+        {% include "versions/v2/includes/deceased.html" %}
+        {% set hospitalInfoHtml %}
+          {% include "versions/base/includes/hospital/autocomplete.html" %}
+        {% endset %}
+        {{ govukRadios({
+          idPrefix: "hospital-death-conditional",
+          name: "hospital-death",
+          fieldset: {
+            legend: {
+              text: "hospital_question" | translate,
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: true,
+              text: "Yes",
+              conditional: {
+                html: hospitalInfoHtml
+              },
+              checked: true if data['hospital-death'] == 'true' else false
+            },
+            {
+              value: false,
+              text: "No",
+              checked: true if data['hospital-death'] == 'false' else false
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue",
+          classes: "submit-button"
+        }) }}
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var anchors = $('.navigation-secondary a');
+      anchors.on('click', function (e) {
+        $('.navigation-secondary a').removeClass('active');
+        console.log(e.target)
+        e.target.classList.add('active');
+      });
+    });
+  </script>
+{% endblock %}
