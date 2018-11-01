@@ -23,6 +23,46 @@
     </p>
     <h2 class="govuk-heading-m">How DWP will use this information</h2>
     <p>DWP will stop or change any payments {{data['deceased-full-name']}} was entitled to.</p>
+
+    {{ govukTable({
+      firstCellIsHeader: true,
+      head: [
+        {
+          text: "Payment"
+        },
+        {
+          text: "What will happen"
+        }
+      ],
+      rows: [
+        [
+          {
+            text: "State Pension"
+          },
+          {
+            text: "This will stop – you may be able to inherit some of their State Pension."
+          }
+        ],
+        [
+          {
+            text: "Pension Credit"
+          },
+          {
+            text: "This will stop."
+          }
+        ],
+        [
+          {
+            text: "Carer's Allowance"
+          },
+          {
+            text: "This will stop."
+          }
+        ]
+      ]
+    }) }}
+
+
     <h2 class="govuk-heading-m">What {{data['caller-full-name']}} needs to do next</h2>
     <p>If they have not already, they will need to register the death.</p>
     <h2 class="govuk-heading-m">What DWP will do next</h2>
