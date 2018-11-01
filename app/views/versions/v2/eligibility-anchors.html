@@ -8,7 +8,7 @@
           <ul>
             <li><a href="#caller-heading" class="active">Caller Details</a></li>
             <li><a href="#deceased-heading">Security</a></li>
-            <li><a href="death-arrears">DAP</a></li>
+            <li><a href="#death-arrears-caller-hint">DAP</a></li>
             <li><a href="#hospital-death-conditional-1">Hospital</a></li>
             <li><a href="#is-caller-spouse-conditional-1">Spouse</a></li>
           </ul>
@@ -44,6 +44,10 @@
             }
           ]
         }) }}
+        {% include "versions/base/includes/deceased-benefits-list.html" %}
+
+        {% include "versions/v2/includes/dap-inline.html" %}
+
 
         {{ govukButton({
           text: "Continue",

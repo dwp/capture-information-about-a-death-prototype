@@ -54,11 +54,11 @@ module.exports = {
   ],
   skipStartPageValidation: false,
   qualifyingBenefits: [
-    {
-      value: "attendance_allowance",
-      text: translate("attendance_allowance"),
-      hospitalInterest: true
-    },
+    // {
+    //   value: "attendance_allowance",
+    //   text: translate("attendance_allowance"),
+    //   hospitalInterest: true
+    // },
     {
       value: "bereavement_benefits",
       text: translate("bereavement_benefits")
@@ -72,11 +72,11 @@ module.exports = {
       text: translate("carers_allowance"),
       hospitalInterest: true
     },
-    {
-      value: "disability_living_allowance_65",
-      text: translate("disability_living_allowance_65"),
-      hospitalInterest: true
-    },
+    // {
+    //   value: "disability_living_allowance_65",
+    //   text: translate("disability_living_allowance_65"),
+    //   hospitalInterest: true
+    // },
     {
       value: "disability_living_allowance_child",
       text: translate("disability_living_allowance_child")
