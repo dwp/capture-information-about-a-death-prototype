@@ -38,12 +38,8 @@
   <div class="app-cookie-banner js-cookie-banner">
     <p class="app-cookie-banner__message">{{cookieText | safe }}</p>
   </div>
-  {{ govukHeader({
-    "homepageUrl": "/",
-    "serviceName": "app_title" | translate,
-    "serviceUrl": "/",
-    "containerClasses": "govuk-width-container"
-  }) }}
+  {% include "header.html" %}
+
 {% endblock %}
 
 {% block footer %}

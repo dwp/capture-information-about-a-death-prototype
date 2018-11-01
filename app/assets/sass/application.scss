@@ -288,3 +288,9 @@ legend {
     display: block;
   }
 }
+
+@media (min-width: 48.0625em) {
+  .govuk-header__content {
+    margin-left: -29px;
+  }
+}
