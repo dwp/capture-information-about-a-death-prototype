@@ -9,6 +9,7 @@ $govuk-global-styles: true;
 @import 'patterns/related-items';
 @import 'patterns/task-list';
 @import 'patterns/global-nav';
+@import 'patterns/secondary-nav';
 @import 'patterns/autocomplete';
 @import 'patterns/cards';
 
@@ -275,5 +276,15 @@ legend {
 
   dd {
     margin-left: 0;
+  }
+}
+
+.anchors {
+  .govuk-button {
+    display: none;
+  }
+
+  .submit-button {
+    display: block;
   }
 }
