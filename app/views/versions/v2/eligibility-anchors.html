@@ -9,8 +9,8 @@
             <li><a href="#caller-heading" class="active">Caller Details</a></li>
             <li><a href="#deceased-heading">Security</a></li>
             <li><a href="#death-arrears-caller-hint">DAP</a></li>
-            <li><a href="#hospital-death-conditional-1">Hospital</a></li>
-            <li><a href="#is-caller-spouse-conditional-1">Spouse</a></li>
+            <li><a href="#hospital-section">Hospital</a></li>
+            <li><a href="#spouse-section">Spouse</a></li>
           </ul>
         </nav>
         {% include "versions/v2/includes/caller.html" %}
@@ -18,6 +18,7 @@
         {% set hospitalInfoHtml %}
           {% include "versions/base/includes/hospital/autocomplete.html" %}
         {% endset %}
+        <span id="hospital-section"></span>
         {{ govukRadios({
           idPrefix: "hospital-death-conditional",
           name: "hospital-death",

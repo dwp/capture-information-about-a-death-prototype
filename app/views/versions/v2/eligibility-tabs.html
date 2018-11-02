@@ -6,7 +6,7 @@
   {% endset %}
 
   {% set deceasedDetailsHtml %}
-    {% include "versions/v2/includes/deceased.html" %}
+    {% include "versions/v2/includes/deceased-extra-tabs.html" %}
   {% endset %}
 
   {% set hospitalHtml %}
@@ -39,6 +39,9 @@
         }
       ]
     }) }}
+
+    <a href="#spouse-tab" class="govuk-button">{{"save_continue" | translate}}</a>
+
   {% endset %}
 
   {% set dapHtml %}
