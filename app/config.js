@@ -52,7 +52,7 @@ module.exports = {
     'CZ116319A',
     'OC172390C'
   ],
-  skipStartPageValidation: false,
+  skipStartPageValidation: true,
   qualifyingBenefits: [
     // {
     //   value: "attendance_allowance",
