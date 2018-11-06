@@ -20,10 +20,10 @@ const locales = {
     building_soc_roll_hint: 'If your building society uses a roll or reference number, you will find it on your passbook',
     bsp: 'Bereavement Support Payment',
     bsp_eligibility_failed: 'Based on the information provided we believe you are not eligible for Bereavement Support Payments. You can apply again directly via this form or ring BSP team information here.',
-    bsp_use_bank: 'Would you like to give your bank details so we can use if your claim is successful?', // content review
-    bsp_use_bank_hint: 'By providing the bank details we may be able to process the payment and claim withouth reaching out to the claimant', // content review
-    bsp_use_dap: 'Would the caller like to use the bank details they provided for DAP?', // content review
-    bsp_use_dap_hint: 'If the caller wants to use the same account they provided during the DAP process they can', // content review
+    bsp_use_bank: 'Does the caller want to give their bank details?',
+    bsp_use_bank_hint: `We'll make payments to this account if their claim is successful`, // content review
+    bsp_use_dap: 'Does the caller want to use the bank details they already told us about?', // content review
+    bsp_use_dap_hint: `We'll use the account the caller asked us to pay any outstanding benefits to`, // content review
     caller_details_heading: `About the caller`,
     caller_heading: 'About the caller',
     caller_relationship: 'Relationship to the person who died',
@@ -51,8 +51,8 @@ const locales = {
     death_arrears_details_heading: `Death Arrears Payee's details`,
     death_arrears_heading: 'Death Arrears Payee',
     death_arrears_address: 'Where does the payee live?',
-    death_arrears_question: 'Who should we pay any benefits arrears to?',
-    death_arrears_question_hint: `If the person who died was owed any benefit payments, these would be paid to the 'death arrears payee'`,
+    death_arrears_question: 'If the person who died was owed any benefits, who should we pay?',
+    death_arrears_question_hint: `The person we pay is known as the 'death arrears payee'`,
     deceased_address: 'Where did they live at time of death?',
     deceased_details_heading: 'About the person who died',
     deceased_heading: 'About the person who died',
