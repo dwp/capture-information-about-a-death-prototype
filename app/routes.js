@@ -78,12 +78,24 @@ router.get('*/eligibility', (req, res, next) => {
   next();
 });
 
+router.get('*/fail-nino', (req, res, next) => {
+  const data = req.session.data;
+  let normalisedNino = data['deceased-national-insurance'].replace(/\s+/g, '');
+
+  if (duplicateNinos.includes(normalisedNino)) {
+    res.redirect(req.params[0] + '/already-notified');
+  } else {
+    res.redirect(req.params[0] + '/already-notified');
+  }
+})
+
 router.get('*/already-notified', (req, res, next) => {
   const data = req.session.data;
 
   if (!data['deceased-national-insurance']) {
     res.redirect(req.params[0] + '/start');
   }
+  res.app.locals.ninoFailed = true;
 
   next();
 });
@@ -98,13 +110,14 @@ router.get('*/payee', (req, res, next) => {
 
   let route = req.params[0] + '/payee-bank';
 
-  if (version === 'v2') {
+  if (version === 'v2' || version === 'v3') {
     if (isKnownPayee) {
       if (payee === isSomeoneElse) {
         route = req.params[0] + '/payee-details';
       }
 
       res.app.locals.isCallerDap = (payee === isCaller);
+      res.app.locals.dNComplete = true;
       res.redirect(route);
     } else {
       res.redirect(req.params[0] + '/select-eligibility-cards');
@@ -121,12 +134,13 @@ router.get('*/payee', (req, res, next) => {
   }
 });
 
-router.get('*/benefits-handler', (req, res, next) => {
+router.get('*/benefits-handler*', (req, res, next) => {
+  console.log('test', req.params[1])
   const selectedBenefits = req.session.data['deceased-qualifying-benefits'] || [];
   const qualifyingBenefits = (benefits) => res.app.locals.qualifyingBenefits.find(benefit => benefits === benefit.value)
   const matches = selectedBenefits.map(item => qualifyingBenefits(item));
   const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
-  let route = '/select-eligibility';
+  let route = '/select-eligibility-cards' + req.params[1];
   if (isHospitalCheckRequired) {
     route = '/hospital-lookup';
   }
@@ -148,7 +162,7 @@ router.get('*/select-eligibility', (req, res, next) => {
   }
 });
 
-router.get('*/select-eligibility-cards', (req, res) => {
+router.get('*/select-eligibility-cards*', (req, res) => {
   if (req.session.data['deceased-dod-year'] === '1901') {
     req.session.data.eligibilityError = true;
     res.redirect(req.params[0] + '/eligibility');
@@ -159,10 +173,26 @@ router.get('*/select-eligibility-cards', (req, res) => {
     return true;
   }
 
-  res.render(req.params[0].substr(1) + '/select-eligibility-cards.html', {
+  let body = res.app.locals.dNComplete ? 'send_death_notification_claim_body' : 'new_death_notification_claim_body';
+  if (res.app.locals.ninoFailed) {
+    body = 'nino_failed_death_notification_body';
+  }
+
+  console.log('has nino failed', !!res.app.locals.ninoFailed)
+  res.render(req.params[0].substr(1) + '/select-eligibility-cards' + req.params[1] + '.html', {
     bspEligibility: utils.generateCard(req, res, 'bsp'),
-    fepEligibility: utils.generateCard(req, res, 'fep')
+    fepEligibility: utils.generateCard(req, res, 'fep'),
+    notification: {
+      body: body,
+      failed: !!res.app.locals.ninoFailed
+    }
   });
+});
+
+router.get('*/deceased-benefits', (req, res, next) => {
+  res.app.locals.dNComplete = true;
+  console.log('wait', res.app.locals.dNComplete)
+  next();
 });
 
 router.get('*/handle-eligibility', (req, res) => {

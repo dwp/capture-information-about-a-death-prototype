@@ -1,5 +1,4 @@
 /* global $ */
-
 // Warn about using the kit in production
 if (window.console && window.console.info) {
   window.console.info('GOV.UK Prototype Kit - do not use for production')
@@ -9,7 +8,7 @@ $(document).ready(function () {
   /**
    * If a hospital location select element exists, make it into an autocomplete element
    */
-  const setupHospitalAutoComplete = () => {
+  const setupHospitalAutoComplete = function(){
     const hospitalLocationEl = document.getElementById('hospital-location');
     if (hospitalLocationEl) {
       const isSelectEl = hospitalLocationEl.tagName.toLowerCase() === 'select';

@@ -176,6 +176,8 @@ app.get('/prototype-admin/clear-data', function (req, res) {
   res.app.locals.fepComplete = false;
   res.app.locals.fepFailed = false;
   res.app.locals.isCallerDap = undefined;
+  res.app.locals.dNComplete = false;
+  res.app.locals.ninoFailed = undefined;
   res.render('prototype-admin/clear-data')
 })
 
@@ -186,6 +188,8 @@ app.get('*/eligibility/clear', (req, res) => {
   res.app.locals.fepComplete = false;
   res.app.locals.fepFailed = false;
   res.app.locals.isCallerDap = undefined;
+  res.app.locals.dNComplete = false;
+  res.app.locals.ninoFailed = undefined;
   res.redirect(req.params[0] + '/eligibility');
 })
 

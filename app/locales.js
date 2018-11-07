@@ -24,6 +24,7 @@ const locales = {
     bsp_use_bank_hint: `We'll make payments to this account if their claim is successful`, // content review
     bsp_use_dap: 'Does the caller want to use the bank details they already told us about?', // content review
     bsp_use_dap_hint: `We'll use the account the caller asked us to pay any outstanding benefits to`, // content review
+    caller_address: `What is the caller's address?`,
     caller_details_heading: `About the caller`,
     caller_heading: 'About the caller',
     caller_relationship: 'Relationship to the person who died',
@@ -117,6 +118,7 @@ const locales = {
     new_bsp_claim_body: 'You can start a new BSP claim here',
     new_death_notification_claim_body: 'You can start a new Death Notification claim here',
     new_fep_claim_body: 'You can start a new FEP claim here',
+    nino_failed_death_notification_body: 'You cannot send a death notification as there has already been a claim for this person in our system',
     no_results_found: 'Sorry, no results were found.',
     none: 'None of the above',
     passport: 'Passport',
@@ -138,6 +140,7 @@ const locales = {
     security_title: 'Is there a record of the person in Searchlight?',
     select_address: 'Select an address',
     select_eligibility: 'Does the caller want to check if they can get financial support after the death?',
+    send_death_notification_claim_body: 'You can send the Death Notification claim here',
     smi: 'Support for Mortgage Interest loan',
     spouse_details_heading: `Surviving spouse's details`,
     spouse_label: 'Surviving spouse',

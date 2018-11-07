@@ -1,0 +1,118 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">
+        {{"start_page_heading" | translate}}
+        {# <span class="govuk-caption-m">We need some information about the caller and the deceased to check if theres already been a claim, content along these lines...</span> #}
+      </h1>
+      {# <p>We need some information about the caller and the deceased to check if theres already been a claim, content along these lines...</p> #}
+      <form method="post" action="eligibility">
+        {% call govukFieldset({
+          legend: {
+            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-4",
+            isPageHeading: false,
+            text: "Caller"
+          }
+        }) %}
+          {{ govukInput({
+            label: {
+              text: "full_name" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-full-name-group"
+              }
+            },
+            id: "caller-full-name",
+            name: "caller-full-name",
+            classes: "govuk-!-width-two-thirds",
+            value: data["caller-full-name"]
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "phone_number" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-phone-number-group"
+              }
+            },
+            id: "caller-phone-number",
+            name: "caller-phone-number",
+            classes: "govuk-!-width-two-thirds",
+            value: data["caller-phone-number"]
+          }) }}
+        {% endcall %}
+
+        {% call govukFieldset({
+          legend: {
+            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-4",
+            isPageHeading: false,
+            text: "Person who died"
+          }
+        }) %}
+          {{ govukInput({
+            label: {
+              text: "full_name" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "deceased-full-name-group"
+              }
+            },
+            id: "deceased-full-name",
+            name: "deceased-full-name",
+            classes: "govuk-!-width-two-thirds",
+            value: data["deceased-full-name"]
+          }) }}
+          {{ govukDateInput({
+            id: "deceased-dob",
+            name: "deceased-dob",
+            value: data["deceased-dob"],
+            fieldset: {
+              legend: {
+                text: "dob_title" | translate,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: "dob_hint" | translate
+            },
+            items: [
+              {
+                name: "day",
+                value: data['deceased-dob-day']
+              },
+              {
+                name: "month",
+                value: data['deceased-dob-month']
+              },
+              {
+                name: "year",
+                value: data['deceased-dob-year']
+              }
+            ]
+          }) }}
+          {{ govukInput({
+            label: {
+              text: "national_insurance" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "deceased-national-insurance-group"
+              }
+            },
+            id: "deceased-national-insurance",
+            name: "deceased-national-insurance",
+            classes: "govuk-!-width-two-thirds",
+            value: data["deceased-national-insurance"]
+          }) }}
+        {% endcall %}
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-eligibility"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

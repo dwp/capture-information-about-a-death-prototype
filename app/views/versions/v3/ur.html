@@ -1,0 +1,57 @@
+{% extends "layout-full-width.html" %}
+{%- from "tag/macro.njk" import govukTag -%}
+
+{% block pageTitle %}
+  {{"app_title" | translate}} Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  <div class="homepage-header">
+    <div class="govuk-width-container">
+      <h1 class="govuk-heading-xl">
+        {{"app_title" | translate}}
+        <span class="govuk-caption-xl">Prototypes</span>
+      </h1>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <article class="latest-version">
+        <section>
+          {{ govukTag({
+            text: "Most Recent",
+            classes: "most-recent-tag"
+          }) }}
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-third">
+              <dl class="govuk-list govuk-list--description">
+                <dt class="govuk-heading-s">Date of Release</dt>
+                <dd>2nd November 2018</dd>
+              </dl>
+            </div>
+            <div class="govuk-grid-column-one-third">
+              <dl class="govuk-list govuk-list--description">
+                <dt class="govuk-heading-s">Version</dt>
+                <dd>2.0</dd>
+              </dl>
+            </div>
+          </div>
+          <h3 class="govuk-heading-s">Overview</h3>
+          <p>Prototype of the death notification user flow.</p>
+
+          <h3 class="govuk-heading-s">Versions</h3>
+          <ul class="govuk-list govuk-list--bullet">
+            <li><a href="start-fail">Test 1 Start</a></li>
+            <li><a href="eligibility-failed">Test 2 No Start</a></li>
+            <li><a href="eligibility-swapped">Test 3 Tabs</a></li>
+          </ul>
+        </section>
+      </article>
+    </div>
+  </div>
+{% endblock %}
+
+

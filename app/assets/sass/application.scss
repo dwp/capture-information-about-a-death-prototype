@@ -209,6 +209,12 @@ legend {
   }
 }
 
+.deceased-address {
+  .govuk-hint {
+    display: none;
+  }
+}
+
 .govuk-radios__conditional {
   label {
     @include govuk-typography-weight-regular($important: true);
