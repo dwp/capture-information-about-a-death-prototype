@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "accessible-autocomplete": "^1.6.1",
+    "babel-polyfill": "^6.26.0",
     "basic-auth": "^1.0.3",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.14.1",
