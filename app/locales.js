@@ -40,7 +40,7 @@ const locales = {
     check_title: 'Check this information',
     child_tax_credit: 'Child Tax Credit',
     company_name: 'Company name',
-    confirm_application: 'Yes - send application',
+    confirm_application: 'Yes - continue',
     consent_message: `Does the caller agree that the information they have given is accurate, to the best of their knowledge?`,
     continue: 'Continue',
     complete_application_title: 'Before you send this information',
