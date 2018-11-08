@@ -304,3 +304,12 @@ legend {
     margin-left: -29px;
   }
 }
+
+.js-roll-number {
+  &.js-hidden {
+    display: block;
+  }
+  &.js-hidden-test {
+    display: none;
+  }
+}

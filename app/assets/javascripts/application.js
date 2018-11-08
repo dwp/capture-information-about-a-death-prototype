@@ -111,7 +111,7 @@ $(document).ready(function () {
       var answersEl = bankRadioEl.querySelectorAll('.govuk-radios__item');
       [].concat(_toConsumableArray(answersEl)).forEach(function (el) {
         el.addEventListener('change', function (event) {
-          document.querySelector('.js-roll-number').classList.toggle('js-hidden');
+          document.querySelector('.js-roll-number').classList.toggle('js-hidden-test');
         });
       });
     }
@@ -128,8 +128,7 @@ $(document).ready(function () {
 
   var addressLookup = function addressLookup() {
     var postcodeLookupEl = document.querySelectorAll('.js-postcode-lookup');
-    if ([].concat(_toConsumableArray(postcodeLookupEl)).length) {
-      [].concat(_toConsumableArray(postcodeLookupEl)).forEach(function (el) {
+    if ([].concat(_toConsumableArray(postcodeLookupEl)).length) { [].concat(_toConsumableArray(postcodeLookupEl)).forEach(function (el) {
         el.addEventListener('click', function (event) {
           var postcode = event.target.previousElementSibling.querySelector('input').value.toLowerCase().replace(/(\s)|(-)/g, '').trim();
           var parentEl = event.target.parentElement;
