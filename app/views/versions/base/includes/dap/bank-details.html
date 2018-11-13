@@ -25,6 +25,7 @@
   ]
 }) }}
 
+<br>
 {{ govukInput({
   label: {
     text: "bank_name" | translate,
@@ -67,7 +68,7 @@
   value: data["bank-sort-code"]
 }) }}
 
-<div class="govuk-form-group js-roll-number js-hidden-test" aria-hidden="true">
+<div class="govuk-form-group js-roll-number js-hidden" aria-hidden="true">
   <label class="govuk-label govuk-!-font-weight-bold" id="dap-building-soc-roll-group" for="building-soc-roll">
     {{ "building_soc_roll" | translate}}
   </label>
