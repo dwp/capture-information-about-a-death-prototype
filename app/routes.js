@@ -112,11 +112,16 @@ router.get('*/payee', (req, res, next) => {
 
   if (version === 'v2' || version === 'v3') {
     if (isKnownPayee) {
+      console.log(payee, 'payee')
       if (payee === isSomeoneElse) {
+        console.log('please not here')
         route = req.params[0] + '/payee-details';
+        res.app.locals.isCallerDap = false;
+      } else {
+        console.log('am i here?')
+        res.app.locals.isCallerDap = true;
       }
 
-      res.app.locals.isCallerDap = (payee === isCaller);
       res.app.locals.dNComplete = true;
       res.redirect(route);
     } else {
@@ -133,6 +138,38 @@ router.get('*/payee', (req, res, next) => {
     next();
   }
 });
+
+router.get('*/payee-bank-test', (req, res, next) => {
+  console.log('bank test')
+  const deathArrearsPayee = req.session.data['death-arrears-caller'] || '';
+  const payee = deathArrearsPayee.toLowerCase();
+  const isSomeoneElse = 'someone-else';
+  const isCaller = 'caller';
+  const isKnownPayee = (payee === isCaller) || (payee === isSomeoneElse);
+
+  let route = req.params[0] + '/payee-bank';
+  if (isKnownPayee) {
+    console.log(payee, 'payee')
+    if (payee === isSomeoneElse) {
+      console.log('please not here')
+      route = req.params[0] + '/payee-details';
+      res.app.locals.isCallerDap = false;
+    } else {
+      console.log('am i here?')
+      res.app.locals.isCallerDap = true;
+      return next();
+    }
+
+    res.app.locals.dNComplete = true;
+    console.log(route)
+    res.redirect(route);
+  } else {
+    res.redirect(req.params[0] + '/select-eligibility-cards');
+    return;
+  }
+
+  next();
+})
 
 router.get('*/benefits-handler*', (req, res, next) => {
   console.log('test', req.params[1])

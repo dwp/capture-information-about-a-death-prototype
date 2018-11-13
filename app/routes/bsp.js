@@ -23,6 +23,7 @@ const generateRoutes = (router) => {
 
   router.get('*/bank-details', (req, res, next) => {
     const { isCallerDap } = res.app.locals;
+    console.log(res.app.locals.isCallerDap)
     const isProvidingBankDetails = req.session.data['bsp-use-bank'] === 'true';
     let route = '/confirm';
 
