@@ -244,7 +244,7 @@ legend {
 
 .govuk-fieldset__legend--s {
   + .govuk-hint {
-    margin-top: -15px;
+    margin-top: -12px;
   }
 }
 
@@ -311,5 +311,15 @@ legend {
   }
   &.js-hidden-test {
     display: none;
+  }
+}
+
+.start-group {
+  margin-bottom: 30px;
+}
+
+.date-of-birth-group {
+  &.govuk-fieldset__legend:not(.govuk-fieldset__legend--m):not(.govuk-fieldset__legend--l):not(.govuk-fieldset__legend--xl) + .govuk-hint {
+    margin-bottom: 4px;
   }
 }

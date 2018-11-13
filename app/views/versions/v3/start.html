@@ -11,10 +11,11 @@
       <form method="post" action="eligibility-swapped">
         {% call govukFieldset({
           legend: {
-            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-4",
+            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-2",
             isPageHeading: false,
             text: "Caller"
-          }
+          },
+          classes: "start-group"
         }) %}
           {{ govukInput({
             label: {
@@ -47,7 +48,7 @@
 
         {% call govukFieldset({
           legend: {
-            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-4",
+            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-2",
             isPageHeading: false,
             text: "Person who died"
           }
@@ -73,7 +74,7 @@
               legend: {
                 text: "dob_title" | translate,
                 isPageHeading: false,
-                classes: "govuk-fieldset__legend--s"
+                classes: "govuk-fieldset__legend--s date-of-birth-group"
               }
             },
             hint: {
