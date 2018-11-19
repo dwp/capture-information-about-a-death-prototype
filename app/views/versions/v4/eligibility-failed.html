@@ -1,0 +1,36 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  {% set callerHtml %}
+    {% include "versions/v3/includes/caller.html" %}
+  {% endset %}
+
+  {% set deceasedDetailsHtml %}
+    {% include "versions/v3/includes/deceased.html" %}
+  {% endset %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="already-notified">
+        {{ govukTabs({
+          items: [
+            {
+              label: "caller_tab" | translate,
+              id: "caller-tab",
+              panel: {
+                html: callerHtml
+              }
+            },
+            {
+              label: "deceased_tab" | translate,
+              id: "deceased-tab",
+              panel: {
+                html: deceasedDetailsHtml
+              }
+            }
+          ]
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

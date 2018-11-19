@@ -323,3 +323,9 @@ legend {
     margin-bottom: 4px;
   }
 }
+
+.card-button {
+  .govuk-button {
+    background-color: govuk-colour("blue");
+  }
+}

@@ -1,0 +1,55 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "../../macros/card.njk" import card %}
+{% block content %}
+{# 4 states, new, not eligible, complete, failed - work out on server #}
+  <div class="govuk-grid-row card-button">
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'Death information collected',
+          body: "We have collected the information we need about the death. This will be sent to the relevant benefit areas." | translate,
+          link: {
+            text: 'submit_notification',
+            url: 'check'
+          },
+          failed: notification.failed
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'Apply for Bereavement Support Payment',
+          body: 'The caller is eligible to apply for Bereavement Support Payments
+          ',
+          classes: '',
+          link: {
+            text: 'start_bsp',
+            url: 'bereavement-support-payments/landing'
+          },
+          eligible: true,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'Apply for Funeral Expenses Payment',
+          body: 'The caller is eligible to apply for Funeral Expenses Payment',
+          classes: '',
+          link: {
+            text: 'start_fep',
+            url: 'funeral-expense-payments/landing'
+          },
+          eligible: true,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <a href="check" class="govuk-button govuk-button--start">Send all</a>
+    </div>
+  </div>
+{% endblock %}
