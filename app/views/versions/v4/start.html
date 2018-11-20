@@ -109,6 +109,30 @@
             value: data["deceased-national-insurance"]
           }) }}
         {% endcall %}
+
+        {{ govukRadios({
+          id: "passed-security",
+          name: "passed-security",
+          fieldset: {
+            legend: {
+              text: "passed_security" | translate,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes" | translate
+            },
+            {
+              value: "false",
+              text: "No" | translate
+            }
+          ]
+          })
+        }}
+
         {{ govukButton({
           text: "continue" | translate,
           id: "continue-eligibility"

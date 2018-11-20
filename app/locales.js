@@ -123,6 +123,8 @@ const locales = {
     none: 'None of the above',
     passport: 'Passport',
     page_heading: 'Does the caller want to check if they can get financial support after the death?',
+    passed_security: 'Did the caller pass security?',
+    passed_security_hint: ' ',
     pension_credit: 'Pension Credit',
     pip: 'Personal Independence Payment',
     phone_number: 'Phone number',
