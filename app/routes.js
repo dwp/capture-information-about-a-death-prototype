@@ -110,7 +110,7 @@ router.get('*/payee', (req, res, next) => {
 
   let route = req.params[0] + '/payee-bank';
 
-  if (version === 'v2' || version === 'v3') {
+  if (version === 'v2' || version === 'v3' || version === 'v4') {
     if (isKnownPayee) {
       console.log(payee, 'payee')
       if (payee === isSomeoneElse) {
