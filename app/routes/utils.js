@@ -1,5 +1,6 @@
 const bspEligibility = require('../bsp-eligibility.js');
 const fepEligibility = require('../fep-eligibility.js');
+const { checkRelationship } = require('../eligibility-utils.js');
 
 const handleFailure = (msg, type, req, res) => {
   const prefix = req.params[0] + '/';
@@ -86,7 +87,12 @@ const generateCard = (req, res, type = 'fep') => {
   }
 };
 
+const spouseRelationships = ['wife', 'husband', 'civilpartner'];
+
+const isCallerSpouse = (relationship) => checkRelationship(relationship, spouseRelationships);
+
 module.exports = {
   handleFailure,
-  generateCard
+  generateCard,
+  isCallerSpouse
 }

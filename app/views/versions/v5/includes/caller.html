@@ -14,10 +14,7 @@
   id: "caller-full-name",
   name: "caller-full-name",
   classes: "govuk-!-width-two-thirds",
-  value: data["caller-full-name"],
-  attributes: {
-    disabled: true
-  }
+  value: data["caller-full-name"]
 }) }}
 
 {{ govukInput({
@@ -31,10 +28,7 @@
   id: "caller-phone-number",
   name: "caller-phone-number",
   classes: "govuk-!-width-two-thirds",
-  value: data["caller-phone-number"],
-  attributes: {
-    disabled: true
-  }
+  value: data["caller-phone-number"]
 }) }}
 
 {{ govukDateInput({
@@ -108,7 +102,7 @@
   ]
 }) }}
 
-{# {% set isNotSpouseHtml %}
+{% set isNotSpouseHtml %}
   {% call govukFieldset({
     legend: {
       text: "spouse_question" | translate,
@@ -164,64 +158,12 @@
       checked: true if data['is-caller-spouse'] == 'false' else false
     }
   ]
-}) }} #}
-
-{{ govukInput({
-  label: {
-    text: "caller_relationship" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "caller-relationship-group"
-    }
-  },
-  id: "caller-relationship",
-  name: "caller-relationship",
-  classes: "govuk-!-width-two-thirds",
-  value: data["caller-relationship"]
 }) }}
 
-{% set callerAddressHtml %}
-  {% call govukFieldset({
-    classes: 'address-group',
-    legend: {
-      html: "caller_address" | translate,
-      classes: "govuk-fieldset__legend--s",
-      isPageHeading: false
-    }
-  }) %}
-    <div class="govuk-form-group">
-      {% set prefix = "caller" %}
-      {% include "includes/address-lookup.html" %}
-    </div>
-  {% endcall %}
-{% endset %}
-
-{{ govukRadios({
-  idPrefix: "caller-address-conditional",
-  name: "caller-address",
-  fieldset: {
-    classes: "hide-address-fix",
-    legend: {
-      text: "caller_same_address" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  items: [
-    {
-      value: true,
-      text: "Yes",
-      checked: true if data['caller-address'] == 'true' else false
-    },
-    {
-      value: false,
-      text: "No",
-      conditional: {
-        html: callerAddressHtml
-      }, checked: true if data['caller-address'] == 'false' else false
-    }
-  ]
-}) }}
+<div class="govuk-form-group">
+  {% set prefix = "caller" %}
+  {% include "includes/address-lookup.html" %}
+</div>
 
 {{ govukRadios({
   idPrefix: "is-caller-executor-conditional",
@@ -253,7 +195,4 @@
   ]
 }) }}
 
-{{ govukButton({
-  text: "final_step_continue" | translate,
-  id: "continue-to-deceased"
-}) }}
+<a href="#deceased-tab" class="govuk-button">{{"save_continue" | translate}}</a>

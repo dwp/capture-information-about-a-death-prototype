@@ -55,9 +55,10 @@ router.get('*/check', (req, res, next) => {
 router.get('*/eligibility', (req, res, next) => {
   const url = req.params[0];
   const startExists = fs.existsSync('app/views' + url + '/start.html')
-
+  console.log('hello?')
   if (startExists) {
     const data = req.session.data;
+    res.app.locals.isCallerSpouse = utils.isCallerSpouse(data['caller-relationship']);
 
     // probably create an array of props and check the obj includes them all
     if (skipStartPageValidation) {
@@ -100,6 +101,7 @@ router.get('*/already-notified', (req, res, next) => {
   next();
 });
 
+// Feel free to tidy this up, its in my todo, morphed into this during a UR session!!
 router.get('*/payee', (req, res, next) => {
   const deathArrearsPayee = req.session.data['death-arrears-caller'] || '';
   const payee = deathArrearsPayee.toLowerCase();
@@ -110,7 +112,7 @@ router.get('*/payee', (req, res, next) => {
 
   let route = req.params[0] + '/payee-bank';
 
-  if (version === 'v2' || version === 'v3' || version === 'v4') {
+  if (version!== 'base' || version !== 'v1') {
     if (isKnownPayee) {
       console.log(payee, 'payee')
       if (payee === isSomeoneElse) {

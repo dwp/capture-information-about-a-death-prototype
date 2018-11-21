@@ -329,3 +329,17 @@ legend {
     background-color: govuk-colour("blue");
   }
 }
+
+.capture-data {
+  input:disabled {
+    padding: 0;
+    border: 0;
+    height: 25px;
+  }
+}
+
+.test-height {
+  .govuk-card {
+   min-height: 240px;
+  }
+}

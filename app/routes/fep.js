@@ -13,9 +13,17 @@ const firstQuestion = (data) => {
   }
   return 'relationship';
 }
+const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
 
 const generateRoutes = (router) => {
   router.get('*/funeral-expense-payments/landing', (req, res, next) => {
+    const version = getVersion(req.params[0], 1);
+    if (version === 'v5') {
+      res.render('versions/' + version + '/funeral-expense-payments/landing.html', {
+
+      });
+      return true;
+    }
     const data = req.session.data;
     const age = fepEligibility.getClaimantAge(data);
     const isClaimantAdult = fepEligibility.isClaimantAdult(age);
@@ -107,9 +115,14 @@ const generateRoutes = (router) => {
   router.get('*/check-funeral-location', (req, res, next) => {
     const prefix = req.params[0] + '/';
     const data = req.session.data;
+    const version = getVersion(req.params[0], 1);
 
     if (data['fep-funeral-location'] === 'true') {
-      res.redirect(prefix + 'qualifying-benefits');
+      if (version === 'v5') {
+        res.redirect(prefix + 'confirm');
+      } else {
+        res.redirect(prefix + 'qualifying-benefits');
+      }
     } else {
       const error = 'The location of the funeral must be in the UK or EU';
       return handleFailure(error, 'fep', req, res);
@@ -117,6 +130,7 @@ const generateRoutes = (router) => {
   });
 
   router.get('*/check-qualifying-benefits', (req, res, next) => {
+    const version = getVersion(req.params[0], 1);
     const prefix = req.params[0] + '/';
     const data = req.session.data;
     const benefits = data['fep-qualifying-benefits'] || [];
@@ -124,7 +138,11 @@ const generateRoutes = (router) => {
       if (benefits.length === 1 && benefits[0] === '_unchecked') {
         return benefitsRedirect(req, res, prefix);
       } else {
-        res.redirect(prefix + 'confirm');
+        if (version === 'v5') {
+          res.redirect(prefix + 'funeral-date');
+        } else {
+          res.redirect(prefix + 'confirm');
+        }
       }
     } else {
       return benefitsRedirect(req, res, prefix);

@@ -1,0 +1,69 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  {% set callerHtml %}
+    {% include "versions/v5/includes/caller-swapped.html" %}
+  {% endset %}
+
+  {% set deceasedDetailsHtml %}
+    {% include "versions/v5/includes/deceased-swapped.html" %}
+  {% endset %}
+
+  {% set spouseHtml %}
+    {% include "versions/v5/includes/spouse.html" %}
+  {% endset %}
+
+  {% set tabs = [
+    {
+      label: "deceased_tab" | translate,
+      id: "deceased-tab",
+      panel: {
+        html: deceasedDetailsHtml
+      }
+    },
+    {
+      label: "caller_tab" | translate,
+      id: "caller-tab",
+      panel: {
+        html: callerHtml
+      }
+    }
+  ] %}
+
+  {% if isCallerSpouse != true %}
+    {% set tabs = [
+      {
+        label: "deceased_tab" | translate,
+        id: "deceased-tab",
+        panel: {
+          html: deceasedDetailsHtml
+        }
+      },
+      {
+        label: "caller_tab" | translate,
+        id: "caller-tab",
+        panel: {
+          html: callerHtml
+        }
+      },
+      {
+        label: "spouse_tab" | translate,
+        id: "spouse-tab",
+        panel: {
+          html: spouseHtml
+        }
+      }
+    ] %}
+  {% endif %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="deceased-benefits" class="capture-data">
+        {{ govukTabs({
+          items: tabs
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

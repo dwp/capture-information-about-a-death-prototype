@@ -2,16 +2,16 @@
 
 {% block content %}
   {% set callerHtml %}
-    {% include "versions/v4/includes/caller-swapped.html" %}
+    {% include "versions/v3/includes/caller-swapped.html" %}
   {% endset %}
 
   {% set deceasedDetailsHtml %}
-    {% include "versions/v4/includes/deceased-swapped.html" %}
+    {% include "versions/v3/includes/deceased-swapped.html" %}
   {% endset %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form method="post" action="deceased-benefits" class="capture-data">
+      <form method="post" action="deceased-benefits">
         {{ govukTabs({
           items: [
             {

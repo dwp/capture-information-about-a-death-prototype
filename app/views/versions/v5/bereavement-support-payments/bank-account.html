@@ -1,0 +1,37 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <form method="post" action="bank-details">
+    {{ govukRadios({
+      id: "bsp-use-bank",
+      name: "bsp-use-bank",
+      fieldset: {
+        legend: {
+          text: "bsp_use_bank" | translate,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint:{
+        text: "bsp_use_bank_hint" | translate
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

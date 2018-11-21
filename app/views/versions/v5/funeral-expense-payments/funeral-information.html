@@ -1,0 +1,100 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/" + version + "/funeral-expense-payments/layout-full.html" %}
+{% set funeralDateHtml %}
+  {{ govukDateInput({
+    id: "fep-funeral-date",
+    name: "fep-funeral-date",
+    value: data["fep-funeral-date"],
+    fieldset: {
+      legend: {
+        text: "funeral_date_when" | translate,
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        name: "day",
+        value: data['fep-funeral-day']
+      },
+      {
+        name: "month",
+        value: data['fep-funeral-month']
+      },
+      {
+        name: "year",
+        value: data['fep-funeral-year']
+      }
+    ]
+  }) }}
+{% endset %}
+{% block formContent %}
+  {% if data.funeralDateError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.funeralDateError,
+          href: "#fep-funeral-date"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check-funeral-information">
+    {{ govukRadios({
+      id: "fep-funeral-date",
+      name: "fep-funeral-date",
+      fieldset: {
+        legend: {
+          text: "funeral_date" | translate,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate,
+          conditional: {
+            html: funeralDateHtml
+          },
+          checked: true if (data.funeralDateError and (data['fep-funeral-date'] == 'true')) else false
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+
+    {{ govukRadios({
+      idPrefix: "fep-funeral-responsibility",
+      name: "fep-funeral-responsibility",
+      fieldset: {
+        legend: {
+          text: "fep_responsibility" | translate,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate,
+          checked: true if (data.funeralResponsibilityError and (data['fep-funeral-responsibility'] == 'true')) else false
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

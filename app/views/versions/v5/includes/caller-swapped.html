@@ -92,7 +92,7 @@
     }
   },
   hint: {
-    text: "caller_sex_hint" | translate
+    text: "caller_sex_hint" | translate + " for BSP eligibility"
   },
   items: [
     {
@@ -106,78 +106,6 @@
       checked: true if data['caller-sex'] == 'male' else false
     }
   ]
-}) }}
-
-{# {% set isNotSpouseHtml %}
-  {% call govukFieldset({
-    legend: {
-      text: "spouse_question" | translate,
-      classes: "govuk-fieldset__legend--s",
-      isPageHeading: false
-    },
-    classes: "spouse-group"
-  }) %}
-    {{ govukInput({
-      label: {
-        text: "full_name" | translate,
-        classes: "govuk-!-font-weight-bold",
-        attributes: {
-          id: "spouse-full-name-group"
-        }
-      },
-      id: "spouse-full-name",
-      name: "spouse-full-name",
-      classes: "govuk-!-width-two-thirds",
-    value: data["spouse-full-name"]
-    }) }}
-
-    <div class="govuk-form-group">
-      {% set prefix = "spouse" %}
-      {% include "includes/address-lookup.html" %}
-    </div>
-  {% endcall %}
-{% endset -%}
-
-<span id="spouse-section"></span>
-{{ govukRadios({
-  idPrefix: "is-caller-spouse-conditional",
-  name: "is-caller-spouse",
-  fieldset: {
-    legend: {
-      text: "Was the caller the wife, husband or civil partner of the person who died?",
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  items: [
-    {
-      value: "true",
-      text: "Yes",
-      checked: true if data['is-caller-spouse'] == 'true' else false
-    },
-    {
-      value: "false",
-      text: "No",
-      conditional: {
-        html: isNotSpouseHtml
-      },
-      checked: true if data['is-caller-spouse'] == 'false' else false
-    }
-  ]
-}) }} #}
-
-{{ govukInput({
-  label: {
-    text: "caller_relationship" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "caller-relationship-group"
-    }
-  },
-  id: "caller-relationship",
-  name: "caller-relationship",
-  classes: "govuk-!-width-two-thirds",
-  value: data["caller-relationship"]
 }) }}
 
 {% set callerAddressHtml %}

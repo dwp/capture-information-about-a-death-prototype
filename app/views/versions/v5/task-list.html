@@ -27,33 +27,37 @@
               {{ govukTag({
                 attributes: { id: "eligibility-completed" },
                 classes: "app-task-list__task-completed tag-orange",
-                text: "Pending send"
+                text: "Ready to send"
               }) }}
-              <a class="app-task-list__task-name" href="bereavement-support-payments/landing" aria-describedby="read-declaration-completed">
+              <a class="app-task-list__task-name" href="check" aria-describedby="read-declaration-completed">
                 Check and change your answers
               </a>
             </li>
             <li class="app-task-list__item">
-              <a class="app-task-list__task-name" href="bereavement-support-payments/landing" aria-describedby="read-declaration-completed">
-                Bereavement Support Payments
-              </a>
+              <strong class="app-task-list__task-name" aria-describedby="eligibility-completed">
+                Bereavement Support Payment
+              </strong>
+
               {{ govukTag({
                 attributes: { id: "read-declaration-completed" },
-                classes: "app-task-list__task-completed",
-                text: "Eligible"
+                classes: "app-task-list__task-completed tag-red",
+                text: "Not eligible"
               }) }}
-              <p>Based on the information provided, Jane Doe is eligible to apply for Bereavement Support Payments</p>
+              <p>The caller is not eligible to apply for Bereavement Support Payments as they are not working age</p>
             </li>
             <li class="app-task-list__item">
-              <a class="app-task-list__task-name" href="funeral-expense-payments/landing" aria-describedby="read-declaration-completed">
-                Funeral Expense Payment
-              </a>
+              <strong class="app-task-list__task-name" aria-describedby="eligibility-completed">
+                Funeral Expenses Payment
+              </strong>
               {{ govukTag({
                 attributes: { id: "read-declaration-completed" },
                 classes: "app-task-list__task-completed",
                 text: "Eligible"
               }) }}
-              <p>Based on the information provided, Jane Doe is eligible to apply for a Funeral Expenses Payment</p>
+              <p>Based on the information provided, the caller is eligible to apply for a Funeral Expenses Payment</p>
+              <a class="app-task-list__task-name" href="funeral-expense-payments/landing" aria-describedby="read-declaration-completed">
+                Check Funeral Expenses Payment Eligibility
+              </a>
             </li>
           </ul>
         </li>
