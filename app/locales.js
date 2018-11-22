@@ -30,7 +30,7 @@ const locales = {
     caller_details_heading: `About the caller`,
     caller_heading: 'About the caller',
     caller_relationship: `Relationship to the person who died`,
-    caller_same_address: `Was their address the same as the caller's?`,
+    caller_same_address: `Was their address the same as the person who died?`,
     caller_sex: 'Sex',
     caller_sex_hint: `We need this to work out the caller's State Pension age`,
     caller_tab: 'Caller',
