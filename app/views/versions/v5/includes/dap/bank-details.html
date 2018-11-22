@@ -1,6 +1,3 @@
-{% from "input/macro.njk"         import govukInput %}
-{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
-
 {% set bankHtml %}
   {{ govukInput({
     label: {
@@ -99,44 +96,37 @@
 {% endset %}
 
 {% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <form method="post" action="select-eligibility-cards">
-        {{ govukRadios({
-          idPrefix: "bank-or-building-conditional",
-          name: "dap-bank-or-building",
-          fieldset: {
-            legend: {
-              text: "bank_building_question" | translate,
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--s"
-            }
+  {% set question = "bank_building_question" | translate %}
+  {% if data['death-arrears-caller'] == 'someone-else' %}
+    {% set question = "bank_building_question_executor" | translate %}
+  {% endif %}
+    {{ govukRadios({
+      idPrefix: "bank-or-building-conditional",
+      name: "dap-bank-or-building",
+      fieldset: {
+        legend: {
+          text: question,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Bank account",
+          checked: true if data['bank-or-building'] == 'true' else false,
+          conditional: {
+            html: bankHtml
+          }
+        },
+        {
+          value: "false",
+          text: "Building Society",
+          conditional: {
+            html: buildingHtml
           },
-          items: [
-            {
-              value: "true",
-              text: "Bank account",
-              checked: true if data['bank-or-building'] == 'true' else false,
-              conditional: {
-                html: bankHtml
-              }
-            },
-            {
-              value: "false",
-              text: "Building Society",
-              conditional: {
-                html: buildingHtml
-              },
-              checked: true if data['bank-or-building'] == 'false' else false
-            }
-          ]
-        }) }}
-
-        {{ govukButton({
-          text: "continue" | translate,
-          id: "continue-to-payee"
-        }) }}
-      </form>
-    </div>
-  </div>
+          checked: true if data['bank-or-building'] == 'false' else false
+        }
+      ]
+    }) }}
 {% endblock %}
