@@ -10,3 +10,4 @@ govuk_modules
 /node_modules
 .tmuxp.*
 package-lock.json
+screenshots

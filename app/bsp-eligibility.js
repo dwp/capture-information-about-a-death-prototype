@@ -1,12 +1,16 @@
 const sra = require('sra');
 const isAfter = require('date-fns/is_after')
-
+const { checkRelationship } = require('./eligibility-utils.js');
 /**
  * Takes data from the death notification and returns their spousal status
  * @param {object} data
  */
-const isCallerSpouse = (data => data['is-caller-spouse'] === 'true');
-
+const relationships = ['husband', 'wife', 'spouse', 'civilpartner'];
+const isCallerSpouse = (data) => {
+  const relationship = data['caller-relationship'];
+  console.log('hellotesting bsp', checkRelationship(relationship, relationships))
+  return (data['is-caller-spouse'] === 'true') || checkRelationship(relationship, relationships);
+};
 /**
  * Takes data from the death notification and calculates if they are working age
  * @param {object} data

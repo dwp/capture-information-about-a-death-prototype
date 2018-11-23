@@ -10,7 +10,8 @@
     "start": "node start.js",
     "lint": "standard",
     "test": "gulp test && npm run lint",
-    "eligibility": "node inquirer/eligibility.js"
+    "eligibility": "node inquirer/eligibility.js",
+    "screenshot": "wshot urls.txt"
   },
   "dependencies": {
     "accessible-autocomplete": "^1.6.1",
@@ -58,5 +59,8 @@
     "ignore": [
       "nunjucks"
     ]
+  },
+  "devDependencies": {
+    "wshot": "^1.1.1"
   }
 }

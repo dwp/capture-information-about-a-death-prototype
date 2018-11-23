@@ -22,4 +22,11 @@ npm install
 npm start
 ```
 
+### Capture screenshots
+edit `urls.txt` to include the urls you want to screenshot, they must be prefixed with http.
+
+```
+npm run screenshot
+```
+
 Go to [localhost:3000](http://localhost:3000/) in your browser.

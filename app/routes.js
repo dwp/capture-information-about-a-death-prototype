@@ -36,11 +36,11 @@ const isDapAvailable = (req, res, next) => {
   const isDap = checkDapEligibility(req.session.data);
   const dapProps = ['dap-bank-or-building', 'dap-bank-name', 'dap-bank-account-no', 'dap-bank-sort-code'];
   const isDapComplete = validateProps(dapProps, req.session.data).length === 0;
-  if (isDap && !isDapComplete) {
-    res.redirect(req.params[0] + '/death-arrears.html');
-    res.locals.isDapComplete = true;
-    return true;
-  }
+  // if (isDap && !isDapComplete) {
+  //   res.redirect(req.params[0] + '/death-arrears.html');
+  //   res.locals.isDapComplete = true;
+  //   return true;
+  // }
   if (next) {
     next();
   }
