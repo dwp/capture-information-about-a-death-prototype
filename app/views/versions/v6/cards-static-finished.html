@@ -6,8 +6,13 @@
     <div class="govuk-grid-column-one-third test-height">
       {{ card({
           heading: 'Death information collected',
+          tag: {
+            attributes: { id: "eligibility-completed" },
+            classes: "tag-orange",
+            text: "Ready to send"
+          },
           body: "We have collected the information we need about the death. This will be sent to the relevant DWP benefit areas" | translate,
-          classes: 'govuk-card--success',
+          classes: 'govuk-card--warning',
           link: {
             text: 'submit_notification',
             url: 'check'
@@ -19,8 +24,13 @@
     <div class="govuk-grid-column-one-third test-height">
       {{ card({
           heading: 'Bereavement Support Payment',
+          tag: {
+            attributes: { id: "eligibility-completed" },
+            classes: "tag-orange",
+            text: "Ready to send"
+          },
           body: 'The caller is eligible for Bereavement Support Payments and their details will be given to the Bereavement Support Payment team for processing who will contact the caller to complete the application',
-          classes: 'govuk-card--success',
+          classes: 'govuk-card--warning',
           link: {
             text: 'Start',
             url: 'bereavement-support-payments/landing'
@@ -34,6 +44,11 @@
     <div class="govuk-grid-column-one-third test-height">
       {{ card({
           heading: 'Funeral Expenses Payment',
+          tag: {
+            attributes: { id: "eligibile" },
+            classes: "",
+            text: "Eligible"
+          },
           body: 'The caller may eligible to apply for a Funeral Expenses Payment based on the information we have collected',
           classes: '',
           link: {

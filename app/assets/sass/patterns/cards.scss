@@ -10,6 +10,10 @@ $govuk-card-border : govuk-colour("blue");
     border-color: #00823b;
   }
 
+  &--warning {
+    border-color: #f47738;
+  }
+
   &--error {
     border-color: govuk-colour("red");
   }
