@@ -34,6 +34,23 @@
     </div>
   {% endif %}
 
+  {% if (data['spouse-dob-day']) and (data['spouse-dob-month']) and (data['spouse-dob-year']) %}
+    <div class="app-check-your-answers__contents">
+      <dt class="app-check-your-answers__question">
+        {{ "dob_title" | translate }}
+      </dt>
+      <dd class="app-check-your-answers__answer">
+        {{data['spouse-dob-day']}}/{{data['spouse-dob-month']}}/{{data['spouse-dob-year']}}
+      </dd>
+      <dd class="app-check-your-answers__change">
+        <a href="eligibility#spouse-tab">
+          {{ "change" | translate }}
+          <span class="govuk-visually-hidden"> {{ "dob_title" | translate }}</span>
+        </a>
+      </dd>
+    </div>
+  {% endif %}
+
   {% if (data['spouse-address'] == 'true') %}
     <div class="app-check-your-answers__contents">
       <dt class="app-check-your-answers__question">

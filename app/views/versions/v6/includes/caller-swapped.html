@@ -37,36 +37,6 @@
   }
 }) }}
 
-{{ govukDateInput({
-  id: "caller-dob",
-  name: "caller-dob",
-  value: data["caller-dob"],
-  fieldset: {
-    legend: {
-      text: "dob_title" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  hint: {
-    text: "dob_hint" | translate
-  },
-  items: [
-    {
-      name: "day",
-      value: data['caller-dob-day']
-    },
-    {
-      name: "month",
-      value: data['caller-dob-month']
-    },
-    {
-      name: "year",
-      value: data['caller-dob-year']
-    }
-  ]
-}) }}
-
 {{ govukRadios({
   idPrefix: "is-caller-executor-conditional",
   name: "is-caller-executor",
