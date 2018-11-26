@@ -9,14 +9,6 @@ if (window.console && window.console.info) {
   window.console.info('GOV.UK Prototype Kit - do not use for production');
 }
 
-// TODO ammend form action depending on route
-/* global $ */
-
-// Warn about using the kit in production
-if (window.console && window.console.info) {
-  window.console.info('GOV.UK Prototype Kit - do not use for production');
-}
-
 $(document).ready(function () {
   /**
    * If a hospital location select element exists, make it into an autocomplete element
@@ -135,22 +127,42 @@ $(document).ready(function () {
   };
 
   var addressLookup = function addressLookup() {
+    var postcode;
+    var manualFields;
+
     var postcodeLookupEl = document.querySelectorAll('.js-postcode-lookup');
     if ([].concat(_toConsumableArray(postcodeLookupEl)).length) {
       [].concat(_toConsumableArray(postcodeLookupEl)).forEach(function (el) {
         el.addEventListener('click', function (event) {
-          var postcode = event.target.previousElementSibling.querySelector('input').value.toLowerCase().replace(/(\s)|(-)/g, '').trim();
+          postcode = event.target.previousElementSibling.querySelector('input').value.toLowerCase().replace(/(\s)|(-)/g, '').trim();
+
           var parentEl = event.target.parentElement;
           var resultEl = parentEl.querySelector('select');
           var resultParent = parentEl.querySelector('.js-results-group');
-          var result = document.createElement('option');
-          var manualFields = parentEl.querySelector('.inset-address');
-          fillManualFields(manualFields, addresses[postcode]);
-          result.text = addresses[postcode].summary;
-          resultEl.add(result);
+          var addressResults = addresses[postcode];
+
+          manualFields = parentEl.querySelector('.inset-address');
+
+          resultEl.removeEventListener('change', handleAddressSelect);
+
+          addressResults.forEach(function (address, index) {
+            var result = document.createElement('option');
+            result.text = address.summary;
+            result.value = index;
+            resultEl.add(result);
+          });
+
+          fillManualFields(manualFields, addresses[postcode][0]);
+
           resultParent.classList.remove('js-hidden');
+
+          resultEl.addEventListener('change', handleAddressSelect, false);
         });
       });
+    }
+
+    function handleAddressSelect(event) {
+      fillManualFields(manualFields, addresses[postcode][event.target.value]);
     }
   };
 

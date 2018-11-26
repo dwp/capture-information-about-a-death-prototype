@@ -29,22 +29,42 @@ module.exports = {
   useBrowserSync: 'true',
   // assetsMaxAge: 10000,
   addresses: {
-    'ne981yx': {
-      line1: 'Benton Park View',
-      line2: '',
-      town: 'Newcastle Upon Tyne',
-      county: 'Tyne and Wear',
-      postcode: 'NE98 1YX',
-      summary: 'Benton Park View, Newcastle Upon Tyne, NE98 1YX'
-    },
-    'ne463jr': {
-      line1: '2 Windsor Terrace',
-      line2: '',
-      town: 'Hexham',
-      county: 'Northumberland',
-      postcode: 'NE46 3JR',
-      summary: '2 Windsor Terrace, Hexham, NE46 3JR'
-    }
+    'ne981yx': [
+      {
+        line1: 'Benton Park View',
+        line2: '',
+        town: 'Newcastle Upon Tyne',
+        county: 'Tyne and Wear',
+        postcode: 'NE98 1YX',
+        summary: 'Benton Park View, Newcastle Upon Tyne, NE98 1YX'
+      }
+    ],
+    'ne463jr': [
+      {
+        line1: '1 Windsor Terrace',
+        line2: '',
+        town: 'Hexham',
+        county: 'Northumberland',
+        postcode: 'NE46 3JR',
+        summary: '1 Windsor Terrace, Hexham, NE46 3JR'
+      },
+      {
+        line1: '2 Windsor Terrace',
+        line2: '',
+        town: 'Hexham',
+        county: 'Northumberland',
+        postcode: 'NE46 3JR',
+        summary: '2 Windsor Terrace, Hexham, NE46 3JR'
+      },
+      {
+        line1: '3 Windsor Terrace',
+        line2: '',
+        town: 'Hexham',
+        county: 'Northumberland',
+        postcode: 'NE46 3JR',
+        summary: '3 Windsor Terrace, Hexham, NE46 3JR'
+      }
+    ]
   },
   // fake ninos for testing
   duplicateNinos: [
