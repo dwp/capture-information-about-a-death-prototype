@@ -18,14 +18,14 @@
     </div>
     <div class="govuk-grid-column-one-third test-height">
       {{ card({
-          heading: 'Not eligible for Bereavement Support Payment',
-          body: 'The caller is not eligible to apply for Bereavement Support Payments as they are not working age',
-          classes: 'govuk-card--error',
+          heading: 'Bereavement Support Payment',
+          body: 'Based on the information provided, the caller is eligible to apply for Bereavement Support Payments',
+          classes: '',
           link: {
-            text: 'Check Eligibility',
+            text: 'Start',
             url: 'bereavement-support-payments/landing'
           },
-          eligible: false,
+          eligible: true,
           complete: false,
           failed: false
         })
