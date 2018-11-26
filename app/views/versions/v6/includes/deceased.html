@@ -1,0 +1,137 @@
+<h2 class="govuk-heading-m" id="deceased-heading">{{"deceased_heading" | translate}}</h2>
+
+{{ govukInput({
+  label: {
+    text: "full_name" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "deceased-full-name-group"
+    }
+  },
+  id: "deceased-full-name",
+  name: "deceased-full-name",
+  classes: "govuk-!-width-two-thirds",
+  value: data["deceased-full-name"]
+}) }}
+
+{{ govukDateInput({
+  id: "deceased-dob",
+  name: "deceased-dob",
+  value: data["deceased-dob"],
+  fieldset: {
+    legend: {
+      text: "dob_title" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "dob_hint" | translate
+  },
+  items: [
+    {
+      name: "day",
+      value: data['deceased-dob-day']
+    },
+    {
+      name: "month",
+      value: data['deceased-dob-month']
+    },
+    {
+      name: "year",
+      value: data['deceased-dob-year']
+    }
+  ]
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "national_insurance" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "deceased-national-insurance-group"
+    }
+  },
+  id: "deceased-national-insurance",
+  name: "deceased-national-insurance",
+  classes: "govuk-!-width-two-thirds",
+  value: data["deceased-national-insurance"]
+}) }}
+
+{% set deceasedAddressHtml %}
+  {% call govukFieldset({
+    classes: 'address-group',
+    legend: {
+      html: "deceased_address" | translate,
+      classes: "govuk-fieldset__legend--s",
+      isPageHeading: false
+    }
+  }) %}
+    <div class="govuk-form-group">
+      {% set prefix = "deceased" %}
+      {% include "includes/address-lookup.html" %}
+    </div>
+  {% endcall %}
+{% endset %}
+
+{{ govukRadios({
+  idPrefix: "deceased-address-conditional",
+  name: "deceased-address",
+  fieldset: {
+    classes: "hide-address-fix",
+    legend: {
+      text: "caller_same_address" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: true,
+      text: "Yes",
+      checked: true if data['deceased-address'] == 'true' else false
+    },
+    {
+      value: false,
+      text: "No",
+      conditional: {
+        html: deceasedAddressHtml
+      }, checked: true if data['deceased-address'] == 'false' else false
+    }
+  ]
+}) }}
+
+{{ govukDateInput({
+  id: "deceased-dod",
+  name: "deceased-dod",
+  fieldset: {
+    legend: {
+      text: "dod_title" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "dod_hint" | translate
+  },
+  items: [
+    {
+      name: "day",
+      value: data['deceased-dod-day']
+    },
+    {
+      name: "month",
+      value: data['deceased-dod-month']
+    },
+    {
+      name: "year",
+      value: data['deceased-dod-year']
+    }
+  ]
+  })
+}}
+
+{{ govukButton({
+  text: "final_step_continue" | translate,
+  id: "continue-to-deceased"
+}) }}

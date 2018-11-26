@@ -1,0 +1,80 @@
+{% extends "layout-full-width.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-6">
+      <h2 class="govuk-panel__title">
+        Information sent
+      </h2>
+    </div>
+
+    <p>
+      The Department for Work and Pensions now knows about the death of {{data['deceased-full-name']}}
+    </p>
+
+    <h2 class="govuk-heading-m">How DWP will use this information</h2>
+    <p>DWP will stop or change any payments {{data['deceased-full-name']}} was entitled to.</p>
+
+    {{ govukTable({
+      firstCellIsHeader: true,
+      head: [
+        {
+          text: "Payment"
+        },
+        {
+          text: "What will happen"
+        }
+      ],
+      rows: [
+        [
+          {
+            text: "State Pension"
+          },
+          {
+            text: "This will stop – you may be able to inherit some of their State Pension."
+          }
+        ],
+        [
+          {
+            text: "Pension Credit"
+          },
+          {
+            text: "This will stop."
+          }
+        ],
+        [
+          {
+            text: "Carer's Allowance"
+          },
+          {
+            text: "This will stop."
+          }
+        ]
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">What {{data['caller-full-name']}} needs to do next</h2>
+    <p>If they have not already, they will need to register the death.</p>
+    <h2 class="govuk-heading-m">What DWP will do next</h2>
+    <p>DWP will write to {{data['caller-full-name']}} to confirm this call and tell them when {{data['deceased-full-name']}}'s payments will stop.</p>
+    <p>The Funeral Expenses Payment team will contact {{data['caller-full-name']}} within the next 2 weeks and continue their application.</p>
+    <p>They will need to have a funeral date. They can contact the team on 0834 234 6789.</p>
+    <h2 class="govuk-heading-m">Other financial support</h2>
+    <p>{{data['caller-full-name']}} can use an independant benefits calculator at <a href="/">www.gov.uk/benefits-calculator</a> to find out:
+      <ul class="govuk-list--bullet govuk-list">
+        <li>what other financial support they could get</li>
+        <li>how to claim</li>
+        <li>how any benefits they already get will be affected</li>
+      </ul>
+    </p>
+    <h2 class="govuk-heading-m">Emotional support</h2>
+    <p>Cruse Bereavement Care is a voluntary organisation that offers people emotional help and support during a bereavement.</p>
+    <h2 class="govuk-heading-s">Phone</h2>
+    <p>0808 808 1677</p>
+    <h2 class="govuk-heading-s">Email</h2>
+    <p>helpline@cruse.org.uk</p>
+    <a href="eligibility/clear">Back to start</a>
+  </div>
+</div>
+{% endblock %}
