@@ -37,6 +37,14 @@ module.exports = {
         county: 'Tyne and Wear',
         postcode: 'NE98 1YX',
         summary: 'Benton Park View, Newcastle Upon Tyne, NE98 1YX'
+      },
+      {
+        line1: 'Tyne View Park',
+        line2: '',
+        town: 'Newcastle Upon Tyne',
+        county: 'Tyne and Wear',
+        postcode: 'NE98 1YX',
+        summary: 'Tyne View Park, Newcastle Upon Tyne, NE98 1YX'
       }
     ],
     'ne463jr': [

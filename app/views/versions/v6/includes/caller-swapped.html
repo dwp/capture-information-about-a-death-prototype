@@ -67,90 +67,6 @@
   ]
 }) }}
 
-{{ govukInput({
-  label: {
-    text: "national_insurance" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "caller-national-insurance-group"
-    }
-  },
-  id: "caller-national-insurance",
-  name: "caller-national-insurance",
-  classes: "govuk-!-width-two-thirds",
-  value: data["caller-national-insurance"]
-}) }}
-
-{{ govukRadios({
-  idPrefix: "caller-sex",
-  name: "caller-sex",
-  fieldset: {
-    legend: {
-      text: "caller_sex" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  hint: {
-    text: "caller_sex_hint" | translate + " for BSP eligibility"
-  },
-  items: [
-    {
-      value: "female",
-      text: "Female",
-      checked: true if data['caller-sex'] == 'female' else false
-    },
-    {
-      value: "male",
-      text: "Male",
-      checked: true if data['caller-sex'] == 'male' else false
-    }
-  ]
-}) }}
-
-{% set callerAddressHtml %}
-  {% call govukFieldset({
-    classes: 'address-group',
-    legend: {
-      html: "caller_address" | translate,
-      classes: "govuk-fieldset__legend--s",
-      isPageHeading: false
-    }
-  }) %}
-    <div class="govuk-form-group">
-      {% set prefix = "caller" %}
-      {% include "includes/address-lookup.html" %}
-    </div>
-  {% endcall %}
-{% endset %}
-
-{{ govukRadios({
-  idPrefix: "caller-address-conditional",
-  name: "caller-address",
-  fieldset: {
-    classes: "hide-address-fix",
-    legend: {
-      text: "caller_same_address" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  items: [
-    {
-      value: true,
-      text: "Yes",
-      checked: true if data['caller-address'] == 'true' else false
-    },
-    {
-      value: false,
-      text: "No",
-      conditional: {
-        html: callerAddressHtml
-      }, checked: true if data['caller-address'] == 'false' else false
-    }
-  ]
-}) }}
-
 {{ govukRadios({
   idPrefix: "is-caller-executor-conditional",
   name: "is-caller-executor",
@@ -181,7 +97,4 @@
   ]
 }) }}
 
-{{ govukButton({
-  text: "final_step_continue" | translate,
-  id: "continue-to-deceased"
-}) }}
+<a href="#spouse-tab" class="govuk-button">{{"save_continue" | translate}}</a>

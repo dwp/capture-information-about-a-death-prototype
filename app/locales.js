@@ -151,6 +151,7 @@ const locales = {
     spouse_details_heading: `Surviving spouse's details`,
     spouse_label: 'Surviving spouse',
     spouse_question: 'Who is the surviving spouse?',
+    spouse_sex_hint: `We need this to work out their State Pension age`,
     spouse_tab: 'Spouse',
     start_bsp: 'Start application',
     start_fep: 'Start application',

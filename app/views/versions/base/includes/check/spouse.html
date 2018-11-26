@@ -17,8 +17,57 @@
     </div>
   {% endif %}
 
-  {%
-    if (data['spouse-line-1']) or (data['spouse-line-2'])
+  {% if (data['spouse-national-insurance']) %}
+    <div class="app-check-your-answers__contents">
+      <dt class="app-check-your-answers__question">
+        {{ "national_insurance" | translate }}
+      </dt>
+      <dd class="app-check-your-answers__answer">
+        {{data['spouse-national-insurance']}}
+      </dd>
+      <dd class="app-check-your-answers__change">
+        <a href="eligibility#spouse-tab">
+          {{ "change" | translate }}
+          <span class="govuk-visually-hidden"> {{ "national_insurance" | translate }}</span>
+        </a>
+      </dd>
+    </div>
+  {% endif %}
+
+  {% if (data['spouse-address'] == 'true') %}
+    <div class="app-check-your-answers__contents">
+      <dt class="app-check-your-answers__question">
+        {{ "address" | translate }}
+      </dt>
+      <dd class="app-check-your-answers__answer">
+        {% if (data['deceased-line-1']) %}
+          {{data['deceased-line-1']}}
+          <br />
+        {% endif %}
+        {% if (data['deceased-line-2']) %}
+          {{data['deceased-line-2']}}
+          <br />
+        {% endif %}
+        {% if (data['deceased-town-city']) %}
+          {{data['deceased-town-city']}}
+          <br />
+        {% endif %}
+        {% if (data['deceased-county']) %}
+          {{data['deceased-county']}}
+          <br />
+        {% endif %}
+        {% if (data['deceased-postcode']) %}
+          {{data['deceased-postcode']}}
+        {% endif %}
+      </dd>
+      <dd class="app-check-your-answers__change">
+        <a href="eligibility#spouse-tab">
+          {{ "change" | translate }}
+          <span class="govuk-visually-hidden"> {{ "address" | translate }}</span>
+        </a>
+      </dd>
+    </div>
+  {% elseif (data['spouse-line-1']) or (data['spouse-line-2'])
     or (data['spouse-town-city']) or (data['spouse-county'])
     or (data['spouse-postcode'])
   %}
@@ -48,7 +97,7 @@
         {% endif %}
       </dd>
       <dd class="app-check-your-answers__change">
-        <a href="#">
+        <a href="eligibility#spouse-tab">
           {{ "change" | translate }}
           <span class="govuk-visually-hidden"> {{ "address" | translate }}</span>
         </a>
