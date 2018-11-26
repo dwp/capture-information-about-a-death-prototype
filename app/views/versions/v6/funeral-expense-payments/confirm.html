@@ -5,10 +5,6 @@
 <p>The information you have collected will be used to apply for a Funeral Expenses Payment.</p>
 
   <form action="complete" method="post">
-    {{ govukWarningText({
-      text: "consent_message" | translate,
-      iconFallbackText: "Warning"
-    }) }}
     <a href="../select-eligibility-cards-finished" class="govuk-button" role="button">{{"confirm_application" | translate}}</a>
   </form>
 {% endblock %}
