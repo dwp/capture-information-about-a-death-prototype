@@ -1,7 +1,7 @@
 {% from "tabs/macro.njk" import govukTabs %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 {% block formContent %}
-  <form method="post" action="../select-eligibility-cards">
+  <form method="post" action="confirm">
     <h2 class="govuk-heading-m">{{"bank_details_heading" | translate}}</h2>
 
     {{ govukRadios({
