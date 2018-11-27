@@ -36,11 +36,11 @@ const isDapAvailable = (req, res, next) => {
   const isDap = checkDapEligibility(req.session.data);
   const dapProps = ['dap-bank-or-building', 'dap-bank-name', 'dap-bank-account-no', 'dap-bank-sort-code'];
   const isDapComplete = validateProps(dapProps, req.session.data).length === 0;
-  // if (isDap && !isDapComplete) {
-  //   res.redirect(req.params[0] + '/death-arrears.html');
-  //   res.locals.isDapComplete = true;
-  //   return true;
-  // }
+  if (isDap && !isDapComplete) {
+    res.redirect(req.params[0] + '/death-arrears.html');
+    res.locals.isDapComplete = true;
+    return true;
+  }
   if (next) {
     next();
   }
@@ -110,6 +110,12 @@ router.get('*/payee', (req, res, next) => {
   const isKnownPayee = (payee === isCaller) || (payee === isSomeoneElse);
   const version = getVersion(req.params[0], 1);
 
+  console.log({
+    deathArrearsPayee,
+    payee,
+    isKnownPayee
+  });
+
   let route = req.params[0] + '/payee-bank';
 
   if (version!== 'base' || version !== 'v1') {
@@ -150,6 +156,7 @@ router.get('*/payee-bank-test', (req, res, next) => {
   const isKnownPayee = (payee === isCaller) || (payee === isSomeoneElse);
 
   let route = req.params[0] + '/payee-bank';
+
   if (isKnownPayee) {
     console.log(payee, 'payee')
     if (payee === isSomeoneElse) {
