@@ -145,6 +145,10 @@ $(document).ready(function () {
 
           resultEl.removeEventListener('change', handleAddressSelect);
 
+          resultEl.querySelectorAll('option').forEach(function (item) {
+            return item.remove();
+          });
+
           addressResults.forEach(function (address, index) {
             var result = document.createElement('option');
             result.text = address.summary;

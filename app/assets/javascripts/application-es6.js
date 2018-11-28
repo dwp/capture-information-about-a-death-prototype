@@ -139,6 +139,8 @@ $(document).ready(function () {
 
           resultEl.removeEventListener('change', handleAddressSelect);
 
+          resultEl.querySelectorAll('option').forEach(item => item.remove());
+
           addressResults.forEach(function (address, index) {
             const result = document.createElement('option');
             result.text = address.summary;
