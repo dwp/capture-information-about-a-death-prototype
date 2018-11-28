@@ -343,3 +343,15 @@ legend {
    min-height: 240px;
   }
 }
+
+.tag--inverted {
+  border: 2px solid #005ea5;
+  background-color: transparent;
+  color: #005ea5;
+
+  &.tag-orange {
+    border: 2px solid #f47738;
+    background-color: transparent;
+    color: #f47738;
+  }
+}
