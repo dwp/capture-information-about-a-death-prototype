@@ -125,6 +125,7 @@ const locales = {
     nino_failed_death_notification_body: 'You cannot send a death notification as there has already been a claim for this person in our system',
     no_results_found: 'Sorry, no results were found.',
     none: 'None of the above',
+    passed_to_bsp_message: "This information will be given to the Bereavement Support Payment team.",
     passport: 'Passport',
     page_heading: 'Does the caller want to check if they can get financial support after the death?',
     passed_security: 'Did the caller pass security?',
