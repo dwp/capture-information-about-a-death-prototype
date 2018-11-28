@@ -18,7 +18,7 @@ const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
 const generateRoutes = (router) => {
   router.get('*/funeral-expense-payments/landing', (req, res, next) => {
     const version = getVersion(req.params[0], 1);
-    if (version === 'v5') {
+    if (version === 'v5' || version === 'v6') {
       res.render('versions/' + version + '/funeral-expense-payments/landing.html', {
 
       });
@@ -118,7 +118,7 @@ const generateRoutes = (router) => {
     const version = getVersion(req.params[0], 1);
 
     if (data['fep-funeral-location'] === 'true') {
-      if (version === 'v5') {
+      if (version === 'v5' || version === 'v6 ') {
         res.redirect(prefix + 'confirm');
       } else {
         res.redirect(prefix + 'qualifying-benefits');
