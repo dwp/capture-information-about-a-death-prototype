@@ -26,7 +26,7 @@
               </strong>
               {{ govukTag({
                 attributes: { id: "eligibility-completed" },
-                classes: "app-task-list__task-completed tag-orange tag--inverted",
+                classes: "app-task-list__task-completed tag-orange tag--text-only",
                 text: "Ready to send"
               }) }}
               <a class="app-task-list__task-name" href="check" aria-describedby="read-declaration-completed">
@@ -40,7 +40,7 @@
 
               {{ govukTag({
                 attributes: { id: "read-declaration-completed" },
-                classes: "app-task-list__task-completed tag--inverted",
+                classes: "app-task-list__task-completed tag--text-only",
                 text: "Eligible"
               }) }}
               <p>Based on the information provided, the spouse is eligible to apply for Bereavement Support Payments</p>
@@ -54,7 +54,7 @@
               </strong>
               {{ govukTag({
                 attributes: { id: "read-declaration-completed" },
-                classes: "app-task-list__task-completed tag--inverted",
+                classes: "app-task-list__task-completed tag--text-only",
                 text: "Eligible"
               }) }}
               <p>Based on the information provided, the spouse is eligible to apply for a Funeral Expenses Payment</p>

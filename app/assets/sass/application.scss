@@ -344,6 +344,16 @@ legend {
   }
 }
 
+.tag--text-only {
+  border: none;
+  background-color: transparent;
+  color: #005ea5;
+
+  &.tag-orange {
+    color: #f47738;
+  }
+}
+
 .tag--inverted {
   border: 2px solid #005ea5;
   background-color: transparent;
