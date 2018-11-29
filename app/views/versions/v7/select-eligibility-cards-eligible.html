@@ -1,0 +1,49 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "../../macros/card.njk" import card %}
+{% block content %}
+{# 4 states, new, not eligible, complete, failed - work out on server #}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'submit_notification',
+          body: notification.body,
+          link: {
+            text: 'submit_notification',
+            url: 'check'
+          },
+          failed: notification.failed
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'check_bsp',
+          body: 'new_bsp_claim_body',
+          classes: '',
+          link: {
+            text: 'start_bsp',
+            url: 'bereavement-support-payments/landing'
+          },
+          eligible: true,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'check_fep',
+          body: 'new_fep_claim_body',
+          classes: '',
+          link: {
+            text: 'start_fep',
+            url: 'funeral-expense-payments/landing'
+          },
+          eligible: true,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="select-eligibility-cards">
+        <h1 class="govuk-heading-l">{{ "bank_account_question" | translate }}</h1>
+
+        {{ govukInput({
+          label: {
+            text: "bank_name" | translate,
+            classes: "govuk-!-font-weight-bold",
+            attributes: {
+              id: "dap-bank-name-group"
+            }
+          },
+          id: "bank-name",
+          name: "dap-bank-name",
+          classes: "govuk-!-width-two-thirds",
+          value: data["bank-name"]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "bank_account_no" | translate,
+            classes: "govuk-!-font-weight-bold",
+            attributes: {
+              id: "dap-bank-account-no-group"
+            }
+          },
+          id: "bank-account-no",
+          name: "dap-bank-account-no",
+          classes: "govuk-!-width-two-thirds",
+          value: data["bank-account-no"]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "bank_sort_code" | translate,
+            classes: "govuk-!-font-weight-bold",
+            attributes: {
+              id: "dap-bank-sort-code-group"
+            }
+          },
+          id: "bank-sort-code",
+          name: "dap-bank-sort-code",
+          classes: "govuk-!-width-two-thirds govuk-input--width-10",
+          value: data["bank-sort-code"]
+        }) }}
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-to-payee"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

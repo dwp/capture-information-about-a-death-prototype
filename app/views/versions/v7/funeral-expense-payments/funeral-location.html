@@ -1,0 +1,47 @@
+{% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
+
+{% block formContent %}
+  {% if data.funeralLocationError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.funeralLocationError,
+          href: "#fep-funeral-location-1"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check-funeral-location">
+    {{ govukRadios({
+      idPrefix: "fep-funeral-location",
+      name: "fep-funeral-location",
+      fieldset: {
+        legend: {
+          text: "fep_location" | translate,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: "fep_location_hint" | translate
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate,
+          checked: true if (data.funeralLocationError and (data['fep-funeral-location'] == 'true')) else false
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

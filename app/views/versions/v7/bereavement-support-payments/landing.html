@@ -1,0 +1,64 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Bereavement Support Payment</h1>
+
+      <p>This gives a spouse or civil partner a first payment and then up to 18 monthly payments.</p>
+
+      <h2 class="govuk-heading-m">Eligibility</h2>
+
+      <p>
+        The person who died must have either:
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>paid National Insurance contributions for at least 25 weeks</li>
+          <li>died because of an accident at work or a disease caused by work</li>
+        </ul>
+      </p>
+
+      <p>
+        When the person died, the claimant must have been:
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>under State Pension age</li>
+          <li>living in the UK or a country that pays bereavement benefits</li>
+        </ul>
+      </p>
+
+      <h2 class="govuk-heading-m">What they could get</h2>
+
+      <p>There are 2 rates. The higher rate is given if the claimant is entitled to Child Benefit or is pregnant.</p>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Rate</th>
+            <th class="govuk-table__header" scope="col">First payment</th>
+            <th class="govuk-table__header" scope="col">Monthly payment</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Higher rate</td>
+            <td class="govuk-table__cell">&pound;3,500</td>
+            <td class="govuk-table__cell">&pound;350</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Lower rate</td>
+            <td class="govuk-table__cell">&pound;2,500</td>
+            <td class="govuk-table__cell">&pound;100</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Bereavement Support Payment will not affect any benefits for a year after the first payment.</p>
+
+      <a href="dependants" role="button" class="govuk-button govuk-button--start">
+        Continue
+      </a>
+    </div>
+  </div>
+{% endblock %}

@@ -291,4 +291,24 @@ router.get('*/check-qualifying-benefits', (req, res, next) => {
   }
 });
 
+router.get('*/has-bank-account', (req, res, next) => {
+  const data = req.session.data;
+
+  if (data['dap-has-bank-or-building'] === "true") {
+    res.redirect(req.params[0] + '/payee-bank-type');
+  } else {
+    res.redirect(req.params[0] + '/select-eligibility-cards');
+  }
+});
+
+router.get('*/bank-account-type', (req, res, next) => {
+  const data = req.session.data;
+
+  if (data['dap-bank-or-building'] === "bank") {
+    res.redirect(req.params[0] + '/payee-bank-account-details');
+  } else {
+    res.redirect(req.params[0] + '/payee-building-society-account-details');
+  }
+});
+
 module.exports = router;

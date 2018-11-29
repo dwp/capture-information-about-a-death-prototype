@@ -1,0 +1,32 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Funeral Expenses Payment</h1>
+      <p>You could get a Funeral Expenses Payment if you get certain benefits and need help to pay for a funeral you’re arranging.</p>
+
+      <h2 class="govuk-heading-m">What you’ll get</h2>
+      <p>Funeral Expenses Payment can help to pay for some of the costs of the following:
+      <ul class="govuk-list govuk-list--bullet">
+        <li>burial fees for a particular plot</li>
+        <li>cremation fees, including the cost of the doctor’s certificate</li>
+        <li>travel to arrange or go to the funeral</li>
+        <li>the cost of moving the body within the UK, if it’s being moved more than 50 miles</li>
+        <li>death certificates or other documents</li>
+      </ul></p>
+      <p>You can also get up to £700 for any other funeral expenses, such as funeral director’s fees, flowers or the coffin.</p>
+      <p>The payment will not usually cover all of the costs of the funeral.</p>
+      <p>How much you get depends on your circumstances. This includes any other money that’s available to cover the costs, for example from an insurance policy or the deceased person’s estate.</p>
+
+      <h2 class="govuk-heading-m">How the money is paid</h2>
+      <p>Funeral Expenses Payment is paid into your bank, building society or credit union account if you’ve already paid for the funeral.</p>
+      <p>The money will be paid directly to the organiser of the funeral (for example, the funeral director) if you have not paid yet.</p>
+
+      <a href="qualifying-benefits" role="button" class="govuk-button govuk-button--start">
+        Continue
+      </a>
+    </div>
+  </div>
+{% endblock %}
