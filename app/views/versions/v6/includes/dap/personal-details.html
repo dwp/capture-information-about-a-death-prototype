@@ -26,20 +26,21 @@
   value: data["executor-company-name"]
 }) }}
 
-{{ govukInput({
-  label: {
-    text: "national_insurance" | translate,
-    classes: "govuk-!-font-weight-bold",
-    attributes: {
-      id: "dap-national-insurance-group"
-    }
-  },
-  id: "dap-national-insurance",
-  name: "dap-national-insurance",
-  classes: "govuk-!-width-two-thirds",
-  value: data["executor-national-insurance"]
-}) }}
-
+{% if not data["executor-company-name"] %}
+  {{ govukInput({
+    label: {
+      text: "national_insurance" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "dap-national-insurance-group"
+      }
+    },
+    id: "dap-national-insurance",
+    name: "dap-national-insurance",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-national-insurance"]
+  }) }}
+{% endif %}
 
 {% if data['executor-line-1'] %}
   {{ govukInput({
@@ -110,5 +111,3 @@
     </div>
   {% endcall %}
 {% endif %}
-
-
