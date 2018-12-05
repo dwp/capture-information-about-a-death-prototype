@@ -1,0 +1,13 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "../../macros/card.njk" import card %}
+{% block content %}
+{# 4 states, new, not eligible, complete, failed - work out on server #}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <ul class="govuk-list--bullet govuk-list">
+        <li><a href="cards-static">Version A</a></li>
+        <li><a href="task-list">Version B</a></li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}

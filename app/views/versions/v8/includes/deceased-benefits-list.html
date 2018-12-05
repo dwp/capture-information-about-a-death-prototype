@@ -1,0 +1,24 @@
+{% from "checkboxes/macro.njk"    import govukCheckboxes %}
+
+<div>
+  {# {{ govukTag({
+    attributes: { id: "eligibility-completed" },
+    classes: "app-task-list__task-completed tag-red",
+    text: "Do not read out to the caller"
+  }) }} #}
+</div>
+{{ govukCheckboxes({
+  idPrefix: "qualifying-benefits",
+  name: "deceased-qualifying-benefits",
+  fieldset: {
+    legend: {
+      text: "deceased_qualifying_benefits" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "Include any benefits they were waiting to hear about"
+  },
+  items: qualifyingBenefits
+}) }}

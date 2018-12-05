@@ -1,0 +1,11 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <p>If any benefit money is owed, we need to know who we should pay
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

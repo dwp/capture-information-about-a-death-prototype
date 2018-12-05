@@ -1,0 +1,138 @@
+{% call govukFieldset({
+  legend: {
+    classes: "govuk-fieldset__legend--m",
+    isPageHeading: false,
+    html: "caller_details_heading" | translate + "<span class='govuk-hint'>We need this to work out BSP eligibility</span>"
+  },
+  classes: "spouse-group"
+}) %}
+
+  if they are around 63-65 ask if they are a pensioner
+  {# {{ govukInput({
+    label: {
+      text: "full_name" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "spouse-full-name-group"
+      }
+    },
+    id: "spouse-full-name",
+    name: "spouse-full-name",
+    classes: "govuk-!-width-two-thirds",
+  value: data["spouse-full-name"]
+  }) }} #}
+
+  {{ govukDateInput({
+    id: "spouse-dob",
+    name: "spouse-dob",
+    value: data["spouse-dob"],
+    fieldset: {
+      legend: {
+        text: "dob_title" | translate,
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "dob_hint" | translate
+    },
+    items: [
+      {
+        name: "day",
+        value: data['spouse-dob-day']
+      },
+      {
+        name: "month",
+        value: data['spouse-dob-month']
+      },
+      {
+        name: "year",
+        value: data['spouse-dob-year']
+      }
+    ]
+  }) }}
+
+  {# {{ govukInput({
+    label: {
+      text: "national_insurance" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "spouse-national-insurance-group"
+      }
+    },
+    id: "spouse-national-insurance",
+    name: "spouse-national-insurance",
+    classes: "govuk-!-width-two-thirds",
+    value: data["spouse-national-insurance"]
+  }) }} #}
+
+  {# {{ govukRadios({
+    idPrefix: "spouse-sex",
+    name: "spouse-sex",
+    fieldset: {
+      legend: {
+        text: "caller_sex" | translate,
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "spouse_sex_hint" | translate + " for BSP eligibility"
+    },
+    items: [
+      {
+        value: "female",
+        text: "Female",
+        checked: true if data['spouse-sex'] == 'female' else false
+      },
+      {
+        value: "male",
+        text: "Male",
+        checked: true if data['spouse-sex'] == 'male' else false
+      }
+    ]
+  }) }}
+
+  {% set callerAddressHtml %}
+    {% call govukFieldset({
+      classes: 'address-group',
+      legend: {
+        html: "caller_address" | translate,
+        classes: "govuk-fieldset__legend--s",
+        isPageHeading: false
+      }
+    }) %}
+      <div class="govuk-form-group">
+        {% set prefix = "spouse" %}
+        {% include "includes/address-lookup.html" %}
+      </div>
+    {% endcall %}
+  {% endset %}
+
+  {{ govukRadios({
+    idPrefix: "spouse-address-conditional",
+    name: "spouse-address",
+    fieldset: {
+      classes: "hide-address-fix",
+      legend: {
+        text: "caller_same_address" | translate,
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: true,
+        text: "Yes",
+        checked: true if data['spouse-address'] == 'true' else false
+      },
+      {
+        value: false,
+        text: "No",
+        conditional: {
+          html: callerAddressHtml
+        }, checked: true if data['spouse-address'] == 'false' else false
+      }
+    ]
+  }) }} #}
+{% endcall %}

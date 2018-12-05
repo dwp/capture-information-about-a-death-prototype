@@ -1,0 +1,198 @@
+{% set isNotExecutorHtml %}
+  {% include "versions/base/includes/executor.html" %}
+{% endset %}
+
+<h2 class="govuk-heading-m" id="caller-heading">{{"caller_heading" | translate}}</h2>
+{{ govukInput({
+  label: {
+    text: "full_name" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "caller-full-name-group"
+    }
+  },
+  id: "caller-full-name",
+  name: "caller-full-name",
+  classes: "govuk-!-width-two-thirds",
+  value: data["caller-full-name"]
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "phone_number" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "caller-phone-number-group"
+    }
+  },
+  id: "caller-phone-number",
+  name: "caller-phone-number",
+  classes: "govuk-!-width-two-thirds",
+  value: data["caller-phone-number"]
+}) }}
+
+{{ govukDateInput({
+  id: "caller-dob",
+  name: "caller-dob",
+  value: data["caller-dob"],
+  fieldset: {
+    legend: {
+      text: "dob_title" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "dob_hint" | translate
+  },
+  items: [
+    {
+      name: "day",
+      value: data['caller-dob-day']
+    },
+    {
+      name: "month",
+      value: data['caller-dob-month']
+    },
+    {
+      name: "year",
+      value: data['caller-dob-year']
+    }
+  ]
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "national_insurance" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "caller-national-insurance-group"
+    }
+  },
+  id: "caller-national-insurance",
+  name: "caller-national-insurance",
+  classes: "govuk-!-width-two-thirds",
+  value: data["caller-national-insurance"]
+}) }}
+
+{{ govukRadios({
+  idPrefix: "caller-sex",
+  name: "caller-sex",
+  fieldset: {
+    legend: {
+      text: "caller_sex" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "caller_sex_hint" | translate
+  },
+  items: [
+    {
+      value: "female",
+      text: "Female",
+      checked: true if data['caller-sex'] == 'female' else false
+    },
+    {
+      value: "male",
+      text: "Male",
+      checked: true if data['caller-sex'] == 'male' else false
+    }
+  ]
+}) }}
+
+{% set isNotSpouseHtml %}
+  {% call govukFieldset({
+    legend: {
+      text: "spouse_question" | translate,
+      classes: "govuk-fieldset__legend--s",
+      isPageHeading: false
+    },
+    classes: "spouse-group"
+  }) %}
+    {{ govukInput({
+      label: {
+        text: "full_name" | translate,
+        classes: "govuk-!-font-weight-bold",
+        attributes: {
+          id: "spouse-full-name-group"
+        }
+      },
+      id: "spouse-full-name",
+      name: "spouse-full-name",
+      classes: "govuk-!-width-two-thirds",
+    value: data["spouse-full-name"]
+    }) }}
+
+    <div class="govuk-form-group">
+      {% set prefix = "spouse" %}
+      {% include "includes/address-lookup.html" %}
+    </div>
+  {% endcall %}
+{% endset -%}
+
+<span id="spouse-section"></span>
+{{ govukRadios({
+  idPrefix: "is-caller-spouse-conditional",
+  name: "is-caller-spouse",
+  fieldset: {
+    legend: {
+      text: "Was the caller the wife, husband or civil partner of the person who died?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: true if data['is-caller-spouse'] == 'true' else false
+    },
+    {
+      value: "false",
+      text: "No",
+      conditional: {
+        html: isNotSpouseHtml
+      },
+      checked: true if data['is-caller-spouse'] == 'false' else false
+    }
+  ]
+}) }}
+
+<div class="govuk-form-group">
+  {% set prefix = "caller" %}
+  {% include "includes/address-lookup.html" %}
+</div>
+
+{{ govukRadios({
+  idPrefix: "is-caller-executor-conditional",
+  name: "is-caller-executor",
+  fieldset: {
+    legend: {
+      text: "executor" | translate,
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  hint: {
+    text: "executor_hint" | translate
+  },
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: true if data['is-caller-executor'] == 'true' else false
+    },
+    {
+      value: "false",
+      text: "No",
+      conditional: {
+        html: isNotExecutorHtml
+      },
+      checked: true if data['is-caller-executor'] == 'false' else false
+    }
+  ]
+}) }}
+
+<a href="#deceased-tab" class="govuk-button">{{"save_continue" | translate}}</a>
