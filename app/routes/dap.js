@@ -28,20 +28,20 @@ const generateRoutes = (router) => {
     if (data['is-there-maintainer'] === 'true') {
       res.redirect(prefix + 'maintainer-details');
     } else {
-      res.redirect(prefix + 'beneficiary');
-    }
-  })
-
-  router.get('*/dap-beneficiary', (req, res) => {
-    const prefix = req.params[0] + '/';
-    const data = req.session.data;
-
-    if (data['is-there-beneficiary'] === 'true') {
-      res.redirect(prefix + 'beneficiary-details');
-    } else {
       res.redirect(prefix + 'next-of-kin');
     }
   })
+
+  // router.get('*/dap-beneficiary', (req, res) => {
+  //   const prefix = req.params[0] + '/';
+  //   const data = req.session.data;
+
+  //   if (data['is-there-beneficiary'] === 'true') {
+  //     res.redirect(prefix + 'beneficiary-details');
+  //   } else {
+  //     res.redirect(prefix + 'next-of-kin');
+  //   }
+  // })
 
   router.get('*/dap-nok', (req, res) => {
     const prefix = req.params[0] + '/';

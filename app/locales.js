@@ -175,6 +175,7 @@ const locales = {
     who_is_paying_for_funeral: 'Is there someone paying for the funeral costs?',
     dap_funeral_responsible_question_hint: 'This could be a family member, local council or care home',
     who_is_executor: 'Who is the executor or the administrator of the estate?',
+    who_is_nok: 'Who is the Next of Kin?',
     widowed_parent_allowance: `Widowed Parent's Allowance`,
     back_to_start: 'Back to start'
   }

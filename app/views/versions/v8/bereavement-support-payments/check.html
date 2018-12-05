@@ -1,0 +1,72 @@
+{% extends "layout-full-width.html" %} {% set agent = true %}
+{% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% block beforeContent %}
+
+{% endblock %}
+{%block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{"check_title" | translate}}</h1>
+    <p>{{ "check_description" | translate}} {{data["caller-full-name"]}}</p>
+    <dl class="app-check-your-answers app-check-your-answers--long">
+      {% if (data['caller-national-insurance']) %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "national_insurance" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['caller-national-insurance']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="eligibility#caller-national-insurance-group">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "national_insurance" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if (data['caller-sex']) %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "caller_sex" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['caller-sex']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="eligibility#caller-sex-group">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "caller_sex" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+      {% if (data['bsp-dependants']) %}
+        {% if data['bsp-dependants'] === 'true' %}
+          {% set childBenefit = 'Yes' %}
+        {% endif %}
+        {% if data['bsp-dependants'] === 'false' %}
+          {% set childBenefit = 'No' %}
+        {% endif %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "Child Benefit" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{childBenefit}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="eligibility#caller-sex-group">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "caller_sex" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+    </dl>
+    <a href="../funeral-expense-payments/landing" class="govuk-button" role="button">{{"continue" | translate}}</a>
+  </div>
+</div>
+
+{% endblock %}

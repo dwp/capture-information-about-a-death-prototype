@@ -2,10 +2,6 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-  <p>If any benefit money is owed, we need to know who we should pay
-    {{ govukButton({
-      text: "continue" | translate,
-      id: "continue-eligibility"
-    }) }}
-  </form>
+  <p>If any benefit money is owed, we need to know who we should pay if any arrears are due.</p>
+  <a href="executor" class="govuk-button" role="button">{{"continue" | translate}}</a>
 {% endblock %}

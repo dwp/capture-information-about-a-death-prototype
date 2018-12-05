@@ -17,9 +17,11 @@ const isCallerSpouse = (data) => {
  */
 const isWorkingAge = data => {
   const date = new Date(`${data['caller-dob-year']}-${data['caller-dob-month']}-${data['caller-dob-day']}`);
+  const age = differenceInYears(new Date(), new Date(data['spouse-dob-year'], month, data['spouse-dob-day']))
+  const pensionAge = !!(data['pension-age'] === 'true');
   if (!isNaN(date.getTime())) {
     const statePensionAge = sra(date, data['caller-sex']);
-    return isAfter(statePensionAge.date, new Date());
+    return isAfter(statePensionAge.date, new Date()) || age <= 65;
   }
   return false;
 };

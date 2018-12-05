@@ -5,16 +5,11 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">Bereavement Support Payment</h1>
-      <div>
         {{ govukTag({
           attributes: { id: "eligibility-completed" },
-          classes: "app-task-list__task-completed tag-orange stuff",
+          classes: "app-task-list__task-completed tag-orange stuff eligible-tag",
           text: "Potentially eligible"
         }) }}
-      </div>
-      {# <h2 class="govuk-heading-m">Potential eligibility</h2> #}
-
-
       <p>The caller is potentially eligible because they are:
         <ul class="govuk-list--bullet govuk-list">
           <li>Working age</li>
@@ -33,7 +28,7 @@
       <p>Bereavement Support Payment will not affect any benefits for a year after the first payment.</p>
       <p>Next page capture Dob/Nino/Sex/child benefit then after that if eligible take bank details</p>
       <p>Then go to check pagefor bsp only then go to FEP</p>
-      <a href="dependants" role="button" class="govuk-button govuk-button--start">
+      <a href="questions" role="button" class="govuk-button govuk-button--start">
         Continue
       </a>
     </div>

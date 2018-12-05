@@ -6,6 +6,8 @@ const fepRoutes = require('./routes/fep.js');
 const utils = require('./routes/utils.js');
 const fs = require('fs');
 const { duplicateNinos, skipStartPageValidation } = require('./config.js');
+const differenceInYears = require('date-fns/difference_in_years')
+
 
 // Route index page
 router.get('/', function (req, res) {
@@ -184,18 +186,24 @@ router.get('*/payee-bank-test', (req, res, next) => {
 })
 
 router.get('*/benefits-handler*', (req, res, next) => {
+  const data = req.session.data;
+  const isSpouse = utils.isCallerSpouse(data['caller-relationship']);
   const version = getVersion(req.params[0], 1);
   const selectedBenefits = req.session.data['deceased-qualifying-benefits'] || [];
   const qualifyingBenefits = (benefits) => res.app.locals.qualifyingBenefits.find(benefit => benefits === benefit.value)
   const matches = selectedBenefits.map(item => qualifyingBenefits(item));
   const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
   let route = '/select-eligibility-cards' + req.params[1];
-  if (version === 'v8') {
-    route = '/death-arrears-payee/executor';
-  }
   if (isHospitalCheckRequired) {
     route = '/hospital-lookup';
+  } else if (version === 'v8' && isSpouse) {
+    route = '/capture-spouse';
+  } else if (version === 'v8' && selectedBenefits.length) {
+    route = '/death-arrears-payee/executor';
+  } else {
+    route = '/death-arrears';
   }
+
   res.redirect(req.params[0] + route);
 });
 
@@ -207,6 +215,27 @@ router.get('*/spouse-handler', (req, res, next) => {
     route = '/capture-spouse';
   }
   res.redirect(req.params[0] + route);
+});
+
+router.get('*/spouse-data', (req, res, next) => {
+  const data = req.session.data;
+  const month = parseInt(data['spouse-dob-month']) - 1;
+  const age = differenceInYears(new Date(), new Date(data['spouse-dob-year'], month, data['spouse-dob-day']))
+  let route = '/death-arrears-payee/start';
+  if (age >= 63) {
+    route = '/pension-age'
+  }
+  res.redirect(req.params[0] + route);
+});
+
+router.get('*/death-arrears-payee/start', (req, res, next) => {
+  const data = req.session.data;
+  const selectedBenefits = data['deceased-qualifying-benefits'] || [];
+  if (!selectedBenefits.length) {
+    res.redirect(req.params[0] + '/bereavement-support-payments/landing');
+  } else {
+    next();
+  }
 });
 
 router.get('*/select-eligibility', (req, res, next) => {

@@ -8,15 +8,13 @@
       <div>
         {{ govukTag({
           attributes: { id: "eligibility-completed" },
-          classes: "app-task-list__task-completed tag-red stuff",
+          classes: "app-task-list__task-completed tag-red stuff eligible-tag",
           text: "Not eligible"
         }) }}
       </div>
-      {# <h2 class="govuk-heading-m">Potential eligibility</h2> #}
-
 
       <p>The caller is not eligible because they are not responsible for paying for the funeral</p>
-      <a href="dependants" role="button" class="govuk-button govuk-button--start">
+      <a href="../declaration" role="button" class="govuk-button">
         Continue
       </a>
     </div>
