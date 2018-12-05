@@ -1,6 +1,8 @@
 const sra = require('sra');
 const isAfter = require('date-fns/is_after')
 const { checkRelationship } = require('./eligibility-utils.js');
+const differenceInYears = require('date-fns/difference_in_years');
+
 /**
  * Takes data from the death notification and returns their spousal status
  * @param {object} data

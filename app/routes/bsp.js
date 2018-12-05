@@ -26,9 +26,10 @@ const generateRoutes = (router) => {
     console.log(res.app.locals.isCallerDap)
     const isProvidingBankDetails = req.session.data['bsp-use-bank'] === 'true';
     let route = '/confirm';
-
+    const isCallerNok = req.session.data['death-arrears-nok'] === 'caller';
+    console.log(isCallerNok, 'is caller nok')
     if (isProvidingBankDetails) {
-      if (isCallerDap) {
+      if (isCallerDap || isCallerNok) {
         route = '/bank-use-dap';
       } else {
         route = '/add-bank';
@@ -41,7 +42,7 @@ const generateRoutes = (router) => {
     const useDapDetails = req.session.data['bsp-use-dap'] === 'true';
     let route = '/add-bank';
     if (useDapDetails) {
-      route = '/confirm';
+      route = '/check';
     }
     res.redirect(req.params[0] + route);
   });
