@@ -52,6 +52,11 @@ const locales = {
     complete_fep_claim_body: `The caller's Funeral Expenses Payment application has been completed.`,
     correct_answers: 'By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.',
     county: 'County',
+    dap_executor_question: 'Is there an executor or administrator of the estate?', //content
+    dap_executor_question_hint: `They will be responsible for dealing with the person's property, finances and belongings (the estate)`, //content
+    dap_funeral_responsible_question: 'Is there somebody responsible for paying for the funeral?', // content
+    dap_maintainer_question: 'Was the person who died being looked after in a care home, a hospice or a hospital?', // content
+    dap_nok_question: 'Is there a Next of Kin?',
     dap_tab: 'DAP',
     death_arrears_details_heading: `Death Arrears Payee's details`,
     death_arrears_heading: 'Death Arrears Payee',
@@ -63,7 +68,7 @@ const locales = {
     deceased_details_heading: 'About the person who died',
     deceased_heading: 'About the person who died',
     deceased_tab: 'Person who died',
-    deceased_qualifying_benefits: 'Did the person who died get at least one of the following benefits?',
+    deceased_qualifying_benefits: 'Check if the person who died got any of these benefits',
     deceased_qualifying_benefits_hint: 'Include any benefits they were waiting to hear about',
     dependants: 'Does the caller get Child Benefit?',
     dependants_hint: 'In order to get the higher rate, the caller must be entitled to Child Benefit, even if they get no payments',
@@ -127,13 +132,14 @@ const locales = {
     new_death_notification_claim_body: 'You can start a new Death Notification claim here',
     new_fep_claim_body: 'You can start a new FEP claim here',
     nino_failed_death_notification_body: 'You cannot send a death notification as there has already been a claim for this person in our system',
+    no_dap: 'Based on the information provided we did not find a valid Death Arrears Payee.', //content
     no_results_found: 'Sorry, no results were found.',
     none: 'None of the above',
     optional: 'Optional',
     passed_to_bsp_message: "This information will be given to the Bereavement Support Payment team.",
     passport: 'Passport',
     page_heading: 'Does the caller want to check if they can get financial support after the death?',
-    passed_security: 'Did the caller pass security?',
+    passed_security: 'Did the caller provide all of these details?',
     passed_security_hint: ' ',
     pension_credit: 'Pension Credit',
     pip: 'Personal Independence Payment',
@@ -166,6 +172,9 @@ const locales = {
     submit_notification: 'Send death notification',
     town_city: 'Town or city',
     universal_credit: 'Universal Credit',
+    who_is_paying_for_funeral: 'Is there someone paying for the funeral costs?',
+    dap_funeral_responsible_question_hint: 'This could be a family member, local council or care home',
+    who_is_executor: 'Who is the executor or the administrator of the estate?',
     widowed_parent_allowance: `Widowed Parent's Allowance`,
     back_to_start: 'Back to start'
   }

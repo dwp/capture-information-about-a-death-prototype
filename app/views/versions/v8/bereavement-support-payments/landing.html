@@ -1,0 +1,41 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Bereavement Support Payment</h1>
+      <div>
+        {{ govukTag({
+          attributes: { id: "eligibility-completed" },
+          classes: "app-task-list__task-completed tag-orange stuff",
+          text: "Potentially eligible"
+        }) }}
+      </div>
+      {# <h2 class="govuk-heading-m">Potential eligibility</h2> #}
+
+
+      <p>The caller is potentially eligible because they are:
+        <ul class="govuk-list--bullet govuk-list">
+          <li>Working age</li>
+          <li>Married or in a civil partnership</li>
+        </ul>
+      </p>
+
+      <h2 class="govuk-heading-m">What they could get</h2>
+      <ul class="govuk-list--bullet govuk-list">
+        <li>£2500 lump sum</li>
+        <li>Up to 18 monthly payments of £100</li>
+        <li>More if they get child benefit</li>
+        <li>Tax free paid straight into your bank account</li>
+      </ul>
+
+      <p>Bereavement Support Payment will not affect any benefits for a year after the first payment.</p>
+      <p>Next page capture Dob/Nino/Sex/child benefit then after that if eligible take bank details</p>
+      <p>Then go to check pagefor bsp only then go to FEP</p>
+      <a href="dependants" role="button" class="govuk-button govuk-button--start">
+        Continue
+      </a>
+    </div>
+  </div>
+{% endblock %}

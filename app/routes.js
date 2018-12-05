@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const bspRoutes = require('./routes/bsp.js');
+const dapRoutes = require('./routes/dap.js');
 const fepRoutes = require('./routes/fep.js');
 const utils = require('./routes/utils.js');
 const fs = require('fs');
@@ -12,6 +13,7 @@ router.get('/', function (req, res) {
 });
 
 bspRoutes(router);
+dapRoutes(router);
 fepRoutes(router);
 
 const validateProps = (props, data) => props.filter(prop => !data[prop]);
@@ -47,9 +49,10 @@ const isDapAvailable = (req, res, next) => {
   return false;
 };
 
-router.get('*/check', (req, res, next) => {
-  return isDapAvailable(req, res, next);
-});
+// Note: This may break things, keep an eye on it
+// router.get('*/check', (req, res, next) => {
+//   return isDapAvailable(req, res, next);
+// });
 
 // If a start page in the version exists,
 router.get('*/eligibility', (req, res, next) => {
@@ -181,14 +184,27 @@ router.get('*/payee-bank-test', (req, res, next) => {
 })
 
 router.get('*/benefits-handler*', (req, res, next) => {
-  console.log('test', req.params[1])
+  const version = getVersion(req.params[0], 1);
   const selectedBenefits = req.session.data['deceased-qualifying-benefits'] || [];
   const qualifyingBenefits = (benefits) => res.app.locals.qualifyingBenefits.find(benefit => benefits === benefit.value)
   const matches = selectedBenefits.map(item => qualifyingBenefits(item));
   const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
   let route = '/select-eligibility-cards' + req.params[1];
+  if (version === 'v8') {
+    route = '/death-arrears-payee/executor';
+  }
   if (isHospitalCheckRequired) {
     route = '/hospital-lookup';
+  }
+  res.redirect(req.params[0] + route);
+});
+
+router.get('*/spouse-handler', (req, res, next) => {
+  const data = req.session.data;
+  const isSpouse = utils.isCallerSpouse(data['caller-relationship']);
+  let route = '/benefits-handler';
+  if (isSpouse) {
+    route = '/capture-spouse';
   }
   res.redirect(req.params[0] + route);
 });

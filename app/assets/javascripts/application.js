@@ -29,6 +29,25 @@ $(document).ready(function () {
   };
 
   /**
+   * If a relationship to deceased element exists, make it into an autocomplete element
+   */
+  var setupRelationshipAutoComplete = function setupRelationshipAutoComplete() {
+    var relationshipEl = document.getElementById('caller-relationship');
+    if (relationshipEl) {
+      var isSelectEl = relationshipEl.tagName.toLowerCase() === 'select';
+
+      if (isSelectEl) {
+        accessibleAutocomplete.enhanceSelectElement({
+          selectElement: relationshipEl,
+          name: "caller-relationship TEST",
+          showAllValues: true,
+          defaultValue: ''
+        });
+      }
+    }
+  };
+
+  /**
    * Works out whether to show the deceased's marital status field
    * as well as auto populating it if possible
    */
@@ -197,6 +216,7 @@ $(document).ready(function () {
     tab.classList.add('govuk-tabs__panel--hidden');
   };
   getRelationshipStatus();
+  setupRelationshipAutoComplete();
   setupHospitalAutoComplete();
   conditionalBankSetup();
   addressLookup();
