@@ -194,7 +194,7 @@ router.get('*/benefits-handler*', (req, res, next) => {
   const matches = selectedBenefits.map(item => qualifyingBenefits(item));
   const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
   let route = '/select-eligibility-cards' + req.params[1];
-  if (isHospitalCheckRequired) {
+  if (isHospitalCheckRequired && !data['hospital-location-autocomplete']) {
     route = '/hospital-lookup';
   } else if (version === 'v8' && isSpouse) {
     route = '/capture-spouse';

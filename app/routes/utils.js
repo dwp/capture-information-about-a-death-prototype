@@ -87,7 +87,7 @@ const generateCard = (req, res, type = 'fep') => {
   }
 };
 
-const spouseRelationships = ['wife', 'husband', 'civilpartner'];
+const spouseRelationships = ['wife', 'husband', 'civilpartner', 'spouse'];
 
 const isCallerSpouse = (relationship) => checkRelationship(relationship, spouseRelationships);
 
