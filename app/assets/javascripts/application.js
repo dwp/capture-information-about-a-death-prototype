@@ -164,7 +164,7 @@ $(document).ready(function () {
 
           resultEl.removeEventListener('change', handleAddressSelect);
 
-          resultEl.querySelectorAll('option').forEach(function (item) {
+          [].concat(_toConsumableArray(resultEl.querySelectorAll('option'))).forEach(function (item) {
             return item.remove();
           });
 
