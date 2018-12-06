@@ -54,9 +54,9 @@ const locales = {
     county: 'County',
     dap_executor_question: 'Is there an executor or administrator of the estate?', //content
     dap_executor_question_hint: `They will be responsible for dealing with the person's property, finances and belongings (the estate)`, //content
-    dap_funeral_responsible_question: 'Is there somebody responsible for paying for the funeral?', // content
+    dap_funeral_responsible_question: `Is there someone who's paying the funeral costs?`, // content
     dap_maintainer_question: 'Was the person who died being looked after in a care home, a hospice or a hospital?', // content
-    dap_nok_question: 'Is there a Next of Kin?',
+    dap_nok_question: 'Is there a next of kin?',
     dap_tab: 'DAP',
     death_arrears_details_heading: `Death Arrears Payee's details`,
     death_arrears_heading: 'Death Arrears Payee',
@@ -172,10 +172,10 @@ const locales = {
     submit_notification: 'Send death notification',
     town_city: 'Town or city',
     universal_credit: 'Universal Credit',
-    who_is_paying_for_funeral: 'Is there someone paying for the funeral costs?',
+    who_is_paying_for_funeral: 'Who is paying the funeral costs?',
     dap_funeral_responsible_question_hint: 'This could be a family member, local council or care home',
     who_is_executor: 'Who is the executor or the administrator of the estate?',
-    who_is_nok: 'Who is the Next of Kin?',
+    who_is_nok: 'Who is the next of kin?',
     widowed_parent_allowance: `Widowed Parent's Allowance`,
     back_to_start: 'Back to start'
   }
