@@ -199,7 +199,7 @@ router.get('*/benefits-handler*', (req, res, next) => {
   } else if (version === 'v8' && isSpouse) {
     route = '/capture-spouse';
   } else if (version === 'v8' && selectedBenefits.length) {
-    route = '/death-arrears-payee/executor';
+    route = '/death-arrears-payee/start';
   } else {
     route = '/death-arrears';
   }

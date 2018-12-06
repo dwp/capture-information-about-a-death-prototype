@@ -55,7 +55,7 @@ const locales = {
     dap_executor_question: 'Is there an executor or administrator of the estate?', //content
     dap_executor_question_hint: `They will be responsible for dealing with the person's property, finances and belongings (the estate)`, //content
     dap_funeral_responsible_question: `Is there someone who's paying the funeral costs?`, // content
-    dap_maintainer_question: 'Was the person who died being looked after in a care home, a hospice or a hospital?', // content
+    dap_maintainer_question: 'Was the person who died being looked after in a care home or a hospice?', // content
     dap_nok_question: 'Is there a next of kin?',
     dap_tab: 'DAP',
     death_arrears_details_heading: `Death Arrears Payee's details`,
