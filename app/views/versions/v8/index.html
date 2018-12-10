@@ -19,18 +19,35 @@
     </dl>
   </div>
 </div>
-<h3 class="govuk-heading-s">Overview</h3>
+<h3 class="govuk-heading-m">Overview</h3>
 
 <h3 class="govuk-heading-s">Changes</h3>
 <ul class="govuk-list govuk-list--bullet">
   <li>Changed Death Arrears Payee flow to include a heirachy of payees</li>
   <li>Changed BSP start page to include a brief summary and go there straight from the notification</li>
   <li>Add spouse and deceased details page, rather than tabs</li>
+  <li>Add relationship autocomplete</li>
+  <li>Move BSP application fields to the BSP process</li>
+  <li>Ask if caller is pensionable age if between 63-65</li>
 </ul>
 
+<h3 class="govuk-heading-s">Hypotheses</h3>
+<ul class="govuk-list govuk-list--bullet">
+  <li>To remove the need to capture potentially 3 additional person's details, we use the heirachy to determine who the DAP is</li>
+  <li>After trouble with the cards and task list approach we are attempting to take the user straight to the page for clarity</li>
+  <li>The tabs pages we had ended up with one or two fields per tab and were being conditionally shown, the need of tabs appears to be gone</li>
+  <li>In order to get accurate values and help with the possible choices we provided an autocomplete field</li>
+  <li>Previously we took data (NINo, sex, address) for the purpose of the BSP application before determining eligibility, now we only ask the questions to determine eligibility</li>
+  <li>Rather than ask a potentially sensitive question (biological sex), we ask if they're pensionable age if they're within pension boundaries (63-65)</li>
+</ul>
 <h3 class="govuk-heading-s">Research Notes</h3>
 <ul class="govuk-list govuk-list--bullet">
-
+ <li></li>
+ <li></li>
+ <li></li>
+ <li></li>
+ <li></li>
+ <li></li>
 </ul>
 
 <a href="/versions/v8/start-cards" class="govuk-button">Launch prototype</a>
