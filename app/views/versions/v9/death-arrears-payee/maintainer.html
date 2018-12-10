@@ -1,0 +1,34 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <form method="post" action="dap-maintainer">
+    {{ govukRadios({
+      id: "is-there-maintainer",
+      name: "is-there-maintainer",
+      fieldset: {
+        legend: {
+          text: "dap_maintainer_question" | translate,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes" | translate
+        },
+        {
+          value: "false",
+          text: "No" | translate
+        }
+      ]
+      })
+    }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

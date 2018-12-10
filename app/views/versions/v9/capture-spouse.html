@@ -1,0 +1,21 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  {% set deceasedDetailsHtml %}
+    {% include "versions/v8/includes/spouse.html" %}
+  {% endset %}
+
+  <div class="govuk-grid-row capture-data">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="spouse-data">
+        {{deceasedDetailsHtml | safe}}
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-eligibility"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

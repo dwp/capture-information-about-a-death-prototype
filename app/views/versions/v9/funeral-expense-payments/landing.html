@@ -1,0 +1,22 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Funeral Expenses Payment</h1>
+      <div>
+        {{ govukTag({
+          attributes: { id: "eligibility-completed" },
+          classes: "app-task-list__task-completed tag-red stuff eligible-tag",
+          text: "Not eligible"
+        }) }}
+      </div>
+
+      <p>The caller is not eligible because they are not responsible for paying for the funeral</p>
+      <a href="../check" role="button" class="govuk-button">
+        Continue
+      </a>
+    </div>
+  </div>
+{% endblock %}

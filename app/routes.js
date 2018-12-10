@@ -196,13 +196,13 @@ router.get('*/benefits-handler*', (req, res, next) => {
   let route = '/select-eligibility-cards' + req.params[1];
   if (isHospitalCheckRequired && data['hospital-death'] === undefined) {
     route = '/hospital-lookup';
-  } else if (version === 'v8' && isSpouse) {
+  } else if (version === 'v8' || version === 'v9' && isSpouse) {
     route = '/capture-spouse';
-  } else if (version === 'v8' && selectedBenefits.length) {
+  } else if (version === 'v8' || version === 'v9' && selectedBenefits.length) {
     route = '/death-arrears-payee/start';
   } else if (selectedBenefits.length) {
     route = '/death-arrears';
-  } else if (version === 'v8'){
+  } else if (version === 'v8' || version === 'v9'){
     route = '/bereavement-support-payments/landing'
   } else {
     route = '/select-eligibility-cards';

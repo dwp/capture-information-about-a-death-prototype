@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% from "tag/macro.njk" import govukTag %}
+
+{% block pageTitle %}
+  Task list
+{% endblock %}
+
+{% block content %}
+  <div class="grid-grid-row">
+    <div class="govuk-grid-column-two-thirds app-column-minimum">
+
+      <h1 class="govuk-heading-l">
+        Check your progress
+      </h1>
+
+      <ol class="app-task-list">
+        <li>
+          <h2 class="app-task-list__section">
+            Options
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <strong class="app-task-list__task-name" aria-describedby="eligibility-completed">
+                Death notification
+              </strong>
+              {{ govukTag({
+                attributes: { id: "eligibility-completed" },
+                classes: "app-task-list__task-completed tag-orange tag--text-only",
+                text: "Ready to send"
+              }) }}
+              <a class="app-task-list__task-name" href="check" aria-describedby="read-declaration-completed">
+                Check and change your answers
+              </a>
+            </li>
+            <li class="app-task-list__item">
+              <strong class="app-task-list__task-name" aria-describedby="eligibility-completed">
+                Bereavement Support Payment
+              </strong>
+
+              {{ govukTag({
+                attributes: { id: "read-declaration-completed" },
+                classes: "app-task-list__task-completed tag--text-only",
+                text: "Eligible"
+              }) }}
+              <p>Based on the information provided, the spouse is eligible to apply for Bereavement Support Payments</p>
+              <a class="app-task-list__task-name" href="bereavement-support-payments/landing" aria-describedby="read-declaration-completed">
+                Check Bereavement Support Payment Eligibility
+              </a>
+            </li>
+            <li class="app-task-list__item">
+              <strong class="app-task-list__task-name" aria-describedby="eligibility-completed">
+                Funeral Expenses Payment
+              </strong>
+              {{ govukTag({
+                attributes: { id: "read-declaration-completed" },
+                classes: "app-task-list__task-completed tag--text-only",
+                text: "Eligible"
+              }) }}
+              <p>Based on the information provided, the spouse is eligible to apply for a Funeral Expenses Payment</p>
+              <a class="app-task-list__task-name" href="funeral-expense-payments/landing" aria-describedby="read-declaration-completed">
+                Check Funeral Expense Payment Eligibility
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ol>
+      {{ govukWarningText({
+        text: "consent_message" | translate,
+        iconFallbackText: "Warning"
+      }) }}
+      <a href="check" class="govuk-button" role="button">{{"Send and complete" | translate}}</a>
+    </div>
+    <div class="govuk-clearfix"></div>
+  </div>
+{% endblock %}

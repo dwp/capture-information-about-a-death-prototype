@@ -1,0 +1,70 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "../../macros/card.njk" import card %}
+{% block content %}
+{# 4 states, new, not eligible, complete, failed - work out on server #}
+  <div class="govuk-grid-row card-button">
+    <div class="govuk-grid-column-one-third test-height">
+      {{ card({
+          heading: 'Death information collected',
+          tag: {
+            attributes: { id: "eligibility-completed" },
+            classes: "tag-orange",
+            text: "Ready to send"
+          },
+          body: "We have collected the information we need about the death. This will be sent to the relevant DWP benefit areas" | translate,
+          classes: 'govuk-card--warning',
+          link: {
+            text: 'submit_notification',
+            url: 'check'
+          },
+          failed: notification.failed
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third test-height">
+      {{ card({
+          heading: 'Bereavement Support Payment',
+          tag: {
+            attributes: { id: "eligibility-completed" },
+            classes: "tag-orange",
+            text: "Ready to send"
+          },
+          body: 'The spouse is eligible for Bereavement Support Payments and their details will be given to the Bereavement Support Payment team for processing who will contact them to complete the application',
+          classes: 'govuk-card--warning',
+          link: {
+            text: 'Start',
+            url: 'bereavement-support-payments/landing'
+          },
+          eligible: true,
+          complete: true,
+          failed: false
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third test-height">
+      {{ card({
+          heading: 'Funeral Expenses Payment',
+          tag: {
+            attributes: { id: "eligibile" },
+            classes: "",
+            text: "Eligible"
+          },
+          body: 'The spouse may eligible to apply for a Funeral Expenses Payment based on the information we have collected',
+          classes: '',
+          link: {
+            text: 'Start',
+            url: 'funeral-expense-payments/landing'
+          },
+          eligible: true,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third" >
+      <a href="check" class="govuk-button govuk-button--start">Send all</a>
+    </div>
+  </div>
+{% endblock %}

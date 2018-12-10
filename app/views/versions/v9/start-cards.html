@@ -1,0 +1,51 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "../../macros/card.njk" import card %}
+{% block content %}
+{# 4 states, new, not eligible, complete, failed - work out on server #}
+  <div class="govuk-grid-row card-button">
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'Collect death information',
+          body: "Collect information about the caller and the person who died",
+          link: {
+            text: 'Start',
+            url: 'start'
+          },
+          eligible: true,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'Bereavement Support Payment',
+          body: "The caller can check if they're eligible to apply after information has been completed about a death",
+          classes: '',
+          link: {
+            text: 'start_bsp',
+            url: 'bereavement-support-payments/landing'
+          },
+          eligible: false,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ card({
+          heading: 'Funeral Expenses Payment',
+          body: "The caller can check if they're eligible to apply after information has been completed about a death",
+          classes: '',
+          link: {
+            text: 'start_fep',
+            url: 'funeral-expense-payments/landing'
+          },
+          eligible: false,
+          complete: false,
+          failed: false
+        })
+      }}
+    </div>
+  </div>
+{% endblock %}
