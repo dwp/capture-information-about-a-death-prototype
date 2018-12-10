@@ -1,6 +1,8 @@
 const utils = require('./utils.js');
 const { handleFailure } = utils;
 
+const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
+
 const generateRoutes = (router) => {
   router.get('*/check-bsp-nino', (req, res) => {
     const prefix = req.params[0] + '/';
@@ -32,7 +34,13 @@ const generateRoutes = (router) => {
       if (isCallerDap || isCallerNok) {
         route = '/bank-use-dap';
       } else {
+        const version = getVersion(req.params[0], 1);
+
         route = '/add-bank';
+
+        if (version === 'v9') {
+          route = '/payee-bank-type';
+        }
       }
     }
     res.redirect(req.params[0] + route);
