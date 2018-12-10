@@ -17,11 +17,22 @@
 }) }}
 
 <div class="govuk-form-group">
-  {{ govukLabel({
-    text: 'dob_title' | translate,
-    classes: "govuk-!-font-weight-bold"
+  {{ govukInput({
+    label: {
+      text: "dob_title" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "deceased-date-of-birth-group"
+      }
+    },
+    id: "deceased-date-of-birth",
+    name: "deceased-date-of-birth",
+    classes: "govuk-!-width-two-thirds",
+    value: data['deceased-dob-day'] + "/" + data['deceased-dob-month'] + "/" + data['deceased-dob-year'],
+    attributes: {
+      disabled: true
+    }
   }) }}
-  <p>{{data['deceased-dob-day']}}/{{data['deceased-dob-month']}}/{{data['deceased-dob-year']}}</p>
 </div>
 
 {{ govukInput({
@@ -75,4 +86,3 @@
   ]
   })
 }}
-
