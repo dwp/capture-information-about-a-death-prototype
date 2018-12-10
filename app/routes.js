@@ -194,14 +194,18 @@ router.get('*/benefits-handler*', (req, res, next) => {
   const matches = selectedBenefits.map(item => qualifyingBenefits(item));
   const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
   let route = '/select-eligibility-cards' + req.params[1];
-  if (isHospitalCheckRequired && !data['hospital-location-autocomplete']) {
+  if (isHospitalCheckRequired && data['hospital-death'] === undefined) {
     route = '/hospital-lookup';
   } else if (version === 'v8' && isSpouse) {
     route = '/capture-spouse';
   } else if (version === 'v8' && selectedBenefits.length) {
     route = '/death-arrears-payee/start';
-  } else {
+  } else if (selectedBenefits.length) {
     route = '/death-arrears';
+  } else if (version === 'v8'){
+    route = '/bereavement-support-payments/landing'
+  } else {
+    route = '/select-eligibility-cards';
   }
 
   res.redirect(req.params[0] + route);
