@@ -17,11 +17,22 @@
 }) }}
 
 <div class="govuk-form-group">
-  {{ govukLabel({
-    text: 'dob_title' | translate,
-    classes: "govuk-!-font-weight-bold"
+  {{ govukInput({
+    label: {
+      text: "dob_title" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "deceased-date-of-birth-group"
+      }
+    },
+    id: "deceased-date-of-birth",
+    name: "deceased-date-of-birth",
+    classes: "govuk-!-width-two-thirds",
+    value: data['deceased-dob-day'] + "/" + data['deceased-dob-month'] + "/" + data['deceased-dob-year'],
+    attributes: {
+      disabled: true
+    }
   }) }}
-  <p>{{data['deceased-dob-day']}}/{{data['deceased-dob-month']}}/{{data['deceased-dob-year']}}</p>
 </div>
 
 {{ govukInput({
@@ -41,38 +52,39 @@
   }
 }) }}
 
-<div class="govuk-form-group deceased-address">
+<div class="govuk-form-group deceased-address" id="deceased-address-group">
   {% set prefix = "deceased" %}
   {% include "includes/address-lookup.html" %}
 </div>
 
-{{ govukDateInput({
-  id: "deceased-dod",
-  name: "deceased-dod",
-  fieldset: {
-    legend: {
-      text: "dod_title" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  hint: {
-    text: "dod_hint" | translate
-  },
-  items: [
-    {
-      name: "day",
-      value: data['deceased-dod-day']
+<div id="deceased-dod-group">
+  {{ govukDateInput({
+    id: "deceased-dod",
+    name: "deceased-dod",
+    fieldset: {
+      legend: {
+        text: "dod_title" | translate,
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
     },
-    {
-      name: "month",
-      value: data['deceased-dod-month']
+    hint: {
+      text: "dod_hint" | translate
     },
-    {
-      name: "year",
-      value: data['deceased-dod-year']
-    }
-  ]
-  })
-}}
-
+    items: [
+      {
+        name: "day",
+        value: data['deceased-dod-day']
+      },
+      {
+        name: "month",
+        value: data['deceased-dod-month']
+      },
+      {
+        name: "year",
+        value: data['deceased-dod-year']
+      }
+    ]
+    })
+  }}
+</div>

@@ -7,18 +7,21 @@
     text: "Do not read out to the caller"
   }) }} #}
 </div>
-{{ govukCheckboxes({
-  idPrefix: "qualifying-benefits",
-  name: "deceased-qualifying-benefits",
-  fieldset: {
-    legend: {
-      text: "deceased_qualifying_benefits" | translate,
-      isPageHeading: false,
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  hint: {
-    text: "Include any benefits they were waiting to hear about"
-  },
-  items: qualifyingBenefits
-}) }}
+
+<div id="deceased-benefits-group">
+  {{ govukCheckboxes({
+    idPrefix: "qualifying-benefits",
+    name: "deceased-qualifying-benefits",
+    fieldset: {
+      legend: {
+        text: "deceased_qualifying_benefits" | translate,
+        isPageHeading: false,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    hint: {
+      text: "Include any benefits they were waiting to hear about"
+    },
+    items: qualifyingBenefits
+  }) }}
+</div>

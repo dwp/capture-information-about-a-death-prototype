@@ -24,7 +24,15 @@
       {% include "versions/v9/includes/check/dap.html" %}
     {% endif %}
 
-    <a href="bereavement-support-payments/landing" class="govuk-button" role="button">{{"continue" | translate}}</a>
+    <h2 class="govuk-heading-m">{{ "complete_application_title" | translate }}</h2>
+    <p>
+
+    {{ govukWarningText({
+      text: "consent_message" | translate,
+      iconFallbackText: "Warning"
+    }) }}
+
+    <a href="complete" class="govuk-button" role="button">{{"confirm_send_application" | translate}}</a>
   </div>
 </div>
 

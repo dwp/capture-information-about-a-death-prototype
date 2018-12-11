@@ -41,32 +41,34 @@
       value: data["executor-national-insurance"]
     }) }} #}
 
-    {{ govukRadios({
-      idPrefix: "deceased-address-conditional",
-      name: "deceased-address",
-      fieldset: {
-        classes: "hide-address-fix",
-        legend: {
-          text: "caller_same_address" | translate,
-          isPageHeading: false,
-          classes: "govuk-fieldset__legend--s"
-        }
-      },
-      items: [
-        {
-          value: true,
-          text: "Yes",
-          checked: true if data['deceased-address'] == 'true' else false
+    <div id="dap-address-group">
+      {{ govukRadios({
+        idPrefix: "deceased-address-conditional",
+        name: "deceased-address",
+        fieldset: {
+          classes: "hide-address-fix",
+          legend: {
+            text: "caller_same_address" | translate,
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--s"
+          }
         },
-        {
-          value: false,
-          text: "No",
-          conditional: {
-            html: dapHtml
-          }, checked: true if data['deceased-address'] == 'false' else false
-        }
-      ]
-    }) }}
+        items: [
+          {
+            value: true,
+            text: "Yes",
+            checked: true if data['deceased-address'] == 'true' else false
+          },
+          {
+            value: false,
+            text: "No",
+            conditional: {
+              html: dapHtml
+            }, checked: true if data['deceased-address'] == 'false' else false
+          }
+        ]
+      }) }}
+    </div>
 
     {{ govukButton({
       text: "continue" | translate,

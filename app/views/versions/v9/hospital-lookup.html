@@ -1,7 +1,7 @@
 {% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
 
 {% block content %}
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row" id="deceased-hospital-group">
     <div class="govuk-grid-column-two-thirds">
       <form method="post" action="spouse-handler" class="hospital-lookup-container">
         {% set hospitalInfoHtml %}
