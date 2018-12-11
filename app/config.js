@@ -157,6 +157,10 @@ module.exports = {
     {
       value: "widowed_parent_allowance",
       text: translate("widowed_parent_allowance")
+    },
+    {
+      text: "None",
+      value: "none"
     }
   ]
 }
