@@ -1,0 +1,45 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="bank-account-type">
+        {% set question = "bank_building_question" | translate %}
+
+        {% if data['death-arrears-caller'] == 'someone-else' %}
+          {% set question = "bank_building_question_executor" | translate %}
+        {% endif %}
+
+        {{ govukRadios({
+          idPrefix: "bank-or-building-conditional",
+          name: "bsp-bank-or-building",
+          fieldset: {
+            legend: {
+              text: question,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "bank",
+              text: "Bank account",
+              checked: true if data['bank-or-building'] == 'bank' else false
+            },
+            {
+              value: "building-society",
+              text: "Building Society",
+              checked: true if data['bank-or-building'] == 'building-society' else false
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-to-payee"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
