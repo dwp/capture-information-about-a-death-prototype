@@ -19,14 +19,14 @@
           },
           items: [
             {
-              value: "caller",
-              text: "The caller",
-              checked: true if data['death-arrears-caller'] == 'true' else false
-            },
-            {
               value: "someone-else",
               text: "The executor",
               checked: true if data['death-arrears-caller'] == 'false' else false
+            },
+            {
+              value: "caller",
+              text: "The caller",
+              checked: true if data['death-arrears-caller'] == 'true' else false
             },
             {
               value: "unknown",

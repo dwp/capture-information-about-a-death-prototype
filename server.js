@@ -179,6 +179,9 @@ app.get('/prototype-admin/clear-data', function (req, res) {
   res.app.locals.dNComplete = false;
   res.app.locals.ninoFailed = undefined;
   res.app.locals.isCallerSpouse  = undefined;
+  res.app.locals.isEligibleForBsp = undefined;
+  res.app.locals.isCallerSpouse = undefined;
+  res.app.locals.isCallerWorkingAge = undefined;
   res.render('prototype-admin/clear-data')
 })
 
@@ -192,6 +195,9 @@ app.get('*/eligibility/clear', (req, res) => {
   res.app.locals.dNComplete = false;
   res.app.locals.ninoFailed = undefined;
   res.app.locals.isCallerSpouse  = undefined;
+  res.app.locals.isEligibleForBsp = undefined;
+  res.app.locals.isCallerSpouse = undefined;
+  res.app.locals.isCallerWorkingAge = undefined;
   res.redirect(req.params[0] + '/eligibility');
 })
 

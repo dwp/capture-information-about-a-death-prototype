@@ -10,7 +10,6 @@ const differenceInYears = require('date-fns/difference_in_years');
 const relationships = ['husband', 'wife', 'spouse', 'civilpartner'];
 const isCallerSpouse = (data) => {
   const relationship = data['caller-relationship'];
-  console.log('hellotesting bsp', checkRelationship(relationship, relationships))
   return (data['is-caller-spouse'] === 'true') || checkRelationship(relationship, relationships);
 };
 /**
@@ -18,12 +17,20 @@ const isCallerSpouse = (data) => {
  * @param {object} data
  */
 const isWorkingAge = data => {
-  const date = new Date(`${data['caller-dob-year']}-${data['caller-dob-month']}-${data['caller-dob-day']}`);
+  const month = parseInt(data['spouse-dob-month']) - 1;
+  const date = new Date(`${data['spouse-dob-year']}-${data['spouse-dob-month']}-${data['spouse-dob-day']}`);
   const age = differenceInYears(new Date(), new Date(data['spouse-dob-year'], month, data['spouse-dob-day']))
-  const pensionAge = !!(data['pension-age'] === 'true');
+  let pensionAge = false;
+  if (data['pension-age'] !== 'undefined') {
+    pensionAge = data['pension-age'] === 'true';
+  }
+
   if (!isNaN(date.getTime())) {
     const statePensionAge = sra(date, data['caller-sex']);
-    return isAfter(statePensionAge.date, new Date()) || age <= 65;
+    if (pensionAge) {
+      return false;
+    }
+    return (age <= 65 || isAfter(statePensionAge.date, new Date()));
   }
   return false;
 };
@@ -35,5 +42,7 @@ const isWorkingAge = data => {
 const isEligibleForBsp = (data => isCallerSpouse(data) && isWorkingAge(data));
 
 module.exports = {
-  isEligibleForBsp
+  isEligibleForBsp,
+  isCallerSpouse,
+  isWorkingAge
 }
