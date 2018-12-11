@@ -9,19 +9,19 @@
     <h1 class="govuk-heading-l">{{"check_title" | translate}}</h1>
     <p>{{ "check_description" | translate}} {{data["deceased-full-name"]}}</p>
 
-    {% include "versions/base/includes/check/caller.html" %}
-    {% include "versions/base/includes/check/deceased.html" %}
+    {% include "versions/v9/includes/check/caller.html" %}
+    {% include "versions/v9/includes/check/deceased.html" %}
 
     {% if data['spouse-full-name'] %}
-      {% include "versions/base/includes/check/spouse.html" %}
+      {% include "versions/v9/includes/check/spouse.html" %}
     {% endif %}
 
     {% if data['executor-full-name'] %}
-      {% include "versions/base/includes/check/executor.html" %}
+      {% include "versions/v9/includes/check/executor.html" %}
     {% endif %}
 
     {% if data['dap-bank-name'] %}
-      {% include "versions/base/includes/check/dap.html" %}
+      {% include "versions/v9/includes/check/dap.html" %}
     {% endif %}
 
     <a href="bereavement-support-payments/landing" class="govuk-button" role="button">{{"continue" | translate}}</a>

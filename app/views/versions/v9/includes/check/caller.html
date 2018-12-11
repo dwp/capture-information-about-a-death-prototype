@@ -34,13 +34,13 @@
     </div>
   {% endif %}
 
-  {% if (data['caller-dob-day']) and (data['caller-dob-month']) and (data['caller-dob-year']) %}
+  {% if (data['spouse-dob-day']) and (data['spouse-dob-month']) and (data['spouse-dob-year']) %}
     <div class="app-check-your-answers__contents">
       <dt class="app-check-your-answers__question">
         {{ "dob_title" | translate }}
       </dt>
       <dd class="app-check-your-answers__answer">
-        {{data['caller-dob-day']}}/{{data['caller-dob-month']}}/{{data['caller-dob-year']}}
+        {{data['spouse-dob-day']}}/{{data['spouse-dob-month']}}/{{data['spouse-dob-year']}}
       </dd>
       <dd class="app-check-your-answers__change">
         <a href="capture-spouse#spouse-dob-group">
