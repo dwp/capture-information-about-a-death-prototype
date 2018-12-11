@@ -34,9 +34,10 @@
 
     {# We only need this if PIP or DLA #}
     {%
-      if data['deceased-qualifying-benefits'].indexOf('pip') !== -1
+      if data['deceased-qualifying-benefits']
+      and (data['deceased-qualifying-benefits'].indexOf('pip') !== -1
       or data['deceased-qualifying-benefits'].indexOf('disability_living_allowance_child') !== -1
-      or data['deceased-qualifying-benefits'].indexOf('disability_living_allowance_working_age') !== -1
+      or data['deceased-qualifying-benefits'].indexOf('disability_living_allowance_working_age') !== -1)
     %}
       {{ govukInput({
         label: {
