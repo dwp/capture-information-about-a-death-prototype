@@ -1,9 +1,17 @@
+const bspEligibility = require('../bsp-eligibility.js');
 const utils = require('./utils.js');
 const { handleFailure } = utils;
 
 const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
 
 const generateRoutes = (router) => {
+  router.get('*/bereavement-support-payments/landing', (req, res, next) => {
+    res.app.locals.isEligibleForBsp = bspEligibility.isEligibleForBsp(req.session.data);
+    res.app.locals.isCallerSpouse = bspEligibility.isCallerSpouse(req.session.data);
+    res.app.locals.isCallerWorkingAge = bspEligibility.isWorkingAge(req.session.data);
+    next();
+  });
+
   router.get('*/check-bsp-nino', (req, res) => {
     const prefix = req.params[0] + '/';
     const data = req.session.data;

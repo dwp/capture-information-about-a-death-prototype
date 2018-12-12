@@ -60,7 +60,6 @@ const isDapAvailable = (req, res, next) => {
 router.get('*/eligibility', (req, res, next) => {
   const url = req.params[0];
   const startExists = fs.existsSync('app/views' + url + '/start.html')
-  console.log('hello?')
   if (startExists) {
     const data = req.session.data;
     res.app.locals.isCallerSpouse = utils.isCallerSpouse(data['caller-relationship']);
@@ -196,9 +195,9 @@ router.get('*/benefits-handler*', (req, res, next) => {
   let route = '/select-eligibility-cards' + req.params[1];
   if (isHospitalCheckRequired && data['hospital-death'] === undefined) {
     route = '/hospital-lookup';
-  } else if (version === 'v8' || version === 'v9' && isSpouse) {
+  } else if ((version === 'v8' || version === 'v9') && isSpouse) {
     route = '/capture-spouse';
-  } else if (version === 'v8' || version === 'v9' && selectedBenefits.length) {
+  } else if ((version === 'v8' || version === 'v9') && selectedBenefits.length) {
     route = '/death-arrears-payee/start';
   } else if (selectedBenefits.length) {
     route = '/death-arrears';

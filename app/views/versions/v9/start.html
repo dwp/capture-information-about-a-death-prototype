@@ -30,15 +30,15 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">
+      {# <h1 class="govuk-heading-l">
         {{"start_page_heading" | translate}}
-      </h1>
+      </h1> #}
       <form method="post" action="capture">
         {% call govukFieldset({
           legend: {
-            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-2",
+            classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-2",
             isPageHeading: false,
-            text: "Caller"
+            text: "About the caller"
           },
           classes: "start-group"
         }) %}
@@ -135,9 +135,9 @@
 
         {% call govukFieldset({
           legend: {
-            classes: "govuk-fieldset__legend--m govuk-!-margin-bottom-2",
+            classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-2",
             isPageHeading: false,
-            text: "Person who died"
+            text: "About the person who died"
           }
         }) %}
           <p>Use these details for the security check</p>
