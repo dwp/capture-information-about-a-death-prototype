@@ -53,7 +53,12 @@
         </div>
       {% endif %}
 
-      {% if data['fep-funeral-date'] %}
+      {%
+        if data['fep-funeral-date-day']
+        and data['fep-funeral-date-month']
+        and data['fep-funeral-date-year']
+        and (data['fep-funeral-date'] and data['fep-funeral-date'] !== 'false')
+      %}
         <div class="app-check-your-answers__contents">
           <dt class="app-check-your-answers__question">
             {{ "funeral_date_when" | translate }}
