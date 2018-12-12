@@ -17,7 +17,7 @@
           id: "bank-name",
           name: "bsp-bank-name",
           classes: "govuk-!-width-two-thirds",
-          value: data["bank-name"]
+          value: data["bsp-bank-name"]
         }) }}
 
         {{ govukInput({
@@ -31,7 +31,7 @@
           id: "bank-account-no",
           name: "bsp-bank-account-no",
           classes: "govuk-!-width-two-thirds",
-          value: data["bank-account-no"]
+          value: data["bsp-bank-account-no"]
         }) }}
 
         {{ govukInput({
@@ -45,8 +45,9 @@
           id: "bank-sort-code",
           name: "bsp-bank-sort-code",
           classes: "govuk-!-width-two-thirds govuk-input--width-10",
-          value: data["bank-sort-code"]
+          value: data["bsp-bank-sort-code"]
         }) }}
+
         <div class="govuk-form-group" aria-hidden="true">
           <label class="govuk-label govuk-!-font-weight-bold" id="bsp-building-soc-roll-group" for="building-soc-roll">
             {{ "building_soc_roll" | translate}}
@@ -54,7 +55,7 @@
           <span id="building-soc-roll-hint" class="govuk-hint">
             {{ "building_soc_roll_hint" | translate}}
           </span>
-          <input class="govuk-input govuk-!-width-two-thirds" id="building-soc-roll" name="bsp-building-soc-roll" type="text" aria-describedby="building-soc-roll-hint">
+          <input class="govuk-input govuk-!-width-two-thirds" value="{{ data['bsp-building-soc-roll'] }}" id="building-soc-roll" name="bsp-building-soc-roll" type="text" aria-describedby="building-soc-roll-hint">
         </div>
 
 
