@@ -2,6 +2,12 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
+  {% set dapHtml %}
+    <div class="govuk-form-group dap-address">
+      {% set prefix = "dap" %}
+      {% include "includes/address-lookup.html" %}
+    </div>
+  {% endset %}
   {% set notFoundHeading = "Payee's details" %}
   {% if data['death-arrears-pay-other'] === 'caller' %}
     {% set notFoundHeading = "Caller's details" %}
