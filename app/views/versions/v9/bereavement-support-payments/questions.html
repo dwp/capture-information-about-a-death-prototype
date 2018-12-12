@@ -32,9 +32,37 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form method="post" action="bank-account">
-
+      <form method="post" action="bank-details">
         <h2 class="govuk-heading-m" id="caller-heading">{{"caller_heading" | translate}}</h2>
+
+        {{ govukRadios({
+          id: "bsp-dependants",
+          name: "bsp-dependants",
+          fieldset: {
+            legend: {
+              text: "dependants" | translate,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes" | translate,
+              conditional: {
+                html: "<p>" + 'dependants_hint' | translate + "</p>"
+              }
+            },
+            {
+              value: "false",
+              text: "No" | translate,
+              conditional: {
+                html: childBenefitHtml
+              }
+            }
+          ]
+          })
+        }}
 
         {{ govukInput({
           label: {
@@ -76,35 +104,6 @@
             }
           ]
         }) }}
-
-        {{ govukRadios({
-          id: "bsp-dependants",
-          name: "bsp-dependants",
-          fieldset: {
-            legend: {
-              text: "dependants" | translate,
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          hint:{
-            text:"dependants_hint" | translate
-          },
-          items: [
-            {
-              value: "true",
-              text: "Yes" | translate
-            },
-            {
-              value: "false",
-              text: "No" | translate,
-              conditional: {
-                html: childBenefitHtml
-              }
-            }
-          ]
-          })
-        }}
 
         {{ govukButton({
           text: "continue" | translate,

@@ -18,10 +18,10 @@ const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
 const generateRoutes = (router) => {
   router.get('*/funeral-expense-payments/landing', (req, res, next) => {
     const version = getVersion(req.params[0], 1);
-    if (version === 'v5' || version === 'v6' || version === 'v7' || version === 'v8' || version === 'v9') {
-      res.render('versions/' + version + '/funeral-expense-payments/landing.html', {
+    res.app.locals.isEligibleForFep = fepEligibility.isEligibleForFep(req.session.data);
 
-      });
+    if (version === 'v5' || version === 'v6' || version === 'v7' || version === 'v8' || version === 'v9') {
+      next();
       return true;
     }
     const data = req.session.data;
@@ -33,7 +33,7 @@ const generateRoutes = (router) => {
       fepStart = 'student-or-training';
     }
 
-    res.render('versions/base/funeral-expense-payments/landing.html', {
+    res.render('versions/' + version + '/funeral-expense-payments/landing.html', {
       fepStart
     });
   });
@@ -118,7 +118,7 @@ const generateRoutes = (router) => {
     const version = getVersion(req.params[0], 1);
 
     if (data['fep-funeral-location'] === 'true') {
-      if (version === 'v5' || version === 'v6 ') {
+      if (version === 'v5' || version === 'v6 ' || version === 'v9') {
         res.redirect(prefix + 'confirm');
       } else {
         res.redirect(prefix + 'qualifying-benefits');
@@ -138,7 +138,7 @@ const generateRoutes = (router) => {
       if (benefits.length === 1 && benefits[0] === '_unchecked') {
         return benefitsRedirect(req, res, prefix);
       } else {
-        if (version === 'v5') {
+        if (version === 'v5' || version === 'v9') {
           res.redirect(prefix + 'funeral-date');
         } else {
           res.redirect(prefix + 'confirm');

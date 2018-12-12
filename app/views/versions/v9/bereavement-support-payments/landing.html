@@ -11,12 +11,19 @@
         {% include "versions/" + version + "/bereavement-support-payments/ineligible.html" %}
       {% endif %}
 
-      <a href="questions" role="button" class="govuk-button govuk-button--start govuk-!-margin-bottom-3">
+      {% if isEligibleForBsp %}
+        {% set bspTargetUrl = "questions" %}
+      {% else %}
+        {% set bspTargetUrl = "../funeral-expense-payments/landing" %}
+      {% endif %}
+      <a href={{bspTargetUrl}} role="button" class="govuk-button govuk-!-margin-bottom-3">
         Continue
       </a>
-      <p>
-        <a href="../funeral-expense-payments/landing">Skip this page</a>
-      </p>
+      {% if isEligibleForBsp %}
+        <p>
+          <a href="../funeral-expense-payments/landing">Skip this page</a>
+        </p>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

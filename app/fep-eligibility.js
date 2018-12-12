@@ -17,7 +17,7 @@ const validateFuneralDate = (year, month, day) => {
   return differenceInMonths(date, new Date(year, parsedMonth, formattedDay));
 }
 
-const fepRelationships = ['girlfriend', 'boyfriend', 'partner', 'wife', 'husband', 'civilpartner'];
+const fepRelationships = ['girlfriend', 'boyfriend', 'partner', 'wife', 'husband', 'civilpartner', 'spouse'];
 
 const isClaimantAdult = (age = 0) => !(age <= 19 && age >= 16);
 
@@ -34,8 +34,9 @@ const isCallerSpouse = ((data) => data['is-caller-spouse'] === 'true');
  */
 const isEligibleForFep = (data) => {
   getClaimantAge(data)
-  console.log('check relationship', checkRelationship('girl friend', fepRelationships))
-  return true;
+  const isPartner = checkRelationship(data['caller-relationship'], fepRelationships);
+  console.log(isPartner, 'is partner?')
+  return isPartner;
 };
 
 const mockResponse = () => {

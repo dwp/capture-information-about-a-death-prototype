@@ -2,11 +2,11 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-  {% set executorHeading = "death_arrears_who_we_will_pay" | translate %}
-  {% if data['death-arrears-executor'] === 'caller' %}
-    {% set executorHeading = "Caller's details" %}
+  {% set administratorHeading = "Administrator's details" %}
+  {% if data['death-arrears-administrator'] === 'caller' %}
+    {% set administratorHeading = "Caller's details" %}
   {% endif %}
-  <h1 class="govuk-heading-l">{{executorHeading}}</h1>
+  <h1 class="govuk-heading-l">{{administratorHeading}}</h1>
   <form method="post" action="../payee-bank">
     {{ govukInput({
       label: {
@@ -19,7 +19,7 @@
       id: "dap-full-name",
       name: "dap-full-name",
       classes: "govuk-!-width-two-thirds",
-      value: data["caller-full-name"] if data['death-arrears-executor'] === 'caller'
+      value: data["caller-full-name"] if data['death-arrears-administrator'] === 'caller'
     }) }}
 
     {{ govukInput({
@@ -58,7 +58,7 @@
       }) }}
     {% endif %}
 
-    {% if data['death-arrears-executor'] == 'caller' %}
+    {% if data['death-arrears-administrator'] == 'caller' %}
       {{ govukRadios({
         idPrefix: "deceased-address-conditional",
         name: "deceased-address",

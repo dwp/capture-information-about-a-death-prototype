@@ -6,7 +6,7 @@
       <form method="post" action="has-bank-account">
         {% set question = "have_bank_building_details_question" | translate %}
 
-        {% if data['death-arrears-caller'] == 'someone-else' %}
+        {% if data['is-there-executor'] == 'true' or data['is-there-will'] == 'true'%}
           {% set question = "have_bank_building_details_question_executor" | translate %}
         {% endif %}
 
