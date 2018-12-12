@@ -109,6 +109,18 @@
           }) }}
         </div>
 
+        {%
+          if (not data['deceased-address'] or data['deceased-address'] === 'false')
+          and data['death-arrears-nok'] !== 'caller'
+          and data['death-arrears-executor'] !== 'caller'
+          and data['death-arrears-administrator'] !== 'caller'
+        %}
+          <div id="bsp-address-group">
+            {% set prefix = "bsp" %}
+            {% include "includes/address-lookup.html" %}
+          </div>
+        {% endif %}
+
         {{ govukButton({
           text: "continue" | translate,
           id: "continue-eligibility"
