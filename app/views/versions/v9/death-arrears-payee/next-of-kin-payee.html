@@ -18,20 +18,6 @@
       value: data["caller-full-name"] if data['death-arrears-executor'] === 'caller'
     }) }}
 
-    {{ govukInput({
-      label: {
-        text: "company_name" | translate,
-        classes: "govuk-!-font-weight-bold",
-        attributes: {
-          id: "dap-company-name-group"
-        }
-      },
-      id: "dap-company-name",
-      name: "dap-company-name",
-      classes: "govuk-!-width-two-thirds",
-      value: data["executor-company-name"]
-    }) }}
-
     {# We only need this if PIP or DLA #}
     {%
       if data['deceased-qualifying-benefits']
