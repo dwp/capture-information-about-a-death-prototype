@@ -16,12 +16,15 @@ const firstQuestion = (data) => {
 const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
 
 const generateRoutes = (router) => {
+
+
+
   router.get('*/funeral-expense-payments/landing', (req, res, next) => {
     const version = getVersion(req.params[0], 1);
-    if (version === 'v5' || version === 'v6' || version === 'v7' || version === 'v8' || version === 'v9') {
-      res.render('versions/' + version + '/funeral-expense-payments/landing.html', {
+    res.app.locals.isEligibleForFep = fepEligibility.isEligibleForFep(req.session.data);
 
-      });
+    if (version === 'v5' || version === 'v6' || version === 'v7' || version === 'v8' || version === 'v9') {
+      next();
       return true;
     }
     const data = req.session.data;
@@ -33,7 +36,7 @@ const generateRoutes = (router) => {
       fepStart = 'student-or-training';
     }
 
-    res.render('versions/base/funeral-expense-payments/landing.html', {
+    res.render('versions/' + version + '/funeral-expense-payments/landing.html', {
       fepStart
     });
   });

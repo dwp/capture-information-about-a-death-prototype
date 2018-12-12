@@ -5,18 +5,18 @@
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">Funeral Expenses Payment</h1>
-      <div>
-        {{ govukTag({
-          attributes: { id: "eligibility-completed" },
-          classes: "app-task-list__task-completed tag-red stuff eligible-tag",
-          text: "Not eligible"
-        }) }}
-      </div>
+      {% if isEligibleForFep %}
+        {% include "versions/" + version + "/funeral-expense-payments/eligible.html" %}
+      {% else %}
+        {% include "versions/" + version + "/funeral-expense-payments/ineligible.html" %}
+      {% endif %}
 
-      <p>The caller is not eligible because they are not responsible for paying for the funeral</p>
-      <a href="../check" role="button" class="govuk-button">
+      <a href="questions" role="button" class="govuk-button govuk-button--start govuk-!-margin-bottom-3">
         Continue
       </a>
+      <p>
+        <a href="../declaration">Skip this page</a>
+      </p>
     </div>
   </div>
 {% endblock %}

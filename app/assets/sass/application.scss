@@ -145,13 +145,13 @@ article {
 }
 
 .button-secondary {
-  background-color: govuk-colour("light-blue");
-  color: govuk-colour("black");
+  background-color: govuk-colour("blue");
+  color: govuk-colour("white");
 
   &:hover,
   &:focus,
   &:active {
-    background-color: govuk-colour("blue");
+    background-color: darken(govuk-colour("blue"), 8%);
   }
 }
 
@@ -159,26 +159,22 @@ article {
   @include govuk-clearfix;
 
   > .govuk-form-group {
-    float: left;
     margin-bottom: 10px;
   }
 }
 
 .postcode-lookup {
-  float: left;
-  margin-left: 15px;
-  margin-top: 25px;
-  margin: 25px 0 10px 15px;
   width: auto;
+  margin-bottom: 10px;
 
   @include govuk-media-query($from: tablet) {
-    margin-top: 30px;
   }
 }
 
 .address-details {
   float: left;
   width: 100%;
+  margin-top: 5px;
 }
 
 legend {
