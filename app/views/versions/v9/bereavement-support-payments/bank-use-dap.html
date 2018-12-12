@@ -39,6 +39,11 @@
   {% if data['dap-bank-sort-code'] or data['dap-bank-account-no'] %}
     <h2 class="govuk-heading-s">Death Arrears Payee bank account</h2>
     <dl class="bank-summary">
+      {% if data['dap-bank-full-name'] %}
+        <dt>{{"account_holders_name" | translate}}</dt>
+        <dd>{{data['dap-bank-full-name']}}</dd>
+      {% endif %}
+
       {% if data['dap-bank-name'] %}
         <dt>{{"bank_account" | translate}}</dt>
         <dd>{{data['dap-bank-name']}}</dd>
