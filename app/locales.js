@@ -1,5 +1,6 @@
 const locales = {
   en_gb: {
+    account_holders_name: `Account holder's full name`,
     address: 'Address',
     address_hint: `We'll use this to contact the caller if we need to`,
     attendance_allowance: 'Attendance Allowance',
