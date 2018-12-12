@@ -5,6 +5,20 @@
     <div class="govuk-grid-column-two-thirds">
       <form method="post" action="check">
         <h1 class="govuk-heading-l">{{ "building_society_account_question" | translate }}</h1>
+        {{ govukInput({
+          label: {
+            text: "account_holders_name" | translate,
+            classes: "govuk-!-font-weight-bold",
+            attributes: {
+              id: "bsp-bank-full-name-group"
+            }
+          },
+          id: "bank-full-name",
+          name: "bsp-bank-full-name",
+          classes: "govuk-!-width-two-thirds",
+          value: data["bsp-bank-full--name"]
+        }) }}
+
 
         {{ govukInput({
           label: {

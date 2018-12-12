@@ -8,6 +8,20 @@
 
         {{ govukInput({
           label: {
+            text: "account_holders_name" | translate,
+            classes: "govuk-!-font-weight-bold",
+            attributes: {
+              id: "bsp-full-name-group"
+            }
+          },
+          id: "bank-full-name",
+          name: "bsp-bank-full-name",
+          classes: "govuk-!-width-two-thirds",
+          value: data["bsp-bank-full-name"]
+        }) }}
+
+        {{ govukInput({
+          label: {
             text: "bank_name" | translate,
             classes: "govuk-!-font-weight-bold",
             attributes: {

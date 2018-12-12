@@ -20,6 +20,7 @@
 }
 
 .app-check-your-answers--long {
+  margin-bottom: 40px;
   @include govuk-media-query($from: desktop) {
     // to make group of q&a line up horizontally (unless there is just one group)
     width: 100%;

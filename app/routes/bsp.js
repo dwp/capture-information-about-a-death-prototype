@@ -56,7 +56,7 @@ const generateRoutes = (router) => {
     } else {
       const version = getVersion(req.params[0], 1);
 
-      route = '/add-bank';
+      route = '/payee-bank';
 
       if (version === 'v9') {
         route = '/payee-bank-type';
@@ -67,7 +67,7 @@ const generateRoutes = (router) => {
 
   router.get('*/handle-bank-details', (req, res) => {
     const useDapDetails = req.session.data['bsp-use-dap'] === 'true';
-    let route = '/add-bank';
+    let route = '/payee-bank';
     if (useDapDetails) {
       route = '/check';
     }
