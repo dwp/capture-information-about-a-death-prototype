@@ -112,6 +112,7 @@ const locales = {
     have_executor_bank_building_details_question: 'Does the caller have the bank or building society account details for the executor?',
     have_administrator_bank_building_details_question: 'Does the caller have the bank or building society account details for the administrator?',
     have_nok_bank_building_details_question: 'Does the caller have the bank or building society account details for the next of kin?',
+    have_payee_bank_building_details_question: 'Does the caller have the bank or building society account details for the payee?',
     hospital_label: 'Place of death',
     hospital_location: 'Name of hospital',
     hospital_tab: 'Hospital',

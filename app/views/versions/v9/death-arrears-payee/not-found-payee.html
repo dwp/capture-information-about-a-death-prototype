@@ -13,7 +13,7 @@
     {% set notFoundHeading = "Caller's details" %}
   {% endif %}
   <h1 class="govuk-heading-l">{{notFoundHeading}}</h1>
-  <form method="post" action="../notification-check">
+  <form method="post" action="../payee-bank">
     {{ govukInput({
       label: {
         text: "full_name" | translate,
