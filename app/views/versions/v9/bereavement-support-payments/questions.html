@@ -35,34 +35,36 @@
       <form method="post" action="payee-bank">
         <h2 class="govuk-heading-l" id="caller-heading">{{"caller_heading" | translate}}</h2>
 
-        {{ govukRadios({
-          id: "bsp-dependants",
-          name: "bsp-dependants",
-          fieldset: {
-            legend: {
-              text: "dependants" | translate,
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "true",
-              text: "Yes" | translate,
-              conditional: {
-                html: "<p>" + 'dependants_hint' | translate + "</p>"
+        <div id="bsp-dependents">
+          {{ govukRadios({
+            id: "bsp-dependants",
+            name: "bsp-dependants",
+            fieldset: {
+              legend: {
+                text: "dependants" | translate,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--s"
               }
             },
-            {
-              value: "false",
-              text: "No" | translate,
-              conditional: {
-                html: childBenefitHtml
+            items: [
+              {
+                value: "true",
+                text: "Yes" | translate,
+                conditional: {
+                  html: "<p>" + 'dependants_hint' | translate + "</p>"
+                }
+              },
+              {
+                value: "false",
+                text: "No" | translate,
+                conditional: {
+                  html: childBenefitHtml
+                }
               }
-            }
-          ]
-          })
-        }}
+            ]
+            })
+          }}
+        </div>
 
         {{ govukInput({
           label: {
@@ -78,32 +80,46 @@
           value: data["caller-national-insurance"]
         }) }}
 
-        {{ govukRadios({
-          idPrefix: "caller-sex",
-          name: "caller-sex",
-          fieldset: {
-            legend: {
-              text: "caller_sex" | translate,
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          hint: {
-            text: "caller_sex_hint" | translate
-          },
-          items: [
-            {
-              value: "female",
-              text: "Female",
-              checked: true if data['caller-sex'] == 'female' else false
+        <div id="caller-sex-group">
+          {{ govukRadios({
+            idPrefix: "caller-sex",
+            name: "caller-sex",
+            fieldset: {
+              legend: {
+                text: "caller_sex" | translate,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
             },
-            {
-              value: "male",
-              text: "Male",
-              checked: true if data['caller-sex'] == 'male' else false
-            }
-          ]
-        }) }}
+            hint: {
+              text: "caller_sex_hint" | translate
+            },
+            items: [
+              {
+                value: "female",
+                text: "Female",
+                checked: true if data['caller-sex'] == 'female' else false
+              },
+              {
+                value: "male",
+                text: "Male",
+                checked: true if data['caller-sex'] == 'male' else false
+              }
+            ]
+          }) }}
+        </div>
+
+        {%
+          if (not data['deceased-address'] or data['deceased-address'] === 'false')
+          and data['death-arrears-nok'] !== 'caller'
+          and data['death-arrears-executor'] !== 'caller'
+          and data['death-arrears-administrator'] !== 'caller'
+        %}
+          <div id="bsp-address-group">
+            {% set prefix = "bsp" %}
+            {% include "includes/address-lookup.html" %}
+          </div>
+        {% endif %}
 
         {{ govukButton({
           text: "continue" | translate,
