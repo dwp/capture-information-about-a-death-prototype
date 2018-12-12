@@ -1,0 +1,41 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <form method="post" action="other-payee">
+    {{ govukRadios({
+      id: "death-arrears-pay-other",
+      name: "death-arrears-pay-other",
+      fieldset: {
+        legend: {
+          text: "Who should we pay?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [
+        {
+          value: "caller",
+          text: "The caller",
+          checked: true if data['death-arrears-pay-other'] == 'caller' else false
+        },
+        {
+          value: "someone-else",
+          text: "Someone else",
+          checked: true if data['death-arrears-pay-other'] == 'someone-else' else false
+        },
+        {
+          value: "unknown",
+          text: "Unknown",
+          checked: true if data['death-arrears-pay-other'] == 'unknown' else false
+        }
+      ]
+      })
+    }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

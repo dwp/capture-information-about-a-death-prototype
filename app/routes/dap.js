@@ -1,12 +1,19 @@
+const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
+
 const generateRoutes = (router) => {
   router.get('*/dap-executor', (req, res) => {
+    const version = getVersion(req.params[0], 1);
     const prefix = req.params[0] + '/';
     const data = req.session.data;
 
     if (data['is-there-executor'] === 'true') {
       res.redirect(prefix + 'executor-details');
     } else {
-      res.redirect(prefix + 'responsible-for-funeral');
+      if (version === 'v9') {
+        res.redirect(prefix + 'next-of-kin');
+      } else {
+        res.redirect(prefix + 'responsible-for-funeral');
+      }
     }
   });
 
@@ -44,15 +51,31 @@ const generateRoutes = (router) => {
   // })
 
   router.get('*/dap-nok', (req, res) => {
+    const version = getVersion(req.params[0], 1);
     const prefix = req.params[0] + '/';
     const data = req.session.data;
 
     if (data['is-there-nok'] === 'true') {
       res.redirect(prefix + 'next-of-kin-details');
     } else {
-      res.redirect(prefix + 'not-found');
+      if (version === 'v9') {
+        res.redirect(prefix + 'who-should-we-pay');
+      } else {
+        res.redirect(prefix + 'not-found');
+      }
     }
-  })
+  });
+
+  router.get('*/other-payee', (req, res) => {
+    const prefix = req.params[0] + '/';
+    const data = req.session.data;
+
+    if (data['death-arrears-pay-other'] === 'unknown') {
+      res.redirect(prefix + 'not-found');
+    } else {
+      res.redirect(prefix + 'not-found-payee');
+    }
+  });
 };
 
 module.exports = generateRoutes;
