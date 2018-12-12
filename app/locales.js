@@ -53,15 +53,18 @@ const locales = {
     complete_fep_claim_body: `The caller's Funeral Expenses Payment application has been completed.`,
     correct_answers: 'By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.',
     county: 'County',
-    dap_executor_question: 'Is there an executor or administrator of the estate?', //content
+    dap_administrator_question: 'Is there an administrator of the estate?',
+    dap_administrator_question_hint: `This is someone who's been legally appointed to deal with the property and possessions (the estate) of the person who's died`,
+    dap_executor_question: 'Is there an executor?', //content
     dap_executor_question_hint: `They will be responsible for dealing with the person's property, finances and belongings (the estate)`, //content
     dap_funeral_responsible_question: `Is there someone who's paying the funeral costs?`, // content
     dap_maintainer_question: 'Was the person who died being looked after in a care home or a hospice?', // content
     dap_nok_question: 'Is there a next of kin?',
     dap_tab: 'DAP',
+    dap_will_question: 'Is there a will or executor?',
     death_arrears_details_heading: `Death Arrears Payee's details`,
     death_arrears_heading: 'Death Arrears Payee',
-    death_arrears_who_we_will_pay: 'Who we will pay',
+    death_arrears_who_we_will_pay: `Executor's details`,
     death_arrears_address: 'Where does the payee live?',
     death_arrears_question: 'If the person who died was owed any benefits, who should we pay?',
     death_arrears_question_hint: `The person we pay is known as the 'death arrears payee'`,
@@ -72,7 +75,7 @@ const locales = {
     deceased_qualifying_benefits: 'Benefits they were getting or waiting to hear about',
     deceased_qualifying_benefits_hint: ' ',
     dependants: 'Does the caller get Child Benefit?',
-    dependants_hint: 'In order to get the higher rate, the caller must be entitled to Child Benefit, even if they get no payments',
+    dependants_hint: 'The caller will be entitled to the higher rate of Bereavement Support Payment',
     disability_living_allowance: 'Disability Living Allowance',
     disability_living_allowance_65: 'Disability Living Allowance 65+',
     disability_living_allowance_child: 'Disability Living Allowance Child',
@@ -175,7 +178,8 @@ const locales = {
     universal_credit: 'Universal Credit',
     who_is_paying_for_funeral: 'Who is paying the funeral costs?',
     dap_funeral_responsible_question_hint: 'This could be a family member, local council or care home',
-    who_is_executor: 'Who is the executor or the administrator of the estate?',
+    who_is_administrator: 'Who is the administrator of the estate?',
+    who_is_executor: 'Who is the executor?',
     who_is_nok: 'Who is the next of kin?',
     widowed_parent_allowance: `Widowed Parent's Allowance`,
     back_to_start: 'Back to start'

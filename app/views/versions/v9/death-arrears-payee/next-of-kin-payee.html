@@ -2,8 +2,12 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-  <h1 class="govuk-heading-l">{{"death_arrears_who_we_will_pay" | translate}}</h1>
-  <form method="post" action="../notification-check">
+  {% set nokHeading = "Next of kin's details" %}
+  {% if data['death-arrears-nok'] === 'caller' %}
+    {% set nokHeading = "Caller's details" %}
+  {% endif %}
+  <h1 class="govuk-heading-l">{{nokHeading}}</h1>
+  <form method="post" action="../payee-bank">
     {{ govukInput({
       label: {
         text: "full_name" | translate,
@@ -40,10 +44,39 @@
       }) }}
     {% endif %}
 
-    <div class="govuk-form-group dap-address">
-      {% set prefix = "dap" %}
-      {% include "includes/address-lookup.html" %}
-    </div>
+    {% if data['death-arrears-nok'] == 'caller' %}
+      {{ govukRadios({
+        idPrefix: "deceased-address-conditional",
+        name: "deceased-address",
+        fieldset: {
+          classes: "hide-address-fix",
+          legend: {
+            text: "caller_same_address" | translate,
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        items: [
+          {
+            value: true,
+            text: "Yes",
+            checked: true if data['deceased-address'] == 'true' else false
+          },
+          {
+            value: false,
+            text: "No",
+            conditional: {
+              html: dapHtml
+            }, checked: true if data['deceased-address'] == 'false' else false
+          }
+        ]
+      }) }}
+    {% else %}
+      <div class="govuk-form-group dap-address">
+        {% set prefix = "dap" %}
+        {% include "includes/address-lookup.html" %}
+      </div>
+    {% endif %}
 
     {{ govukButton({
       text: "continue" | translate,

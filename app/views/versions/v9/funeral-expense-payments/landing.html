@@ -11,12 +11,19 @@
         {% include "versions/" + version + "/funeral-expense-payments/ineligible.html" %}
       {% endif %}
 
-      <a href="questions" role="button" class="govuk-button govuk-button--start govuk-!-margin-bottom-3">
+      {% if isEligibleForFep %}
+        {% set fepTargetUrl = "qualifying-benefits" %}
+      {% else %}
+        {% set fepTargetUrl = "../declaration" %}
+      {% endif %}
+      <a href={{fepTargetUrl}} role="button" class="govuk-button govuk-!-margin-bottom-3">
         Continue
       </a>
-      <p>
-        <a href="../declaration">Skip this page</a>
-      </p>
+      {% if isEligibleForFep %}
+        <p>
+          <a href="../declaration">Skip this page</a>
+        </p>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

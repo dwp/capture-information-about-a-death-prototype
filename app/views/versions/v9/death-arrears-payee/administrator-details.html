@@ -2,13 +2,13 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-  <form method="post" action="other-payee">
+  <form method="post" action="administrator-payee">
     {{ govukRadios({
-      id: "death-arrears-pay-other",
-      name: "death-arrears-pay-other",
+      id: "death-arrears-administrator",
+      name: "death-arrears-administrator",
       fieldset: {
         legend: {
-          text: "Who should we pay?",
+          text: "who_is_administrator" | translate,
           isPageHeading: true,
           classes: "govuk-fieldset__legend--l"
         }
@@ -17,17 +17,12 @@
         {
           value: "caller",
           text: "The caller",
-          checked: true if data['death-arrears-pay-other'] == 'caller' else false
+          checked: true if data['death-arrears-administrator'] == 'true' else false
         },
         {
           value: "someone-else",
           text: "Someone else",
-          checked: true if data['death-arrears-pay-other'] == 'someone-else' else false
-        },
-        {
-          value: "unknown",
-          text: "Unknown",
-          checked: true if data['death-arrears-pay-other'] == 'unknown' else false
+          checked: true if data['death-arrears-administrator'] == 'false' else false
         }
       ]
       })

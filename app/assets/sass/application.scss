@@ -226,6 +226,8 @@ legend {
 .summary {
   @include govuk-font($size: 19);
   @include govuk-text-colour;
+
+  text-decoration: underline;
 }
 
 .js-enabled .js-hidden {

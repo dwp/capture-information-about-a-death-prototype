@@ -225,7 +225,7 @@ router.get('*/spouse-data', (req, res, next) => {
   const month = parseInt(data['spouse-dob-month']) - 1;
   const age = differenceInYears(new Date(), new Date(data['spouse-dob-year'], month, data['spouse-dob-day']))
   let route = '/death-arrears-payee/start';
-  if (age >= 63) {
+  if (age >= 63 && age < 66) {
     route = '/pension-age'
   }
   res.redirect(req.params[0] + route);
