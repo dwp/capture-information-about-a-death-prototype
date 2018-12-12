@@ -6,12 +6,20 @@
       <form method="post" action="has-bank-account">
         {% set question = "have_bank_building_details_question" | translate %}
 
-        {% if data['is-there-executor'] == 'true' or data['is-there-will'] == 'true' %}
-          {% set question = "have_bank_building_details_question_executor" | translate %}
-        {% endif %}
-
-        {% if data['death-arrears-executor'] and data['death-arrears-executor'] === 'caller' %}
+        {%
+          if (data['death-arrears-executor'] and data['death-arrears-executor'] === 'caller')
+          or (data['death-arrears-administrator'] and data['death-arrears-administrator'] === 'caller')
+          or (data['death-arrears-nok'] and data['death-arrears-nok'] === 'caller')
+        %}
           {% set question = "have_bank_building_details_question" | translate %}
+        {% elif (data['death-arrears-executor'] and data['death-arrears-executor'] !== 'caller') %}
+          {% set question = "have_executor_bank_building_details_question" | translate %}
+        {% elif (data['death-arrears-administrator'] and data['death-arrears-administrator'] !== 'caller') %}
+          {% set question = "have_administrator_bank_building_details_question" | translate %}
+        {% elif (data['death-arrears-nok'] and data['death-arrears-nok'] !== 'caller') %}
+          {% set question = "have_nok_bank_building_details_question" | translate %}
+        {% else %}
+          {% set question = "have_bank_building_details_question_executor" | translate %}
         {% endif %}
 
         {{ govukRadios({
