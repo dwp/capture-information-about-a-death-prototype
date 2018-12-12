@@ -1,0 +1,20 @@
+{{ govukTag({
+  attributes: { id: "eligibility-completed" },
+  classes: "app-task-list__task-completed tag-red stuff eligible-tag",
+  text: "Not eligible"
+}) }}
+{% if isCallerWorkingAge == false and isCallerSpouse == false %}
+<p>The caller is not eligible for Bereavement Support Payment as they are not
+  <ul class="govuk-list--bullet govuk-list">
+    <li>working age</li>
+    <li>this needs content!</li>
+    <li>married or in a civil partnership with the person who died</li>
+  </ul>
+</p>
+{% elif isCallerSpouse == false %}
+  <p>The caller is not eligible for Bereavement Support Payment as they are not married or in a civil partnership with the person who died</p>
+{% elif isCallerWorkingAge == false %}
+  <p>The caller is not eligible for Bereavement Support Payment as they are not working age</p>
+{% else %}
+  <p>The caller is not eligible for Bereavement Support Payment</p>
+{% endif %}
