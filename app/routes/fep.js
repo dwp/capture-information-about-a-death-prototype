@@ -126,7 +126,7 @@ const generateRoutes = (router) => {
 
     if (data['fep-funeral-location'] === 'true') {
       if (version === 'v5' || version === 'v6 ' || version === 'v9') {
-        res.redirect(prefix + 'confirm');
+        res.redirect(prefix + 'check');
       } else {
         res.redirect(prefix + 'qualifying-benefits');
       }
