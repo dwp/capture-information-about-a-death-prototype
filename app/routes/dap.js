@@ -59,12 +59,23 @@ const generateRoutes = (router) => {
       res.redirect(prefix + 'next-of-kin-details');
     } else {
       if (version === 'v9') {
-        res.redirect(prefix + 'not-found-payee');
+        res.redirect(prefix + 'who-should-we-pay');
       } else {
         res.redirect(prefix + 'not-found');
       }
     }
-  })
+  });
+
+  router.get('*/other-payee', (req, res) => {
+    const prefix = req.params[0] + '/';
+    const data = req.session.data;
+
+    if (data['death-arrears-pay-other'] === 'unknown') {
+      res.redirect(prefix + 'not-found');
+    } else {
+      res.redirect(prefix + 'not-found-payee');
+    }
+  });
 };
 
 module.exports = generateRoutes;
