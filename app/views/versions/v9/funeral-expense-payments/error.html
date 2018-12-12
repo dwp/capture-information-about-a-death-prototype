@@ -1,0 +1,16 @@
+{% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-l">Eligibility check failed</h2>
+    <article>
+      <p>The eligibility check failed due to the following reason:</p>
+      <ul class="govuk-list--bullet govuk-list">
+        <li>{{data.fepFailure}}</li>
+      </ul>
+      <a href="../declaration" class="govuk-button" role="button">{{"continue" | translate}}</a>
+    </article>
+  </div>
+</div>
+{% endblock %}
