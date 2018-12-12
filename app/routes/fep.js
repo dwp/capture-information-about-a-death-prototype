@@ -2,8 +2,16 @@ const utils = require('./utils.js');
 const fepEligibility = require('../fep-eligibility.js');
 const { handleFailure } = utils;
 
+const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
+
 const benefitsRedirect = (req, res) => {
-  const error = 'The caller must be in receipt or have one of the following benefits pending';
+  const version = getVersion(req.params[0], 1);
+  let error = 'The caller must be in receipt or have one of the following benefits pending';
+
+  if (version === 'v9') {
+    error = 'The caller must be in receipt of a qualifying benefit';
+  }
+
   return handleFailure(error, 'fep', req, res);
 };
 
@@ -13,7 +21,6 @@ const firstQuestion = (data) => {
   }
   return 'relationship';
 }
-const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
 
 const generateRoutes = (router) => {
   router.get('*/funeral-expense-payments/landing', (req, res, next) => {
