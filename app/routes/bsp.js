@@ -31,24 +31,35 @@ const generateRoutes = (router) => {
     res.redirect(prefix + 'confirm');
   });
 
+  router.get('*/bereavement-support-payments/has-bank-account', (req, res, next) => {
+    const data = req.session.data;
+
+    if (data['bsp-has-bank-or-building'] === "true") {
+      res.redirect(req.params[0] + '/bereavement-support-payments/payee-bank-type');
+    } else {
+      res.redirect(req.params[0] + '/bereavement-support-payments/confirm');
+    }
+  });
+
   router.get('*/bank-details', (req, res, next) => {
+    const data = req.session.data;
     const { isCallerDap } = res.app.locals;
-    console.log(res.app.locals.isCallerDap)
-    const isProvidingBankDetails = req.session.data['bsp-use-bank'] === 'true';
+
     let route = '/confirm';
-    const isCallerNok = req.session.data['death-arrears-nok'] === 'caller';
-    console.log(isCallerNok, 'is caller nok')
-    if (isProvidingBankDetails) {
-      if (isCallerDap || isCallerNok) {
-        route = '/bank-use-dap';
-      } else {
-        const version = getVersion(req.params[0], 1);
+    const isCallerNok = data['death-arrears-nok'] === 'caller';
+    const isCallerExecutor = data['death-arrears-executor'] === 'caller';
+    const isCallerAdministrator = data['death-arrears-administrator'] === 'caller';
+    const isCallerOtherDap = data['death-arrears-pay-other'] === 'caller';
 
-        route = '/add-bank';
+    if (isCallerDap || isCallerNok || isCallerExecutor || isCallerAdministrator || isCallerOtherDap ) {
+      route = '/bank-use-dap';
+    } else {
+      const version = getVersion(req.params[0], 1);
 
-        if (version === 'v9') {
-          route = '/payee-bank-type';
-        }
+      route = '/add-bank';
+
+      if (version === 'v9') {
+        route = '/payee-bank-type';
       }
     }
     res.redirect(req.params[0] + route);

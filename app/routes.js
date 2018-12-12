@@ -349,6 +349,16 @@ router.get('*/has-bank-account', (req, res, next) => {
   }
 });
 
+router.get('*/bereavement-support-payments/bank-account-type', (req, res, next) => {
+  const data = req.session.data;
+
+  if (data['bsp-bank-or-building'] === "bank" ) {
+    res.redirect(req.params[0] + '/bereavement-support-payments/payee-bank-account-details');
+  } else {
+    res.redirect(req.params[0] + '/bereavement-support-payments/payee-building-society-account-details');
+  }
+});
+
 router.get('*/bank-account-type', (req, res, next) => {
   const data = req.session.data;
 
