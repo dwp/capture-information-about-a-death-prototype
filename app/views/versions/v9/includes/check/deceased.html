@@ -113,7 +113,9 @@
       </dt>
       <dd class="app-check-your-answers__answer">
         {{data['deceased-line-1']}}
-        <br /> {{data['deceased-line-2']}}
+        {% if data['deceased-line-2'] %}
+          <br /> {{data['deceased-line-2']}}
+        {% endif %}
         <br /> {{data['deceased-town-city']}}
         <br /> {{data['deceased-county']}}
         <br /> {{data['deceased-postcode']}}

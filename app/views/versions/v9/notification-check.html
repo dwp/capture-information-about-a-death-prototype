@@ -7,10 +7,9 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l">{{"check_title" | translate}}</h1>
-    <p>{{ "check_description" | translate}} {{data["deceased-full-name"]}}</p>
 
-    {% include "versions/v9/includes/check/caller.html" %}
     {% include "versions/v9/includes/check/deceased.html" %}
+    {% include "versions/v9/includes/check/caller.html" %}
 
     {% if data['spouse-full-name'] %}
       {% include "versions/v9/includes/check/spouse.html" %}

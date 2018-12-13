@@ -89,43 +89,118 @@
     </div>
   {% endif %}
 
-  {%
-    if (data['caller-line-1']) or (data['caller-line-2'])
-    or (data['caller-town-city']) or (data['caller-county'])
-    or (data['caller-postcode'])
+  {# this means caller lives at the same address as deceased #}
+  {% if data['deceased-address'] == 'true' %}
+    {%
+      if (data['deceased-line-1']) or (data['deceased-line-2'])
+      or (data['deceased-town-city']) or (data['deceased-county'])
+      or (data['deceased-postcode'])
+    %}
+      <div class="app-check-your-answers__contents">
+        <dt class="app-check-your-answers__question">
+          {{ "address" | translate }}
+        </dt>
+        <dd class="app-check-your-answers__answer">
+          {% if (data['deceased-line-1']) %}
+            {{data['deceased-line-1']}}
+            <br />
+          {% endif %}
+          {% if (data['deceased-line-2']) %}
+            {{data['deceased-line-2']}}
+            <br />
+          {% endif %}
+          {% if (data['deceased-town-city']) %}
+            {{data['deceased-town-city']}}
+            <br />
+          {% endif %}
+          {% if (data['deceased-county']) %}
+            {{data['deceased-county']}}
+            <br />
+          {% endif %}
+          {% if (data['deceased-postcode']) %}
+            {{data['deceased-postcode']}}
+          {% endif %}
+        </dd>
+        <dd class="app-check-your-answers__change"></dd>
+      </div>
+    {% endif %}
+  {% elif ((data['death-arrears-nok'] === 'caller') or
+    (data['death-arrears-executor'] === 'caller') or
+    (data['death-arrears-administrator'] === 'caller'))
+    and data['dap-line-1']
   %}
-    <div class="app-check-your-answers__contents">
-      <dt class="app-check-your-answers__question">
-        {{ "address" | translate }}
-      </dt>
-      <dd class="app-check-your-answers__answer">
-        {% if (data['caller-line-1']) %}
-          {{data['caller-line-1']}}
-          <br />
-        {% endif %}
-        {% if (data['caller-line-2']) %}
-          {{data['caller-line-2']}}
-          <br />
-        {% endif %}
-        {% if (data['caller-town-city']) %}
-          {{data['caller-town-city']}}
-          <br />
-        {% endif %}
-        {% if (data['caller-county']) %}
-          {{data['caller-county']}}
-          <br />
-        {% endif %}
-        {% if (data['caller-postcode']) %}
-          {{data['caller-postcode']}}
-        {% endif %}
-      </dd>
-      <dd class="app-check-your-answers__change">
-        <a href="#">
-          {{ "change" | translate }}
-          <span class="govuk-visually-hidden"> {{ "address" | translate }}</span>
-        </a>
-      </dd>
-    </div>
+    {%
+      if (data['dap-line-1']) or (data['dap-line-2'])
+      or (data['dap-town-city']) or (data['dap-county'])
+      or (data['dap-postcode'])
+    %}
+      <div class="app-check-your-answers__contents">
+        <dt class="app-check-your-answers__question">
+          {{ "address" | translate }}
+        </dt>
+        <dd class="app-check-your-answers__answer">
+          {% if (data['dap-line-1']) %}
+            {{data['dap-line-1']}}
+            <br />
+          {% endif %}
+          {% if (data['dap-line-2']) %}
+            {{data['dap-line-2']}}
+            <br />
+          {% endif %}
+          {% if (data['dap-town-city']) %}
+            {{data['dap-town-city']}}
+            <br />
+          {% endif %}
+          {% if (data['dap-county']) %}
+            {{data['dap-county']}}
+            <br />
+          {% endif %}
+          {% if (data['dap-postcode']) %}
+            {{data['dap-postcode']}}
+          {% endif %}
+        </dd>
+        <dd class="app-check-your-answers__change"></dd>
+      </div>
+    {% endif %}
+  {% else %}
+    {%
+      if (data['caller-line-1']) or (data['caller-line-2'])
+      or (data['caller-town-city']) or (data['caller-county'])
+      or (data['caller-postcode'])
+    %}
+      <div class="app-check-your-answers__contents">
+        <dt class="app-check-your-answers__question">
+          {{ "address" | translate }}
+        </dt>
+        <dd class="app-check-your-answers__answer">
+          {% if (data['caller-line-1']) %}
+            {{data['caller-line-1']}}
+            <br />
+          {% endif %}
+          {% if (data['caller-line-2']) %}
+            {{data['caller-line-2']}}
+            <br />
+          {% endif %}
+          {% if (data['caller-town-city']) %}
+            {{data['caller-town-city']}}
+            <br />
+          {% endif %}
+          {% if (data['caller-county']) %}
+            {{data['caller-county']}}
+            <br />
+          {% endif %}
+          {% if (data['caller-postcode']) %}
+            {{data['caller-postcode']}}
+          {% endif %}
+        </dd>
+        <dd class="app-check-your-answers__change">
+          <a href="#">
+            {{ "change" | translate }}
+            <span class="govuk-visually-hidden"> {{ "address" | translate }}</span>
+          </a>
+        </dd>
+      </div>
+    {% endif %}
   {% endif %}
 
   {% if (data['caller-phone-number']) %}

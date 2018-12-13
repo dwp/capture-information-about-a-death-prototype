@@ -9,7 +9,7 @@ const benefitsRedirect = (req, res) => {
   let error = 'The caller must be in receipt or have one of the following benefits pending';
 
   if (version === 'v9') {
-    error = 'The caller must be in receipt of a qualifying benefit';
+    error = 'they must be in receipt of a qualifying benefit';
   }
 
   return handleFailure(error, 'fep', req, res);
@@ -64,7 +64,7 @@ const generateRoutes = (router) => {
     if (data['living-as-married'] === 'true') {
       res.redirect(prefix + 'funeral-date');
     } else {
-      const error = 'The caller must be living together as a married couple';
+      const error = 'they must have been living together as a married couple with the person who died';
       return handleFailure(error, 'fep', req, res);
     }
   });
@@ -75,7 +75,7 @@ const generateRoutes = (router) => {
     const dateDiff = fepEligibility.validateFuneralDate(data['fep-funeral-date-year'], data['fep-funeral-date-month'], data['fep-funeral-date-day']);
 
     if (data['fep-funeral-date'] && dateDiff >= 6 && data['fep-funeral-date'] !== 'false') {
-      const error = 'The date supplied is longer than 6 months ago.';
+      const error = 'the funeral date supplied is longer than 6 months ago';
       return handleFailure(error, 'fep', req, res);
     } else {
       res.redirect(prefix + 'responsibility');
@@ -88,7 +88,7 @@ const generateRoutes = (router) => {
     const dateDiff = fepEligibility.validateFuneralDate(data['fep-funeral-date-year'], data['fep-funeral-date-month'], data['fep-funeral-date-day']);
 
     if (data['fep-funeral-date'] && dateDiff >= 6 && data['fep-funeral-date'] !== 'false') {
-      const error = 'The date supplied is longer than 6 months ago.';
+      const error = 'the funeral date supplied is longer than 6 months ago';
       return handleFailure(error, 'fep', req, res);
     } else {
       res.redirect(prefix + 'location');
@@ -102,7 +102,7 @@ const generateRoutes = (router) => {
     if (data['fep-funeral-responsibility'] === 'true') {
       res.redirect(prefix + 'residency');
     } else {
-      const error = 'The caller must take responsibility for the costs of the funeral';
+      const error = 'they must take responsibility for the costs of the funeral';
       return handleFailure(error, 'fep', req, res);
     }
   });
@@ -114,7 +114,7 @@ const generateRoutes = (router) => {
     if (data['fep-funeral-residency'] === 'true') {
       res.redirect(prefix + 'funeral-location');
     } else {
-      const error = 'The deceased must ordinarily be a UK resident';
+      const error = 'the deceased must have ordinarily been a UK resident';
       return handleFailure(error, 'fep', req, res);
     }
   });
@@ -131,7 +131,7 @@ const generateRoutes = (router) => {
         res.redirect(prefix + 'qualifying-benefits');
       }
     } else {
-      const error = 'The location of the funeral must be in the UK or EU';
+      const error = 'the location of the funeral must be in the UK or EU';
       return handleFailure(error, 'fep', req, res);
     }
   });
@@ -141,7 +141,7 @@ const generateRoutes = (router) => {
     const prefix = req.params[0] + '/';
     const data = req.session.data;
     const benefits = data['fep-qualifying-benefits'] || [];
-    if (benefits.length) {
+    if (benefits.length && !benefits.includes('none')) {
       if (benefits.length === 1 && benefits[0] === '_unchecked') {
         return benefitsRedirect(req, res, prefix);
       } else {
