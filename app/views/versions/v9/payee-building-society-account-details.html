@@ -5,7 +5,14 @@
     <div class="govuk-grid-column-two-thirds">
       <form method="post" action="notification-check">
         <h1 class="govuk-heading-l">{{ "building_society_account_question" | translate }}</h1>
-
+        {%
+          if (data['death-arrears-executor'] and data['death-arrears-executor'] === 'caller')
+          or (data['death-arrears-administrator'] and data['death-arrears-administrator'] === 'caller')
+          or (data['death-arrears-nok'] and data['death-arrears-nok'] === 'caller')
+          or (data['death-arrears-pay-other'] and data['death-arrears-pay-other'] === 'caller')
+        %}
+          {% set accountHolder = data['caller-full-name'] %}
+        {% endif %}
         {{ govukInput({
           label: {
             text: "account_holders_name" | translate,
@@ -17,7 +24,7 @@
           id: "bank-full-name",
           name: "dap-bank-full-name",
           classes: "govuk-!-width-two-thirds",
-          value: data["bank-full-name"]
+          value: accountHolder
         }) }}
 
         {{ govukInput({

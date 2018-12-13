@@ -3,12 +3,16 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h2 class="govuk-heading-l">Eligibility check failed</h2>
+    <h2 class="govuk-heading-l">Funeral Expenses Payment</h2>
     <article>
-      <p>The eligibility check failed due to the following reason:</p>
-      <ul class="govuk-list--bullet govuk-list">
-        <li>{{data.fepFailure}}</li>
-      </ul>
+      <div>
+        {{ govukTag({
+          attributes: { id: "eligibility-completed" },
+          classes: "app-task-list__task-completed tag-red stuff eligible-tag",
+          text: "Not eligible"
+        }) }}
+      </div>
+      <p>The caller is not eligible because {{data.fepFailure}}.</p>
       <a href="../declaration" class="govuk-button" role="button">{{"continue" | translate}}</a>
     </article>
   </div>

@@ -63,7 +63,7 @@ const locales = {
     dap_nok_question: 'Is there a next of kin?',
     dap_tab: 'DAP',
     dap_will_question: 'Is there a will or executor?',
-    death_arrears_details_heading: `Death Arrears Payee's details`,
+    death_arrears_details_heading: `About the person we will pay`,
     death_arrears_heading: 'Death Arrears Payee',
     death_arrears_who_we_will_pay: `Executor's details`,
     death_arrears_address: 'Where does the payee live?',

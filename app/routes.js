@@ -191,15 +191,16 @@ router.get('*/benefits-handler*', (req, res, next) => {
   const selectedBenefits = req.session.data['deceased-qualifying-benefits'] || [];
   const qualifyingBenefits = (benefits) => res.app.locals.qualifyingBenefits.find(benefit => benefits === benefit.value)
   const matches = selectedBenefits.map(item => qualifyingBenefits(item));
+  console.log('qualifying benefits', selectedBenefits.includes('none'))
   const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
   let route = '/select-eligibility-cards' + req.params[1];
   if (isHospitalCheckRequired && data['hospital-death'] === undefined) {
     route = '/hospital-lookup';
   } else if ((version === 'v8' || version === 'v9') && isSpouse) {
     route = '/capture-spouse';
-  } else if ((version === 'v8' || version === 'v9') && selectedBenefits.length) {
+  } else if ((version === 'v8' || version === 'v9') && selectedBenefits.length && !selectedBenefits.includes('none')) {
     route = '/death-arrears-payee/start';
-  } else if (selectedBenefits.length) {
+  } else if (selectedBenefits.length && !selectedBenefits.includes('none')) {
     route = '/death-arrears';
   } else if (version === 'v8' || version === 'v9'){
     route = '/bereavement-support-payments/landing'
@@ -345,7 +346,7 @@ router.get('*/has-bank-account', (req, res, next) => {
   if (data['dap-has-bank-or-building'] === "true") {
     res.redirect(req.params[0] + '/payee-bank-type');
   } else {
-    res.redirect(req.params[0] + '/select-eligibility-cards');
+    res.redirect(req.params[0] + '/notification-check');
   }
 });
 
