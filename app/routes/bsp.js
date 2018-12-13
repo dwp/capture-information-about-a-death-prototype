@@ -54,13 +54,7 @@ const generateRoutes = (router) => {
     if (isCallerDap || isCallerNok || isCallerExecutor || isCallerAdministrator || isCallerOtherDap ) {
       route = '/bank-use-dap';
     } else {
-      const version = getVersion(req.params[0], 1);
-
       route = '/payee-bank';
-
-      if (version === 'v9') {
-        route = '/payee-bank-type';
-      }
     }
     res.redirect(req.params[0] + route);
   });
