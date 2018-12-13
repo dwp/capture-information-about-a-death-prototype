@@ -109,16 +109,45 @@
           }) }}
         </div>
 
+        {% set bspAddressQuestionHtml %}
+          <div id="bsp-address-group">
+            {% set prefix = "bsp" %}
+            {% include "includes/address-lookup.html" %}
+          </div>
+        {% endset %}
+
         {%
           if (not data['deceased-address'] or data['deceased-address'] === 'false')
           and data['death-arrears-nok'] !== 'caller'
           and data['death-arrears-executor'] !== 'caller'
           and data['death-arrears-administrator'] !== 'caller'
         %}
-          <div id="bsp-address-group">
-            {% set prefix = "bsp" %}
-            {% include "includes/address-lookup.html" %}
-          </div>
+          {{ govukRadios({
+            idPrefix: "bsp-address-conditional",
+            name: "bsp-address-same-as-deceased",
+            fieldset: {
+              classes: "hide-address-fix",
+              legend: {
+                text: "caller_same_address" | translate,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: true,
+                text: "Yes",
+                checked: true if data['bsp-address-same-as-deceased'] == 'true' else false
+              },
+              {
+                value: false,
+                text: "No",
+                conditional: {
+                  html: bspAddressQuestionHtml
+                }, checked: true if data['bsp-address-same-as-deceased'] == 'false' else false
+              }
+            ]
+          }) }}
         {% endif %}
 
         {{ govukButton({
