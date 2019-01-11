@@ -1,1 +1,6 @@
-http://localhost:3000/versions/v8/capture
+http://localhost:3000/versions/v9/death-arrears-payee/administrator
+http://localhost:3000/versions/v9/death-arrears-payee/administrator-details
+http://localhost:3000/versions/v9/death-arrears-payee/administrator-payee
+http://localhost:3000/versions/v9/death-arrears-payee/next-of-kin
+http://localhost:3000/versions/v9/death-arrears-payee/next-of-kin-details
+http://localhost:3000/versions/v9/death-arrears-payee/next-of-kin-payee
