@@ -1,0 +1,115 @@
+{% from "radios/macro.njk"        import govukRadios %}
+
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="start-instructions">
+        {% call govukFieldset({
+          legend: {
+            classes: "govuk-fieldset__legend--l",
+            isPageHeading: false,
+            text: "About the caller"
+          }
+        }) %}
+          {{ govukInput({
+            label: {
+              text: "full_name" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-full-name-group"
+              }
+            },
+            id: "caller-full-name",
+            name: "caller-full-name",
+            classes: "govuk-!-width-two-thirds",
+            value: data["caller-full-name"]
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "phone_number" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-phone-number-group"
+              }
+            },
+            id: "caller-phone-number",
+            name: "caller-phone-number",
+            classes: "govuk-!-width-two-thirds",
+            value: data["caller-phone-number"]
+          }) }}
+
+          <div class="caller-relationship-container">
+            {{ govukSelect({
+              label: {
+                text: "caller_relationship" | translate,
+                classes: "govuk-!-font-weight-bold",
+                attributes: {
+                  id: "caller-relationship-group"
+                }
+              },
+              id: "caller-relationship",
+              name: "caller-relationship",
+              classes: "govuk-!-width-two-thirds",
+              value: data['caller-relationship'],
+              items: [
+                {
+                  text: "",
+                  value: ""
+                },
+                {
+                  text: "Boyfriend",
+                  value: "boyfriend"
+                },
+                {
+                  text: "Civil partner",
+                  value: "civilpartner"
+                },
+                {
+                  text: 'Daughter',
+                  value: 'daughter'
+                },
+                {
+                  text: "Friend",
+                  value: "friend"
+                },
+                {
+                  text: "Girlfriend",
+                  value: "girlfriend"
+                },
+                {
+                  text: "Husband",
+                  value: "husband"
+                },
+                {
+                  text: "Partner",
+                  value: "partner"
+                },
+                {
+                  text: 'Son',
+                  value: 'son'
+                },
+                {
+                  text: 'Spouse',
+                  value: 'spouse'
+                },
+                {
+                  text: "Wife",
+                  value: "wife"
+                }
+              ]
+            }) }}
+          </div>
+        {% endcall %}
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-eligibility"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

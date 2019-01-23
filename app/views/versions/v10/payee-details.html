@@ -3,7 +3,7 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-m">{{"death_arrears_who_we_will_pay" | translate}}</h1>
+      <h1 class="govuk-heading-m">{{"Your details" | translate}}</h1>
       <form method="post" action="payee-bank">
         {% include "versions/v6/includes/dap/personal-details.html" %}
         {{ govukButton({

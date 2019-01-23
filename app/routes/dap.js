@@ -33,7 +33,7 @@ const generateRoutes = (router) => {
     if (data['is-there-executor'] === 'true') {
       res.redirect(prefix + 'executor-details');
     } else {
-      if (version === 'v9') {
+      if (version === 'v9' || version === 'v10') {
         res.redirect(prefix + 'next-of-kin');
       } else {
         res.redirect(prefix + 'responsible-for-funeral');
@@ -82,13 +82,25 @@ const generateRoutes = (router) => {
     if (data['is-there-nok'] === 'true') {
       res.redirect(prefix + 'next-of-kin-details');
     } else {
-      if (version === 'v9') {
+      if (version === 'v9' || version === 'v10') {
         res.redirect(prefix + 'who-should-we-pay');
       } else {
         res.redirect(prefix + 'not-found');
       }
     }
   });
+
+  router.get('*/next-of-kin-payee-handler', (req, res) => {
+    const version = getVersion(req.params[0], 1);
+    const prefix = req.params[0] + '/';
+    const data = req.session.data;
+
+    if (data['nok-responsible'] === 'true') {
+      res.redirect(prefix + 'next-of-kin-payee');
+    } else {
+      res.redirect(prefix + 'next-of-kin-letter');
+    }
+  })
 
   router.get('*/other-payee', (req, res) => {
     const prefix = req.params[0] + '/';

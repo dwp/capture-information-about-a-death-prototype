@@ -2,13 +2,13 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-  <form method="post" action="next-of-kin-responsible">
+  <form method="post" action="who-letter">
     {{ govukRadios({
       id: "death-arrears-nok",
       name: "death-arrears-nok",
       fieldset: {
         legend: {
-          text: "Are you the next of kin?",
+          text: "Can we contact you if we need more information?",
           isPageHeading: true,
           classes: "govuk-fieldset__legend--l"
         }

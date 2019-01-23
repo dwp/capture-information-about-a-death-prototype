@@ -8,7 +8,7 @@ const benefitsRedirect = (req, res) => {
   const version = getVersion(req.params[0], 1);
   let error = 'The caller must be in receipt or have one of the following benefits pending';
 
-  if (version === 'v9') {
+  if (version === 'v9' || version === 'v10') {
     error = 'they must be in receipt of a qualifying benefit';
   }
 
@@ -27,7 +27,7 @@ const generateRoutes = (router) => {
     const version = getVersion(req.params[0], 1);
     res.app.locals.isEligibleForFep = fepEligibility.isEligibleForFep(req.session.data);
 
-    if (version === 'v5' || version === 'v6' || version === 'v7' || version === 'v8' || version === 'v9') {
+    if (version === 'v5' || version === 'v6' || version === 'v7' || version === 'v8' || version === 'v9' || version === 'v10') {
       next();
       return true;
     }
@@ -125,7 +125,7 @@ const generateRoutes = (router) => {
     const version = getVersion(req.params[0], 1);
 
     if (data['fep-funeral-location'] === 'true') {
-      if (version === 'v5' || version === 'v6 ' || version === 'v9') {
+      if (version === 'v5' || version === 'v6 ' || version === 'v9' || version === 'v10') {
         res.redirect(prefix + 'check');
       } else {
         res.redirect(prefix + 'qualifying-benefits');
@@ -145,7 +145,7 @@ const generateRoutes = (router) => {
       if (benefits.length === 1 && benefits[0] === '_unchecked') {
         return benefitsRedirect(req, res, prefix);
       } else {
-        if (version === 'v5' || version === 'v9') {
+        if (version === 'v5' || version === 'v9' || version === 'v10') {
           res.redirect(prefix + 'funeral-date');
         } else {
           res.redirect(prefix + 'confirm');
