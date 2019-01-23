@@ -1,0 +1,64 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="has-bank-account">
+        {% set question = "have_bank_building_details_question" | translate %}
+
+        {%
+          if (data['death-arrears-executor'] and data['death-arrears-executor'] === 'caller')
+          or (data['death-arrears-administrator'] and data['death-arrears-administrator'] === 'caller')
+          or (data['death-arrears-nok'] and data['death-arrears-nok'] === 'caller')
+        %}
+          {% set question = "have_bank_building_details_question" | translate %}
+        {% elif (data['death-arrears-executor'] and data['death-arrears-executor'] !== 'caller') %}
+          {% set question = "have_executor_bank_building_details_question" | translate %}
+        {% elif (data['death-arrears-administrator'] and data['death-arrears-administrator'] !== 'caller') %}
+          {% set question = "have_administrator_bank_building_details_question" | translate %}
+        {% elif (data['death-arrears-nok'] and data['death-arrears-nok'] !== 'caller') %}
+          {% set question = "have_nok_bank_building_details_question" | translate %}
+        {% elif data['death-arrears-pay-other'] %}
+          {% if data['death-arrears-pay-other'] === 'caller' %}
+            {% set question = "have_bank_building_details_question" | translate %}
+          {% else %}
+            {% set question = "have_payee_bank_building_details_question" | translate %}
+          {% endif %}
+
+        {% else %}
+          {% set question = "have_bank_building_details_question_executor" | translate %}
+        {% endif %}
+
+        {{ govukRadios({
+          idPrefix: "has-bank-or-building-conditional",
+          name: "dap-has-bank-or-building",
+          fieldset: {
+            legend: {
+              text: question,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes",
+              checked: true if data['has-bank-or-building'] == 'true' else false
+            },
+            {
+              value: "false",
+              text: "No",
+              checked: true if data['has-bank-or-building'] == 'false' else false
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-to-payee"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <form method="post" action="executor-details">
+    {{ govukCheckboxes({
+      idPrefix: "waste",
+      name: "waste",
+      fieldset: {
+        legend: {
+          text: "Are you aware of:",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: "Select all that apply."
+      },
+      items: [
+        {
+          value: "executor",
+          text: "An executor of the will"
+        },
+        {
+          value: "administrator",
+          text: "An administrator of the estate"
+        },
+        {
+          value: "funeral",
+          text: "Anyone paying for the funeral"
+        },
+        {
+          value: "nok",
+          text: "A next of kin"
+        },
+        {
+          value: "none",
+          text: "None of these"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

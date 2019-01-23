@@ -1,0 +1,46 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <h1 class="govuk-heading-m">{{"death_arrears_who_we_will_pay" | translate}}</h1>
+  <form method="post" action="../check">
+    {{ govukInput({
+      label: {
+        text: "full_name" | translate,
+        classes: "govuk-!-font-weight-bold",
+        attributes: {
+          id: "dap-full-name-group"
+        }
+      },
+      id: "dap-full-name",
+      name: "dap-full-name",
+      classes: "govuk-!-width-two-thirds",
+      value: data["caller-full-name"]
+    }) }}
+
+    {# We only need this if PIP or DLA #}
+    {# {{ govukInput({
+      label: {
+        text: "national_insurance" | translate,
+        classes: "govuk-!-font-weight-bold",
+        attributes: {
+          id: "dap-national-insurance-group"
+        }
+      },
+      id: "dap-national-insurance",
+      name: "dap-national-insurance",
+      classes: "govuk-!-width-two-thirds",
+      value: data["executor-national-insurance"]
+    }) }} #}
+
+    <div class="govuk-form-group dap-address">
+      {% set prefix = "dap" %}
+      {% include "includes/address-lookup.html" %}
+    </div>
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}
