@@ -1,0 +1,29 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Funeral Expenses Payment</h1>
+      {% if isEligibleForFep %}
+        {% include "versions/v11/funeral-expense-payments/eligible.html" %}
+      {% else %}
+        {% include "versions/v11/funeral-expense-payments/ineligible.html" %}
+      {% endif %}
+
+      {% if isEligibleForFep %}
+        {% set fepTargetUrl = "qualifying-benefits" %}
+      {% else %}
+        {% set fepTargetUrl = "../declaration" %}
+      {% endif %}
+      <a href={{fepTargetUrl}} role="button" class="govuk-button govuk-!-margin-bottom-3">
+        Continue
+      </a>
+      {% if isEligibleForFep %}
+        <p>
+          <a href="../declaration">Skip this page</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

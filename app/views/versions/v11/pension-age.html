@@ -1,0 +1,40 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row capture-data">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="death-arrears-payee/start">
+        {{ govukRadios({
+          idPrefix: "pension-age",
+          name: "pension-age",
+          fieldset: {
+            legend: {
+              text: "Is the caller State Pension age?" | translate,
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: true,
+              text: "Yes",
+              checked: true if data['pension-age'] == 'true' else false
+            },
+            {
+              value: false,
+              text: "No",
+              checked: true if data['pension-age'] == 'false' else false
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-eligibility"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

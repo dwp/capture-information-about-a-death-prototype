@@ -51,11 +51,6 @@ const isDapAvailable = (req, res, next) => {
   return false;
 };
 
-// Note: This may break things, keep an eye on it
-// router.get('*/check', (req, res, next) => {
-//   return isDapAvailable(req, res, next);
-// });
-
 // If a start page in the version exists,
 router.get('*/eligibility', (req, res, next) => {
   const url = req.params[0];
@@ -124,13 +119,10 @@ router.get('*/payee', (req, res, next) => {
 
   if (version!== 'base' || version !== 'v1') {
     if (isKnownPayee) {
-      console.log(payee, 'payee')
       if (payee === isSomeoneElse) {
-        console.log('please not here')
         route = req.params[0] + '/payee-details';
         res.app.locals.isCallerDap = false;
       } else {
-        console.log('am i here?')
         res.app.locals.isCallerDap = true;
       }
 
@@ -152,7 +144,6 @@ router.get('*/payee', (req, res, next) => {
 });
 
 router.get('*/payee-bank-test', (req, res, next) => {
-  console.log('bank test')
   const deathArrearsPayee = req.session.data['death-arrears-caller'] || '';
   const payee = deathArrearsPayee.toLowerCase();
   const isSomeoneElse = 'someone-else';
@@ -162,19 +153,15 @@ router.get('*/payee-bank-test', (req, res, next) => {
   let route = req.params[0] + '/payee-bank';
 
   if (isKnownPayee) {
-    console.log(payee, 'payee')
     if (payee === isSomeoneElse) {
-      console.log('please not here')
       route = req.params[0] + '/payee-details';
       res.app.locals.isCallerDap = false;
     } else {
-      console.log('am i here?')
       res.app.locals.isCallerDap = true;
       return next();
     }
 
     res.app.locals.dNComplete = true;
-    console.log(route)
     res.redirect(route);
   } else {
     res.redirect(req.params[0] + '/select-eligibility-cards');
@@ -184,6 +171,7 @@ router.get('*/payee-bank-test', (req, res, next) => {
   next();
 })
 
+// deprecated as of version 10
 router.get('*/benefits-handler*', (req, res, next) => {
   const data = req.session.data;
   const isSpouse = utils.isCallerSpouse(data['caller-relationship']);
@@ -191,9 +179,9 @@ router.get('*/benefits-handler*', (req, res, next) => {
   const selectedBenefits = req.session.data['deceased-qualifying-benefits'] || [];
   const qualifyingBenefits = (benefits) => res.app.locals.qualifyingBenefits.find(benefit => benefits === benefit.value)
   const matches = selectedBenefits.map(item => qualifyingBenefits(item));
-  console.log('qualifying benefits', selectedBenefits.includes('none'))
   const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
   let route = '/select-eligibility-cards' + req.params[1];
+
   if (isHospitalCheckRequired && data['hospital-death'] === undefined) {
     route = '/hospital-lookup';
   } else if ((version === 'v8' || version === 'v9' || version === 'v10') && isSpouse) {
@@ -211,10 +199,44 @@ router.get('*/benefits-handler*', (req, res, next) => {
   res.redirect(req.params[0] + route);
 });
 
+// deprecated as of version 10
 router.get('*/spouse-handler', (req, res, next) => {
   const data = req.session.data;
   const isSpouse = utils.isCallerSpouse(data['caller-relationship']);
   let route = '/benefits-handler';
+  if (isSpouse) {
+    route = '/capture-spouse';
+  }
+  res.redirect(req.params[0] + route);
+});
+
+router.get('*/benefits-route-handler', (req, res, next) => {
+  const version = getVersion(req.params[0], 1);
+  const data = req.session.data;
+  const isSpouse = utils.isCallerSpouse(data['caller-relationship']);
+  const selectedBenefits = req.session.data['deceased-qualifying-benefits'] || [];
+  const qualifyingBenefits = (benefits) => res.app.locals.qualifyingBenefits.find(benefit => benefits === benefit.value)
+  const matches = selectedBenefits.map(item => qualifyingBenefits(item));
+  const isHospitalCheckRequired = !!(matches.find(item => item.hospitalInterest));
+  let route = '/notification-check';
+
+  if (isHospitalCheckRequired && data['hospital-death'] === undefined) {
+    route = '/hospital-lookup';
+  } else if (isSpouse) {
+    route = '/capture-spouse';
+  } else if (selectedBenefits.length && !selectedBenefits.includes('none')) {
+    route = '/death-arrears-payee/start';
+  } else {
+    route = '/bereavement-support-payments/landing'
+  }
+
+  res.redirect(req.params[0] + route);
+});
+
+router.get('*/spouse-route-handler', (req, res) => {
+  const data = req.session.data;
+  const isSpouse = utils.isCallerSpouse(data['caller-relationship']);
+  let route = '/benefits-route-handler';
   if (isSpouse) {
     route = '/capture-spouse';
   }

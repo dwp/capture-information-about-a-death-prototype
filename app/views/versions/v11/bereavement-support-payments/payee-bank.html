@@ -1,0 +1,41 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="has-bank-account">
+        {% set question = "Does the caller have their bank account or building society details?" | translate %}
+
+        {{ govukRadios({
+          idPrefix: "has-bank-or-building-conditional",
+          name: "bsp-has-bank-or-building",
+          fieldset: {
+            legend: {
+              text: question,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes",
+              checked: true if data['has-bank-or-building'] == 'true' else false
+            },
+            {
+              value: "false",
+              text: "No",
+              checked: true if data['has-bank-or-building'] == 'false' else false
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-to-payee"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

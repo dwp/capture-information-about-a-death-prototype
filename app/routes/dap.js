@@ -63,17 +63,6 @@ const generateRoutes = (router) => {
     }
   })
 
-  // router.get('*/dap-beneficiary', (req, res) => {
-  //   const prefix = req.params[0] + '/';
-  //   const data = req.session.data;
-
-  //   if (data['is-there-beneficiary'] === 'true') {
-  //     res.redirect(prefix + 'beneficiary-details');
-  //   } else {
-  //     res.redirect(prefix + 'next-of-kin');
-  //   }
-  // })
-
   router.get('*/dap-nok', (req, res) => {
     const version = getVersion(req.params[0], 1);
     const prefix = req.params[0] + '/';

@@ -1,0 +1,160 @@
+{% from "input/macro.njk" import govukInput %}
+{% from "fieldset/macro.njk" import govukFieldset %}
+{% from "button/macro.njk" import govukButton %}
+{% from "radios/macro.njk" import govukRadios %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% set childBenefitHtml %}
+  {{ govukRadios({
+    id: "child-benefit-eligible",
+    name: "child-benefit-eligible",
+    fieldset: {
+      legend: {
+        text: "Is the caller eligible for child benefit?" | translate,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: "true",
+        text: "Yes" | translate
+      },
+      {
+        value: "false",
+        text: "No" | translate
+      }
+    ]
+    })
+  }}
+{% endset %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="bank-details">
+        <h2 class="govuk-heading-l" id="caller-heading">{{"caller_heading" | translate}}</h2>
+
+        <div id="bsp-dependents">
+          {{ govukRadios({
+            id: "bsp-dependants",
+            name: "bsp-dependants",
+            fieldset: {
+              legend: {
+                text: "dependants" | translate,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "true",
+                text: "Yes" | translate,
+                conditional: {
+                  html: "<p>" + 'dependants_hint' | translate + "</p>"
+                }
+              },
+              {
+                value: "false",
+                text: "No" | translate,
+                conditional: {
+                  html: childBenefitHtml
+                }
+              }
+            ]
+            })
+          }}
+        </div>
+
+        {{ govukInput({
+          label: {
+            text: "national_insurance" | translate,
+            classes: "govuk-!-font-weight-bold",
+            attributes: {
+              id: "caller-national-insurance-group"
+            }
+          },
+          id: "caller-national-insurance",
+          name: "caller-national-insurance",
+          classes: "govuk-!-width-two-thirds",
+          value: data["caller-national-insurance"]
+        }) }}
+
+        <div id="caller-sex-group">
+          {{ govukRadios({
+            idPrefix: "caller-sex",
+            name: "caller-sex",
+            fieldset: {
+              legend: {
+                text: "caller_sex" | translate,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: "caller_sex_hint" | translate
+            },
+            items: [
+              {
+                value: "female",
+                text: "Female",
+                checked: true if data['caller-sex'] == 'female' else false
+              },
+              {
+                value: "male",
+                text: "Male",
+                checked: true if data['caller-sex'] == 'male' else false
+              }
+            ]
+          }) }}
+        </div>
+
+        {% set bspAddressQuestionHtml %}
+          <div id="bsp-address-group">
+            {% set prefix = "bsp" %}
+            {% include "includes/address-lookup.html" %}
+          </div>
+        {% endset %}
+
+        {%
+          if (not data['deceased-address'] or data['deceased-address'] === 'false')
+          and data['death-arrears-nok'] !== 'caller'
+          and data['death-arrears-executor'] !== 'caller'
+          and data['death-arrears-administrator'] !== 'caller'
+        %}
+          {{ govukRadios({
+            idPrefix: "bsp-address-conditional",
+            name: "deceased-address",
+            fieldset: {
+              classes: "hide-address-fix",
+              legend: {
+                text: "caller_same_address" | translate,
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: true,
+                text: "Yes",
+                checked: true if data['bsp-address-same-as-deceased'] == 'true' else false
+              },
+              {
+                value: false,
+                text: "No",
+                conditional: {
+                  html: bspAddressQuestionHtml
+                }, checked: true if data['bsp-address-same-as-deceased'] == 'false' else false
+              }
+            ]
+          }) }}
+        {% endif %}
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-eligibility"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
