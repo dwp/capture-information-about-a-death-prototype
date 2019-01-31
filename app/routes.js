@@ -226,7 +226,7 @@ router.get('*/benefits-route-handler', (req, res, next) => {
     route = '/capture-spouse';
   } else if (selectedBenefits.length && !selectedBenefits.includes('none')) {
     route = '/death-arrears-payee/start';
-  } else if (version === 'v8' || version === 'v9' || version === 'v10'){
+  } else {
     route = '/bereavement-support-payments/landing'
   }
 
