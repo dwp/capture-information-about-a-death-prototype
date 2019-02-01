@@ -1,0 +1,106 @@
+{{ govukInput({
+  label: {
+    text: "full_name" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "dap-full-name-group"
+    }
+  },
+  id: "dap-full-name",
+  name: "dap-full-name",
+  classes: "govuk-!-width-two-thirds",
+  value: data["executor-full-name"]
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "company_name" | translate,
+    classes: "govuk-!-font-weight-bold",
+    attributes: {
+      id: "dap-company-name-group"
+    }
+  },
+  id: "dap-company-name",
+  name: "dap-company-name",
+  classes: "govuk-!-width-two-thirds",
+  value: data["executor-company-name"]
+}) }}
+
+{% if not data["executor-company-name"] %}
+  {{ govukInput({
+    label: {
+      text: "national_insurance" | translate,
+      classes: "govuk-!-font-weight-bold",
+      attributes: {
+        id: "dap-national-insurance-group"
+      }
+    },
+    id: "dap-national-insurance",
+    name: "dap-national-insurance",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-national-insurance"]
+  }) }}
+{% endif %}
+
+{% if data['executor-line-1'] %}
+  {{ govukInput({
+    label: {
+      text: "building_line_1" | translate | safe,
+      classes: "govuk-!-font-weight-bold"
+    },
+    id:  "executor-line-1",
+    name:  "executor-line-1",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-line-1"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "building_line_2" | translate,
+      classes: "govuk-visually-hidden govuk-!-font-weight-bold"
+    },
+    id:  "executor-line-2",
+    name:  "executor-line-2",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-line-2"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "town_city" | translate,
+      classes: "govuk-!-font-weight-bold"
+    },
+    id:  "executor-town-city",
+    name:  "executor-town-city",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-town-city"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "county" | translate,
+      classes: "govuk-!-font-weight-bold"
+    },
+    id:  "executor-county",
+    name:  "executor-county",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-county"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "postcode" | translate,
+      classes: "govuk-!-font-weight-bold"
+    },
+    id:  "executor-postcode",
+    name:  "executor-postcode",
+    classes: "govuk-!-width-two-thirds",
+    value: data["executor-postcode"]
+  }) }}
+{% else %}
+  <div class="govuk-form-group hide-address-fix">
+    {% set prefix = "dap" %}
+    {% set address_label = "death_arrears_address" | translate %}
+    {% include "versions/v11/includes/manual-address.html" %}
+  </div>
+{% endif %}

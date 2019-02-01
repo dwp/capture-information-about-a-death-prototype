@@ -4,7 +4,7 @@
   {% set dapHtml %}
     <div class="govuk-form-group dap-address">
       {% set prefix = "dap" %}
-      {% include "includes/address-lookup.html" %}
+      {% include "versions/v11/includes/manual-address.html" %}
     </div>
   {% endset %}
   <h1 class="govuk-heading-l">Your contact details</h1>
@@ -75,7 +75,7 @@
     {% else %}
       <div class="govuk-form-group dap-address">
         {% set prefix = "dap" %}
-        {% include "includes/address-lookup.html" %}
+        {% include "versions/v11/includes/manual-address.html" %}
       </div>
     {% endif %}
 

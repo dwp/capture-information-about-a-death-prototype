@@ -11,7 +11,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{title}}</h1>
       <form method="post" action="payee-bank">
-        {% include "versions/v6/includes/dap/personal-details.html" %}
+        {% include "versions/v11/death-arrears-payee/personal-details.html" %}
         {{ govukButton({
           text: "continue" | translate,
           id: "continue-to-payee"
