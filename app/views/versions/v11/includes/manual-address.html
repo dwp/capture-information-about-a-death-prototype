@@ -1,7 +1,7 @@
 {% call govukFieldset({
   classes: 'address-group',
   legend: {
-    html: "address" | translate,
+    html: address_label or "address" | translate,
     classes: "govuk-fieldset__legend--s",
     isPageHeading: false
   }
