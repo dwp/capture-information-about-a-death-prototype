@@ -5,8 +5,21 @@
     <div class="govuk-grid-column-two-thirds">
       <form method="post" action="spouse-route-handler" class="hospital-lookup-container">
         {% set hospitalInfoHtml %}
-          {% include "versions/base/includes/hospital/autocomplete.html" %}
+          {{ govukInput({
+            label: {
+              text: "hospital_location" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-full-name-group"
+              }
+            },
+            id: "hospital-location",
+            name: "hospital-location",
+            classes: "govuk-!-width-two-thirds",
+            value: data["hospital-location"]
+          }) }}
         {% endset %}
+
         {{ govukRadios({
           idPrefix: "hospital-death-conditional",
           name: "hospital-death",
