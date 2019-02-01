@@ -1,9 +1,15 @@
 {% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
 
 {% block content %}
+
+  {% set title = "About you" %}
+  {% if data['who-is-dap'] == 'someone' %}
+    {% set title='About the person responsible' %}
+  {% endif %}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-m">{{"Your details" | translate}}</h1>
+      <h1 class="govuk-heading-l">{{title}}</h1>
       <form method="post" action="payee-bank">
         {% include "versions/v6/includes/dap/personal-details.html" %}
         {{ govukButton({

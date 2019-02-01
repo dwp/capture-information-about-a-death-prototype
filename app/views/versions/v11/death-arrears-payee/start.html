@@ -2,42 +2,39 @@
 {% extends "versions/v1/bereavement-support-payments/layout.html" %}
 
 {% block formContent %}
-  <form method="post" action="next-of-kin-details">
-  <h1 class="govuk-heading-l">Benefit money still to be paid</h1>
-  <p>If there’s still benefit money that needs to be paid, we need to work out who to pay.</p>
-    {{ govukCheckboxes({
-      idPrefix: "waste",
-      name: "waste",
+  <form method="post" action="../payee-details">
+
+    {{ govukRadios({
+      idPrefix: "who-is-dap",
+      name: "who-is-dap",
       fieldset: {
         legend: {
-          text: "Which of these are you aware of:",
-          isPageHeading: false,
-          classes: "govuk-fieldset__legend--m"
+          text: "Who is responsible for dealing with the property, belongings and money of the person who died?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
         }
       },
+
       hint: {
-        text: "Select all that apply."
+        text: "We need to know in case we owe benefit money or some needs to be paid back."
       },
+
       items: [
         {
-          value: "executor",
-          text: "An executor of the will"
+          value: "you",
+          text: "You"
         },
         {
-          value: "administrator",
-          text: "An administrator of the estate"
+          value: "someone",
+          text: "Someone else"
+        },
+
+        {
+          divider: "or"
         },
         {
-          value: "funeral",
-          text: "The person paying for the funeral"
-        },
-        {
-          value: "nok",
-          text: "A next of kin"
-        },
-        {
-          value: "none",
-          text: "None of these"
+          value: "idk",
+          text: "I don't know"
         }
       ]
     }) }}
