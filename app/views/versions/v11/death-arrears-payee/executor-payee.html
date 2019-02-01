@@ -4,7 +4,7 @@
   {% set dapHtml %}
     <div class="govuk-form-group dap-address">
       {% set prefix = "dap" %}
-      {% include "includes/address-lookup.html" %}
+      {% include "versions/v11/includes/manual-address.html" %}
     </div>
   {% endset %}
   {% set executorHeading = "death_arrears_who_we_will_pay" | translate %}
@@ -93,7 +93,7 @@
     {% else %}
       <div class="govuk-form-group dap-address">
         {% set prefix = "dap" %}
-        {% include "includes/address-lookup.html" %}
+        {% include "versions/v11/includes/manual-address.html" %}
       </div>
     {% endif %}
 

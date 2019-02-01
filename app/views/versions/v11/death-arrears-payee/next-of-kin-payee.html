@@ -4,7 +4,7 @@
   {% set dapHtml %}
     <div class="govuk-form-group dap-address">
       {% set prefix = "dap" %}
-      {% include "includes/address-lookup.html" %}
+      {% include "versions/v11/includes/manual-address.html" %}
     </div>
   {% endset %}
   {% set nokHeading = "Next of kin's details" %}
@@ -79,7 +79,7 @@
     {% else %}
       <div class="govuk-form-group dap-address">
         {% set prefix = "dap" %}
-        {% include "includes/address-lookup.html" %}
+        {% include "versions/v11/includes/manual-address.html" %}
       </div>
     {% endif %}
 
