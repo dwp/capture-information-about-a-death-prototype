@@ -13,7 +13,7 @@ const locales = {
     bank_name: 'Bank name',
     bank_account_no: 'Account number',
     bank_sort_code: 'Sort code',
-    benefits_label: 'Qualifying benefits',
+    benefits_label: 'Benefits they were getting',
     bereavement_allowance: 'Bereavement Allowance',
     bereavement_benefits: 'Bereavement benefits',
     building_line_1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
