@@ -101,6 +101,15 @@ const generateRoutes = (router) => {
       res.redirect(prefix + 'not-found-payee');
     }
   });
+
+  router.get('*/payee-details', (req, res, next) => {
+    const prefix = req.params[0] + '/';
+    const { data } = req.session;
+    if (data['who-is-dap'] === 'idk') {
+      return res.redirect(prefix + 'death-arrears-payee/not-found.html');
+    }
+    next();
+  });
 };
 
 module.exports = generateRoutes;

@@ -9,7 +9,7 @@
     <div class="govuk-grid-column-two-thirds">
       <form method="post" action="benefits-route-handler">
         {{deceasedDetailsHtml | safe}}
-        {% include "versions/v11/includes/deceased-benefits-list.html" %}
+        {% include "versions/v10/includes/deceased-benefits-list.html" %}
 
         {{ govukButton({
           text: "continue" | translate,

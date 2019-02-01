@@ -4,29 +4,11 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form method="post" action="has-bank-account">
-        {% set question = "have_bank_building_details_question" | translate %}
-
-        {%
-          if (data['death-arrears-executor'] and data['death-arrears-executor'] === 'caller')
-          or (data['death-arrears-administrator'] and data['death-arrears-administrator'] === 'caller')
-          or (data['death-arrears-nok'] and data['death-arrears-nok'] === 'caller')
-        %}
-          {% set question = "have_bank_building_details_question" | translate %}
-        {% elif (data['death-arrears-executor'] and data['death-arrears-executor'] !== 'caller') %}
-          {% set question = "have_executor_bank_building_details_question" | translate %}
-        {% elif (data['death-arrears-administrator'] and data['death-arrears-administrator'] !== 'caller') %}
-          {% set question = "have_administrator_bank_building_details_question" | translate %}
-        {% elif (data['death-arrears-nok'] and data['death-arrears-nok'] !== 'caller') %}
-          {% set question = "have_nok_bank_building_details_question" | translate %}
-        {% elif data['death-arrears-pay-other'] %}
-          {% if data['death-arrears-pay-other'] === 'caller' %}
-            {% set question = "have_bank_building_details_question" | translate %}
-          {% else %}
-            {% set question = "have_payee_bank_building_details_question" | translate %}
-          {% endif %}
-
-        {% else %}
-          {% set question = "have_bank_building_details_question_executor" | translate %}
+        {% set question = "Do you have your bank details?" %}
+        {% set hint = 'If we owe any money, we can pay this into your bank account. If there is an overpayment, we will write to you and explain what to do next.' %}
+        {% if data['who-is-dap'] == 'someone' %}
+          {% set question='Do you have their bank details?' %}
+          {% set hint='If we owe any money, we can pay this into their bank account. If there is an overpayment, we will write to them, explaining what to do next.' %}
         {% endif %}
 
         {{ govukRadios({
@@ -38,6 +20,9 @@
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
+          },
+          hint: {
+            text: hint
           },
           items: [
             {
