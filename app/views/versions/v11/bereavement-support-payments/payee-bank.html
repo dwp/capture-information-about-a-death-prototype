@@ -4,7 +4,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form method="post" action="has-bank-account">
-        {% set question = "Does the caller have their bank account or building society details?" | translate %}
+        {% set question = "Do you have your bank details?" | translate %}
 
         {{ govukRadios({
           idPrefix: "has-bank-or-building-conditional",
