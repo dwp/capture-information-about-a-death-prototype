@@ -7,7 +7,7 @@ const locales = {
     app_title: 'Capture information about a death',
     bank_account: 'Bank account',
     bank_account_question: 'Bank account details',
-    bank_building_question: 'Does the caller have a bank account or building society account?',
+    bank_building_question: 'Is it a bank or building society account?',
     bank_building_question_executor: 'Does the executor have a bank account or building society account?',
     bank_details_heading: 'Payment method',
     bank_name: 'Bank name',
@@ -27,13 +27,13 @@ const locales = {
     bsp_eligibility_failed: 'Based on the information provided we believe you are not eligible for Bereavement Support Payments. You can apply again directly via this form or ring BSP team information here.',
     bsp_use_bank: 'Does the caller want to give their bank details?',
     bsp_use_bank_hint: `We'll make payments to this account if their claim is successful`, // content review
-    bsp_use_dap: 'Does the caller want to use the bank details they provided earlier?', // content review
-    bsp_use_dap_hint: `We'll use the account the caller asked us to pay any outstanding benefits to`, // content review
+    bsp_use_dap: 'Do you want to use the bank details you gave earlier?', // content review
+    bsp_use_dap_hint: `If your claim is successful, we'll make payments into this account.`, // content review
     caller_address: `What is the caller's address?`,
     caller_details_heading: `About the caller`,
     caller_heading: 'About the caller',
     caller_relationship: `Relationship to the person who died`,
-    caller_same_address: `Was your address the same as the person who died?`,
+    caller_same_address: `Is your address the same as the person who died?`,
     caller_sex: 'Sex',
     caller_sex_hint: `We need this to work out the caller's State Pension age`,
     caller_tab: 'Caller',
