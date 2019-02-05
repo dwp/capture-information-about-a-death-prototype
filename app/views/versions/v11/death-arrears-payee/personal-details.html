@@ -1,3 +1,7 @@
+{% set nameValue = '' %}
+{% if data['who-is-dap'] == 'you' %}
+  {% set nameValue = data['caller-full-name'] %}
+{% endif %}
 {{ govukInput({
   label: {
     text: "full_name" | translate,
@@ -9,7 +13,7 @@
   id: "dap-full-name",
   name: "dap-full-name",
   classes: "govuk-!-width-two-thirds",
-  value: data["executor-full-name"]
+  value: nameValue
 }) }}
 
 {{ govukInput({

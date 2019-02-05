@@ -7,7 +7,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l">{{"check_title" | translate}}</h1>
-    <p>{{ "check_description" | translate}} {{data["caller-full-name"]}}</p>
+    <p>{{ "check_description_bsp" | translate}}</p>
     <dl class="app-check-your-answers app-check-your-answers--long">
       {% if (data['caller-national-insurance']) %}
         <div class="app-check-your-answers__contents">
@@ -304,7 +304,7 @@
         </div>
       {% endif %}
     </dl>
-    <a href="confirm" class="govuk-button" role="button">{{"continue" | translate}}</a>
+    <a href="../funeral-expense-payments/landing" class="govuk-button" role="button">{{"continue" | translate}}</a>
   </div>
 </div>
 
