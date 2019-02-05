@@ -125,10 +125,10 @@ const generateRoutes = (router) => {
     const version = getVersion(req.params[0], 1);
 
     if (data['fep-funeral-location'] === 'true') {
-      if (version === 'v5' || version === 'v6 ' || version === 'v9' || version === 'v10') {
-        res.redirect(prefix + 'check');
-      } else {
+      if (version === 'v1' || version === 'v2' || version === 'v3' || version === 'v4' ||  version === 'v7' || version === 'v8') {
         res.redirect(prefix + 'qualifying-benefits');
+      } else {
+        res.redirect(prefix + 'check');
       }
     } else {
       const error = 'the location of the funeral must be in the UK or EU';
@@ -145,10 +145,10 @@ const generateRoutes = (router) => {
       if (benefits.length === 1 && benefits[0] === '_unchecked') {
         return benefitsRedirect(req, res, prefix);
       } else {
-        if (version === 'v5' || version === 'v9' || version === 'v10') {
-          res.redirect(prefix + 'funeral-date');
-        } else {
+        if (version === 'v1' || version === 'v2' || version === 'v3' || version === 'v4' || version === 'v6' ||  version === 'v7' || version === 'v8') {
           res.redirect(prefix + 'confirm');
+        } else {
+          res.redirect(prefix + 'funeral-date');
         }
       }
     } else {
