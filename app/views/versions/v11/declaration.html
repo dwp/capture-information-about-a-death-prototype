@@ -3,11 +3,13 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-l">Declaration</h1>
-    <h2 class="govuk-heading-m">To read to the caller</h2>
-    <p>The information you’ve given will be used to update benefit records and stop any benefit payments.</p>
-    <p>Your information will also be given to the Bereavement Support Payment team and the Funeral Expenses Payment team so they can start an application.</p>
-    <p>Do you agree that the information provided is accurate, to the best of your knowledge?</p>
+    <h1 class="govuk-heading-l">Declaration – read to the caller</h1>
+    <p>The information you’ve given will be used to update benefit records.</p>
+    <p>You agree that the information you’ve given is correct and complete to the best of your knowledge.</p>
+    {{ govukWarningText({
+      text: "You could be prosecuted or face other action if you knowingly give false information.",
+      iconFallbackText: "Warning"
+    }) }}
     <a href="complete" class="govuk-button" role="button">{{"confirm_send_application" | translate}}</a>
   </div>
 </div>
