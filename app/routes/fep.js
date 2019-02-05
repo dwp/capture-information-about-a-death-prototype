@@ -131,7 +131,23 @@ const generateRoutes = (router) => {
         res.redirect(prefix + 'check');
       }
     } else {
+      if (version ==='v11') {
+        return res.redirect(prefix + 'funeral-location-eu');
+      }
       const error = 'the location of the funeral must be in the UK or EU';
+      return handleFailure(error, 'fep', req, res);
+    }
+  });
+
+  router.get('*/check-funeral-location-eu', (req, res, next) => {
+    const prefix = req.params[0] + '/';
+    const data = req.session.data;
+    const version = getVersion(req.params[0], 1);
+
+    if (data['fep-funeral-location-eu'] === 'true') {
+        res.redirect(prefix + 'check');
+    } else {
+      const error = 'the funeral must be held in the UK, European Economic Area (EEA) or Switzerland';
       return handleFailure(error, 'fep', req, res);
     }
   });
