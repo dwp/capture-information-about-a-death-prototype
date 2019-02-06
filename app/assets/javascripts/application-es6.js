@@ -38,7 +38,27 @@ $(document).ready(function () {
           selectElement: relationshipEl,
           name: "caller-relationship TEST",
           showAllValues: true,
-          defaultValue: ''
+          defaultValue: '',
+        });
+      }
+    }
+  }
+
+    /**
+   * If a relationship to deceased element exists, make it into an autocomplete element
+   */
+  const setupRelationshipAutocompleteTest = () => {
+    const relationshipEl = document.getElementById('caller-relationship-hide');
+    if (relationshipEl) {
+      const isSelectEl = relationshipEl.tagName.toLowerCase() === 'select';
+
+      if (isSelectEl) {
+        accessibleAutocomplete.enhanceSelectElement({
+          selectElement: relationshipEl,
+          name: "caller-relationship",
+          showAllValues: false,
+          defaultValue: '',
+          showNoOptionsFound: false
         });
       }
     }
@@ -210,6 +230,7 @@ $(document).ready(function () {
   }
   getRelationshipStatus();
   setupRelationshipAutoComplete();
+  setupRelationshipAutocompleteTest();
   setupHospitalAutoComplete();
   conditionalBankSetup();
   addressLookup();
