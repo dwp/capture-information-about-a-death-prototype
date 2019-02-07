@@ -2,31 +2,6 @@
 
 {% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
 
-{% set securityConditional %}
-  {{ govukRadios({
-    id: "additional-security",
-    name: "additional-security",
-    fieldset: {
-      legend: {
-        text: "Were they able to answer the additional security questions?" | translate,
-        isPageHeading: true,
-        classes: "govuk-fieldset__legend--s"
-      }
-    },
-    items: [
-      {
-        value: "true",
-        text: "Yes" | translate
-      },
-      {
-        value: "false",
-        text: "No" | translate
-      }
-    ]
-    })
-  }}
-{% endset %}
-
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -38,7 +13,7 @@
           legend: {
             classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-2",
             isPageHeading: false,
-            text: "About the caller"
+            text: "2. About the caller"
           },
           classes: "start-group"
         }) %}
