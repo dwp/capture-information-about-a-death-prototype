@@ -1,0 +1,49 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="has-bank-account">
+        {% set question = "Do you have your bank details?" %}
+        {% set hint = 'If we owe any money, we can pay this into your bank account. If there is an overpayment, we will write to you and explain what to do next.' %}
+        {% if data['who-is-dap'] == 'someone' %}
+          {% set question='Do you have their bank details?' %}
+          {% set hint='If we owe any money, we can pay this into their bank account. If there is an overpayment, we will write to them, explaining what to do next.' %}
+        {% endif %}
+
+        {{ govukRadios({
+          idPrefix: "has-bank-or-building-conditional",
+          name: "dap-has-bank-or-building",
+          fieldset: {
+            legend: {
+              text: question,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: hint
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes",
+              checked: true if data['has-bank-or-building'] == 'true' else false
+            },
+            {
+              value: "false",
+              text: "No",
+              checked: true if data['has-bank-or-building'] == 'false' else false
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-to-payee"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

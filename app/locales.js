@@ -26,9 +26,9 @@ const locales = {
     bsp: 'Bereavement Support Payment',
     bsp_eligibility_failed: 'Based on the information provided we believe you are not eligible for Bereavement Support Payments. You can apply again directly via this form or ring BSP team information here.',
     bsp_use_bank: 'Does the caller want to give their bank details?',
-    bsp_use_bank_hint: `We'll make payments to this account if their claim is successful`, // content review
-    bsp_use_dap: 'Do you want to use the bank details you gave earlier?', // content review
-    bsp_use_dap_hint: `If your claim is successful, we'll make payments into this account.`, // content review
+    bsp_use_bank_hint: `We'll make payments to this account if their claim is successful`,
+    bsp_use_dap: 'Do you want to use the bank details you gave earlier?',
+    bsp_use_dap_hint: `If your claim is successful, we'll make payments into this account.`,
     caller_address: `What is the caller's address?`,
     caller_details_heading: `About the caller`,
     caller_heading: 'About the caller',

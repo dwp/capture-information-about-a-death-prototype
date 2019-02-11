@@ -1,0 +1,146 @@
+{% extends "layout-full-width.html" %} {% set agent = true %}
+{% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% block beforeContent %}
+
+{% endblock %}
+{%block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{"check_title" | translate}}</h1>
+    <p>{{ "check_description_fep" | translate}}</p>
+    <dl class="app-check-your-answers app-check-your-answers--long">
+
+      {% if (data['fep-qualifying-benefits']) %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            Qualifying benefits
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {% for benefit in data['fep-qualifying-benefits'] %}
+              {% if loop.index != 1 %}
+                <br />
+              {% endif %}
+              {{benefit | replace('-', '_') | translate}}
+            {% endfor %}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="qualifying-benefits#fep-qualifying-benefits-group">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "benefits_label" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['fep-funeral-date'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            Funeral date known
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {% if data['fep-funeral-date'] === 'false' %}
+              No
+            {% else %}
+              Yes
+            {% endif %}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="funeral-date">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "funeral_date" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {%
+        if data['fep-funeral-date-day']
+        and data['fep-funeral-date-month']
+        and data['fep-funeral-date-year']
+        and (data['fep-funeral-date'] and data['fep-funeral-date'] !== 'false')
+      %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "funeral_date_when" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{ data['fep-funeral-date-day'] }}/{{ data['fep-funeral-date-month'] }}/{{ data['fep-funeral-date-year'] }}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="funeral-date">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "funeral_date_when" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['fep-funeral-responsibility'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            Paying for funeral
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {% if data['fep-funeral-responsibility'] === 'false' %}
+              No
+            {% else %}
+              Yes
+            {% endif %}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="responsibility">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "fep_responsibility" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['fep-funeral-residency'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            Person who died usually lived in the UK
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {% if data['fep-funeral-residency'] === 'false' %}
+              No
+            {% else %}
+              Yes
+            {% endif %}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="residency">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "fep_residency" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['fep-funeral-location'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            Funeral held in the UK, EEA or Switzerland
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {% if data['fep-funeral-location'] === 'false' %}
+              No
+            {% else %}
+              Yes
+            {% endif %}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="funeral-location">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "fep_location" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+    </dl>
+    <a href="../declaration" class="govuk-button" role="button">{{"continue" | translate}}</a>
+  </div>
+</div>
+
+{% endblock %}

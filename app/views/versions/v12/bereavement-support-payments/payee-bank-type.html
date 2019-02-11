@@ -12,7 +12,7 @@
 
         {{ govukRadios({
           idPrefix: "bank-or-building-conditional",
-          name: "dap-bank-or-building",
+          name: "bsp-bank-or-building",
           fieldset: {
             legend: {
               text: question,
@@ -28,11 +28,12 @@
             },
             {
               value: "building-society",
-              text: "Building society account",
+              text: "Building Society",
               checked: true if data['bank-or-building'] == 'building-society' else false
             }
           ]
         }) }}
+
 
         {{ govukButton({
           text: "continue" | translate,

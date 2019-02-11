@@ -1,0 +1,238 @@
+{% from "radios/macro.njk"        import govukRadios %}
+
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% set securityConditional %}
+  {{ govukRadios({
+    id: "additional-security",
+    name: "additional-security",
+    fieldset: {
+      legend: {
+        text: "Were they able to answer the additional security questions?" | translate,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: "true",
+        text: "Yes" | translate
+      },
+      {
+        value: "false",
+        text: "No" | translate
+      }
+    ]
+    })
+  }}
+{% endset %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {# <h1 class="govuk-heading-l">
+        {{"start_page_heading" | translate}}
+      </h1> #}
+      <form method="post" action="capture">
+        {% call govukFieldset({
+          legend: {
+            classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-2",
+            isPageHeading: false,
+            text: "About the caller"
+          },
+          classes: "start-group"
+        }) %}
+          {{ govukInput({
+            label: {
+              text: "full_name" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-full-name-group"
+              }
+            },
+            id: "caller-full-name",
+            name: "caller-full-name",
+            classes: "govuk-!-width-two-thirds",
+            value: data["caller-full-name"]
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "phone_number" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-phone-number-group"
+              }
+            },
+            id: "caller-phone-number",
+            name: "caller-phone-number",
+            classes: "govuk-!-width-two-thirds",
+            value: data["caller-phone-number"]
+          }) }}
+
+          <div class="caller-relationship-container">
+            {{ govukSelect({
+              label: {
+                text: "caller_relationship" | translate,
+                classes: "govuk-!-font-weight-bold",
+                attributes: {
+                  id: "caller-relationship-group"
+                }
+              },
+              id: "caller-relationship",
+              name: "caller-relationship",
+              classes: "govuk-!-width-two-thirds",
+              value: data['caller-relationship'],
+              items: [
+                {
+                  text: "",
+                  value: ""
+                },
+                {
+                  text: "Boyfriend",
+                  value: "boyfriend"
+                },
+                {
+                  text: "Civil partner",
+                  value: "civilpartner"
+                },
+                {
+                  text: 'Daughter',
+                  value: 'daughter'
+                },
+                {
+                  text: "Friend",
+                  value: "friend"
+                },
+                {
+                  text: "Girlfriend",
+                  value: "girlfriend"
+                },
+                {
+                  text: "Husband",
+                  value: "husband"
+                },
+                {
+                  text: "Partner",
+                  value: "partner"
+                },
+                {
+                  text: 'Son',
+                  value: 'son'
+                },
+                {
+                  text: 'Spouse',
+                  value: 'spouse'
+                },
+                {
+                  text: "Wife",
+                  value: "wife"
+                }
+              ]
+            }) }}
+          </div>
+        {% endcall %}
+
+        {% call govukFieldset({
+          legend: {
+            classes: "govuk-fieldset__legend--l govuk-!-margin-bottom-2",
+            isPageHeading: false,
+            text: "About the person who died"
+          }
+        }) %}
+          <p>Use these details for the security check.</p>
+          {{ govukInput({
+            label: {
+              text: "full_name" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "deceased-full-name-group"
+              }
+            },
+            id: "deceased-full-name",
+            name: "deceased-full-name",
+            classes: "govuk-!-width-two-thirds",
+            value: data["deceased-full-name"]
+          }) }}
+
+          <div id="deceased-dob-group">
+            {{ govukDateInput({
+              id: "deceased-dob",
+              name: "deceased-dob",
+              value: data["deceased-dob"],
+              fieldset: {
+                legend: {
+                  text: "dob_title" | translate,
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--s date-of-birth-group"
+                }
+              },
+              hint: {
+                text: "dob_hint" | translate
+              },
+              items: [
+                {
+                  name: "day",
+                  value: data['deceased-dob-day']
+                },
+                {
+                  name: "month",
+                  value: data['deceased-dob-month']
+                },
+                {
+                  name: "year",
+                  value: data['deceased-dob-year']
+                }
+              ]
+            }) }}
+          </div>
+
+          {{ govukInput({
+            label: {
+              text: "national_insurance" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "deceased-national-insurance-group"
+              }
+            },
+            id: "deceased-national-insurance",
+            name: "deceased-national-insurance",
+            classes: "govuk-!-width-two-thirds",
+            value: data["deceased-national-insurance"]
+          }) }}
+        {% endcall %}
+
+        {{ govukRadios({
+          id: "passed-security",
+          name: "passed-security",
+          fieldset: {
+            legend: {
+              text: "passed_security" | translate,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes" | translate
+            },
+            {
+              value: "false",
+              text: "No" | translate,
+              conditional: {
+                html: securityConditional
+              }
+            }
+          ]
+          })
+        }}
+
+        {{ govukButton({
+          text: "continue" | translate,
+          id: "continue-eligibility"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

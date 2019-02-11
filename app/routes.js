@@ -384,7 +384,6 @@ router.get('*/bereavement-support-payments/bank-account-type', (req, res, next) 
 
 router.get('*/bank-account-type', (req, res, next) => {
   const data = req.session.data;
-
   if (data['dap-bank-or-building'] === "bank") {
     res.redirect(req.params[0] + '/payee-bank-account-details');
   } else {

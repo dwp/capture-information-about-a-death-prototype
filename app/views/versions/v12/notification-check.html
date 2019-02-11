@@ -1,0 +1,30 @@
+{% extends "layout-full-width.html" %} {% set agent = true %}
+{% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% block beforeContent %}
+
+{% endblock %}
+{%block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{"check_title" | translate}}</h1>
+
+    {% include "versions/v11/includes/check/deceased.html" %}
+    {% include "versions/v11/includes/check/caller.html" %}
+
+    {% if data['spouse-full-name'] %}
+      {% include "versions/v11/includes/check/spouse.html" %}
+    {% endif %}
+
+    {% if data['executor-full-name'] %}
+      {% include "versions/v11/includes/check/executor.html" %}
+    {% endif %}
+
+    {% if data['dap-bank-name'] %}
+      {% include "versions/v11/includes/check/dap.html" %}
+    {% endif %}
+
+    <a href="bereavement-support-payments/landing" class="govuk-button" role="button">{{"continue" | translate}}</a>
+  </div>
+</div>
+
+{% endblock %}

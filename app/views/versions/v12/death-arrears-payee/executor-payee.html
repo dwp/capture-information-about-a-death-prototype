@@ -1,0 +1,105 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+{% block formContent %}
+  {% set dapHtml %}
+    <div class="govuk-form-group dap-address">
+      {% set prefix = "dap" %}
+      {% include "versions/v11/includes/manual-address.html" %}
+    </div>
+  {% endset %}
+  {% set executorHeading = "death_arrears_who_we_will_pay" | translate %}
+  {% if data['death-arrears-executor'] === 'caller' %}
+    {% set executorHeading = "Caller's details" %}
+  {% endif %}
+  <h1 class="govuk-heading-l">{{executorHeading}}</h1>
+  <form method="post" action="../payee-bank">
+    {{ govukInput({
+      label: {
+        text: "full_name" | translate,
+        classes: "govuk-!-font-weight-bold",
+        attributes: {
+          id: "dap-full-name-group"
+        }
+      },
+      id: "dap-full-name",
+      name: "dap-full-name",
+      classes: "govuk-!-width-two-thirds",
+      value: data["caller-full-name"] if data['death-arrears-executor'] === 'caller'
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "company_name" | translate,
+        classes: "govuk-!-font-weight-bold",
+        attributes: {
+          id: "dap-company-name-group"
+        }
+      },
+      id: "dap-company-name",
+      name: "dap-company-name",
+      classes: "govuk-!-width-two-thirds",
+      value: data["executor-company-name"]
+    }) }}
+
+    {# We only need this if PIP or DLA #}
+    {%
+      if data['deceased-qualifying-benefits']
+      and (data['deceased-qualifying-benefits'].indexOf('pip') !== -1
+      or data['deceased-qualifying-benefits'].indexOf('disability_living_allowance_child') !== -1
+      or data['deceased-qualifying-benefits'].indexOf('disability_living_allowance_working_age') !== -1)
+    %}
+      {{ govukInput({
+        label: {
+          text: "national_insurance" | translate,
+          classes: "govuk-!-font-weight-bold",
+          attributes: {
+            id: "dap-national-insurance-group"
+          }
+        },
+        id: "dap-national-insurance",
+        name: "dap-national-insurance",
+        classes: "govuk-!-width-two-thirds",
+        value: data["executor-national-insurance"]
+      }) }}
+    {% endif %}
+
+    {% if data['death-arrears-executor'] == 'caller' %}
+      {{ govukRadios({
+        idPrefix: "deceased-address-conditional",
+        name: "deceased-address",
+        fieldset: {
+          classes: "hide-address-fix",
+          legend: {
+            text: "caller_same_address" | translate,
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        items: [
+          {
+            value: true,
+            text: "Yes",
+            checked: true if data['deceased-address'] == 'true' else false
+          },
+          {
+            value: false,
+            text: "No",
+            conditional: {
+              html: dapHtml
+            }, checked: true if data['deceased-address'] == 'false' else false
+          }
+        ]
+      }) }}
+    {% else %}
+      <div class="govuk-form-group dap-address">
+        {% set prefix = "dap" %}
+        {% include "versions/v11/includes/manual-address.html" %}
+      </div>
+    {% endif %}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

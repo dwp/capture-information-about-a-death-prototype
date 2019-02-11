@@ -6,7 +6,7 @@ const getVersion = ((url, index = 0) => url.slice(1).split('/')[index]);
 
 const benefitsRedirect = (req, res) => {
   const version = getVersion(req.params[0], 1);
-  let error = 'The caller must be in receipt or have one of the following benefits pending';
+  let error = 'they must claim or have applied for a qualifying benefit';
 
   if (version === 'v9' || version === 'v10') {
     error = 'they must be in receipt of a qualifying benefit';
@@ -102,7 +102,7 @@ const generateRoutes = (router) => {
     if (data['fep-funeral-responsibility'] === 'true') {
       res.redirect(prefix + 'residency');
     } else {
-      const error = 'they must take responsibility for the costs of the funeral';
+      const error = 'they must be paying for the funeral';
       return handleFailure(error, 'fep', req, res);
     }
   });
@@ -114,7 +114,7 @@ const generateRoutes = (router) => {
     if (data['fep-funeral-residency'] === 'true') {
       res.redirect(prefix + 'funeral-location');
     } else {
-      const error = 'the deceased must have ordinarily been a UK resident';
+      const error = 'the person who died must have usually lived in the UK';
       return handleFailure(error, 'fep', req, res);
     }
   });
@@ -131,7 +131,7 @@ const generateRoutes = (router) => {
         res.redirect(prefix + 'check');
       }
     } else {
-      if (version ==='v11') {
+      if (version === 'v11' || version === 'v12') {
         return res.redirect(prefix + 'funeral-location-eu');
       }
       const error = 'the location of the funeral must be in the UK or EU';
@@ -147,7 +147,7 @@ const generateRoutes = (router) => {
     if (data['fep-funeral-location-eu'] === 'true') {
         res.redirect(prefix + 'check');
     } else {
-      const error = 'the funeral must be held in the UK, European Economic Area (EEA) or Switzerland';
+      const error = 'the funeral must be in the UK, EEA or Switzerland';
       return handleFailure(error, 'fep', req, res);
     }
   });
