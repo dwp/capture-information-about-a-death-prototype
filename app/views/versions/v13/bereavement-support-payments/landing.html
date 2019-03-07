@@ -1,0 +1,29 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% from "date-input/macro.njk"    import govukDateInput %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Bereavement Support Payment</h1>
+      {% if isEligibleForBsp %}
+        {% include "versions/" + version + "/bereavement-support-payments/eligible.html" %}
+      {% else %}
+        {% include "versions/" + version + "/bereavement-support-payments/ineligible.html" %}
+      {% endif %}
+
+      {% if isEligibleForBsp %}
+        {% set bspTargetUrl = "questions" %}
+      {% else %}
+        {% set bspTargetUrl = "../funeral-expense-payments/landing" %}
+      {% endif %}
+      <a href={{bspTargetUrl}} role="button" class="govuk-button govuk-!-margin-bottom-3">
+        Continue
+      </a>
+      {% if isEligibleForBsp %}
+        <p>
+          <a href="../funeral-expense-payments/landing">Skip this page</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-l">Funeral Expenses Payment</h2>
+    <article>
+      <div>
+        {{ govukTag({
+          attributes: { id: "eligibility-completed" },
+          classes: "app-task-list__task-completed tag-red stuff eligible-tag",
+          text: "Not eligible"
+        }) }}
+      </div>
+      <p>The caller's details can't be given to the Funeral Expenses Payment team.</p>
+      <p>They aren't eligible because {{data.fepFailure}}.</p>
+      <p>They can still apply using a paper form. They can find and download a form from GOV.UK by searching for “funeral costs”.</p>
+      <a href="../declaration" class="govuk-button" role="button">{{"continue" | translate}}</a>
+    </article>
+  </div>
+</div>
+{% endblock %}

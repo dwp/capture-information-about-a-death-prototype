@@ -1,0 +1,53 @@
+{% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
+
+{% block formContent %}
+  {% if data.funeralLocationError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.funeralLocationError,
+          href: "#fep-funeral-location-1"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="claimant-details">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Is the funeral being held in the European Economic Area (EEA) or Switzerland?
+          </h1>
+        </legend>
+
+        {% from "details/macro.njk" import govukDetails %}
+
+        {{ govukDetails({
+          summaryText: "The European Economic Area (EEA)",
+          text: "Austria, Belgium, Bulgaria, Croatia, Republic of Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Malta, Netherlands, Norway, Poland, Portugal, Romania, Slovakia, Slovenia, Spain, Sweden, Switzerland and the UK"
+        }) }}
+
+        <div class="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="fep-funeral-location-eu-1" name="fep-funeral-location-eu" type="radio" value="true">
+            <label class="govuk-label govuk-radios__label" for="fep-funeral-location-eu-1">
+              Yes
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="fep-funeral-location-eu-2" name="fep-funeral-location-eu" type="radio" value="false">
+            <label class="govuk-label govuk-radios__label" for="fep-funeral-location-eu-2">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

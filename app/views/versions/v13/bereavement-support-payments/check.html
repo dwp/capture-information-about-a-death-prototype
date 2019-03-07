@@ -1,0 +1,311 @@
+{% extends "layout-full-width.html" %} {% set agent = true %}
+{% block page_title %} {{"app_title" | translate}} {% endblock %}
+{% block beforeContent %}
+
+{% endblock %}
+{%block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{"check_title" | translate}}</h1>
+    <p>{{ "check_description_bsp" | translate}}</p>
+    <dl class="app-check-your-answers app-check-your-answers--long">
+      {% if (data['caller-national-insurance']) %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "national_insurance" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['caller-national-insurance']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="questions#caller-national-insurance-group">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "national_insurance" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if (data['caller-sex']) %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "caller_sex" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{ data['caller-sex'] | title }}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="questions#caller-sex-group">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "caller_sex" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if (data['bsp-dependants']) %}
+        {% if data['bsp-dependants'] === 'true' %}
+          {% set childBenefit = 'Yes' %}
+        {% elif data['bsp-dependants'] === 'false' %}
+          {% if data['child-benefit-eligible'] and data['child-benefit-eligible'] === 'true' %}
+            {% set childBenefit = 'Eligible' %}
+          {% else %}
+            {% set childBenefit = 'No' %}
+          {% endif %}
+        {% endif %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "Child Benefit" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{childBenefit}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="questions#bsp-dependants">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "caller_sex" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+
+      {# this means caller lives at the same address as deceased #}
+      {% if data['deceased-address'] == 'true' %}
+        {%
+          if (data['deceased-line-1']) or (data['deceased-line-2'])
+          or (data['deceased-town-city']) or (data['deceased-county'])
+          or (data['deceased-postcode'])
+        %}
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              {{ "address" | translate }}
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {% if (data['deceased-line-1']) %}
+                {{data['deceased-line-1']}}
+                <br />
+              {% endif %}
+              {% if (data['deceased-line-2']) %}
+                {{data['deceased-line-2']}}
+                <br />
+              {% endif %}
+              {% if (data['deceased-town-city']) %}
+                {{data['deceased-town-city']}}
+                <br />
+              {% endif %}
+              {% if (data['deceased-county']) %}
+                {{data['deceased-county']}}
+                <br />
+              {% endif %}
+              {% if (data['deceased-postcode']) %}
+                {{data['deceased-postcode']}}
+              {% endif %}
+            </dd>
+            <dd class="app-check-your-answers__change"></dd>
+          </div>
+        {% endif %}
+      {% elif ((data['death-arrears-nok'] === 'caller') or
+        (data['death-arrears-executor'] === 'caller') or
+        (data['death-arrears-administrator'] === 'caller'))
+        and data['dap-line-1']
+      %}
+        {%
+          if (data['dap-line-1']) or (data['dap-line-2'])
+          or (data['dap-town-city']) or (data['dap-county'])
+          or (data['dap-postcode'])
+        %}
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              {{ "address" | translate }}
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {% if (data['dap-line-1']) %}
+                {{data['dap-line-1']}}
+                <br />
+              {% endif %}
+              {% if (data['dap-line-2']) %}
+                {{data['dap-line-2']}}
+                <br />
+              {% endif %}
+              {% if (data['dap-town-city']) %}
+                {{data['dap-town-city']}}
+                <br />
+              {% endif %}
+              {% if (data['dap-county']) %}
+                {{data['dap-county']}}
+                <br />
+              {% endif %}
+              {% if (data['dap-postcode']) %}
+                {{data['dap-postcode']}}
+              {% endif %}
+            </dd>
+            <dd class="app-check-your-answers__change"></dd>
+          </div>
+        {% endif %}
+      {% else %}
+        {%
+          if (data['bsp-line-1']) or (data['bsp-line-2'])
+          or (data['bsp-town-city']) or (data['bsp-county'])
+          or (data['bsp-postcode'])
+        %}
+          <div class="app-check-your-answers__contents">
+            <dt class="app-check-your-answers__question">
+              {{ "address" | translate }}
+            </dt>
+            <dd class="app-check-your-answers__answer">
+              {% if (data['bsp-line-1']) %}
+                {{data['bsp-line-1']}}
+                <br />
+              {% endif %}
+              {% if (data['bsp-line-2']) %}
+                {{data['bsp-line-2']}}
+                <br />
+              {% endif %}
+              {% if (data['bsp-town-city']) %}
+                {{data['bsp-town-city']}}
+                <br />
+              {% endif %}
+              {% if (data['bsp-county']) %}
+                {{data['bsp-county']}}
+                <br />
+              {% endif %}
+              {% if (data['bsp-postcode']) %}
+                {{data['bsp-postcode']}}
+              {% endif %}
+            </dd>
+            <dd class="app-check-your-answers__change">
+              <a href="questions#bsp-address-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "address" | translate }}</span>
+              </a>
+            </dd>
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% if data['bsp-bank-full-name'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "account_holders_name" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['bsp-bank-full-name']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            {% if data['bsp-bank-or-building'] === 'bank' %}
+              <a href="payee-bank-account-details#bsp-full-name-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "account_holders_name" | translate }}</span>
+              </a>
+            {% endif %}
+
+            {% if data['bsp-bank-or-building'] === 'building-society' %}
+              <a href="payee-building-society-account-details#bsp-full-name-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "account_holders_name" | translate }}</span>
+              </a>
+            {% endif %}
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['bsp-bank-name'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "bank_name" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['bsp-bank-name']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            {% if data['bsp-bank-or-building'] === 'bank' %}
+              <a href="payee-bank-account-details#bsp-bank-name-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "bank_name" | translate }}</span>
+              </a>
+            {% endif %}
+
+            {% if data['bsp-bank-or-building'] === 'building-society' %}
+              <a href="payee-building-society-account-details#bsp-bank-name-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "bank_name" | translate }}</span>
+              </a>
+            {% endif %}
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['bsp-bank-account-no'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "bank_account_no" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['bsp-bank-account-no']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            {% if data['bsp-bank-or-building'] === 'bank' %}
+              <a href="payee-bank-account-details#bsp-bank-account-no-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "bank_account_no" | translate }}</span>
+              </a>
+            {% endif %}
+
+            {% if data['bsp-bank-or-building'] === 'building-society' %}
+              <a href="payee-building-society-account-details#bsp-bank-account-no-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "bank_account_no" | translate }}</span>
+              </a>
+            {% endif %}
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['bsp-bank-sort-code'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "bank_sort_code" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['bsp-bank-sort-code']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            {% if data['bsp-bank-or-building'] === 'bank' %}
+              <a href="payee-bank-account-details#bsp-bank-sort-code-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "bank_sort_code" | translate }}</span>
+              </a>
+            {% endif %}
+
+            {% if data['bsp-bank-or-building'] === 'building-society' %}
+              <a href="payee-building-society-account-details#bsp-bank-sort-code-group">
+                {{ "change" | translate }}
+                <span class="govuk-visually-hidden"> {{ "bank_sort_code" | translate }}</span>
+              </a>
+            {% endif %}
+          </dd>
+        </div>
+      {% endif %}
+
+      {% if data['bsp-building-soc-roll'] %}
+        <div class="app-check-your-answers__contents">
+          <dt class="app-check-your-answers__question">
+            {{ "building_soc_roll" | translate }}
+          </dt>
+          <dd class="app-check-your-answers__answer">
+            {{data['bsp-building-soc-roll']}}
+          </dd>
+          <dd class="app-check-your-answers__change">
+            <a href="payee-building-society-account-details#bsp-building-soc-roll-group">
+              {{ "change" | translate }}
+              <span class="govuk-visually-hidden"> {{ "building_soc_roll" | translate }}</span>
+            </a>
+          </dd>
+        </div>
+      {% endif %}
+    </dl>
+    <a href="../funeral-expense-payments/landing" class="govuk-button" role="button">{{"continue" | translate}}</a>
+  </div>
+</div>
+
+{% endblock %}

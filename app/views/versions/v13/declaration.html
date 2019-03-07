@@ -1,0 +1,16 @@
+{% extends "layout-full-width.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Declaration – read to the caller</h1>
+    <p>The information you’ve given will be used to update benefit records.</p>
+    <p>You agree that the information you’ve given is correct and complete as far as you know.</p>
+    {{ govukWarningText({
+      text: "If you knowingly give false information you could be prosecuted or face other action.",
+      iconFallbackText: "Warning"
+    }) }}
+    <a href="complete" class="govuk-button" role="button">Agree and send</a>
+  </div>
+</div>
+{% endblock %}

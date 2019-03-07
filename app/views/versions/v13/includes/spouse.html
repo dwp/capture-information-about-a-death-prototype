@@ -1,0 +1,40 @@
+{% call govukFieldset({
+  legend: {
+    classes: "govuk-fieldset__legend--l",
+    isPageHeading: false,
+    html: "caller_details_heading" | translate + "<span class='govuk-hint'>We need this to work out Bereavement Support Payment eligibility.</span>"
+  },
+  classes: "spouse-group"
+}) %}
+  <div class="spouse-dob-group" id="spouse-dob-group">
+    {{ govukDateInput({
+      id: "spouse-dob",
+      name: "spouse-dob",
+      value: data["spouse-dob"],
+      fieldset: {
+        legend: {
+          text: "dob_title" | translate,
+          isPageHeading: false,
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      hint: {
+        text: "dob_hint" | translate
+      },
+      items: [
+        {
+          name: "day",
+          value: data['spouse-dob-day']
+        },
+        {
+          name: "month",
+          value: data['spouse-dob-month']
+        },
+        {
+          name: "year",
+          value: data['spouse-dob-year']
+        }
+      ]
+    }) }}
+  </div>
+{% endcall %}

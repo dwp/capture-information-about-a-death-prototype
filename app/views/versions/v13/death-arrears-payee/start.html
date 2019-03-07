@@ -1,0 +1,47 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <form method="post" action="../payee-details">
+
+    {{ govukRadios({
+      idPrefix: "who-is-dap",
+      name: "who-is-dap",
+      fieldset: {
+        legend: {
+          text: "Who is responsible for dealing with the property, belongings and money of the person who died?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+
+      hint: {
+        text: "We need to know in case we owe benefit money or some needs to be paid back."
+      },
+
+      items: [
+        {
+          value: "you",
+          text: "You"
+        },
+        {
+          value: "someone",
+          text: "Someone else"
+        },
+
+        {
+          divider: "or"
+        },
+        {
+          value: "idk",
+          text: "I don't know"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}
