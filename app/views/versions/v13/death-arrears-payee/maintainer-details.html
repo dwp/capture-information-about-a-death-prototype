@@ -1,0 +1,36 @@
+{% from "date-input/macro.njk"    import govukDateInput %}
+{% extends "versions/v1/bereavement-support-payments/layout.html" %}
+
+{% block formContent %}
+  <form method="post" action="maintainer-payee">
+    {{ govukRadios({
+      id: "death-arrears-maintainer",
+      name: "death-arrears-maintainer",
+      fieldset: {
+        legend: {
+          text: "who_is_maintainer" | translate,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [
+        {
+          value: "caller",
+          text: "The caller",
+          checked: true if data['death-arrears-maintainer'] == 'true' else false
+        },
+        {
+          value: "someone-else",
+          text: "Someone else",
+          checked: true if data['death-arrears-maintainer'] == 'false' else false
+        }
+      ]
+      })
+    }}
+
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}

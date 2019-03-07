@@ -1,0 +1,56 @@
+{% from "tabs/macro.njk" import govukTabs %} {% extends "layout-full-width.html" %} {% set agent = true %} {% block page_title %} {{"app_title" | translate}} {% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row" id="deceased-hospital-group">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="post" action="spouse-route-handler" class="hospital-lookup-container">
+        {% set hospitalInfoHtml %}
+          {{ govukInput({
+            label: {
+              text: "hospital_location" | translate,
+              classes: "govuk-!-font-weight-bold",
+              attributes: {
+                id: "caller-full-name-group"
+              }
+            },
+            id: "hospital-location",
+            name: "hospital-location",
+            classes: "govuk-!-width-two-thirds",
+            value: data["hospital-location"]
+          }) }}
+        {% endset %}
+
+        {{ govukRadios({
+          idPrefix: "hospital-death-conditional",
+          name: "hospital-death",
+          fieldset: {
+            legend: {
+              text: "hospital_question" | translate,
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: true,
+              text: "Yes",
+              conditional: {
+                html: hospitalInfoHtml
+              },
+              checked: true if data['hospital-death'] == 'true' else false
+            },
+            {
+              value: false,
+              text: "No",
+              checked: true if data['hospital-death'] == 'false' else false
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

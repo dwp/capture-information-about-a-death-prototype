@@ -131,7 +131,7 @@ const generateRoutes = (router) => {
         res.redirect(prefix + 'check');
       }
     } else {
-      if (version === 'v11' || version === 'v12') {
+      if (version === 'v11' || version === 'v12' || version === 'v13') {
         return res.redirect(prefix + 'funeral-location-eu');
       }
       const error = 'the location of the funeral must be in the UK or EU';

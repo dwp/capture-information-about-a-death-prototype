@@ -1,0 +1,8 @@
+{% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
+
+{% block formContent %}
+  <h1 class="govuk-heading-l">What we will do next</h1>
+  <p>If there’s any benefit money still to pay or if some needs paid back, we’ll send a letter explaining what to do next.</p>
+  <p>The letter is usually sent to the address of the person who’s died.</p>
+  <a href="../notification-check" class="govuk-button" role="button">{{"continue" | translate}}</a>
+{% endblock %}

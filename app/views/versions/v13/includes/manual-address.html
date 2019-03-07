@@ -1,0 +1,59 @@
+{% call govukFieldset({
+  classes: 'address-group',
+  legend: {
+    html: address_label or "address" | translate,
+    classes: "govuk-fieldset__legend--s",
+    isPageHeading: false
+  }
+}) %}
+  {{ govukInput({
+    label: {
+      text: "building_line_1" | translate | safe
+    },
+    id:  prefix + "-line-1",
+    name:  prefix + "-line-1",
+    classes: "govuk-!-width-two-thirds",
+    value: data[prefix + "-line-1"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "building_line_2" | translate,
+      classes: "govuk-visually-hidden"
+    },
+    id:  prefix + "-line-2",
+    name:  prefix + "-line-2",
+    classes: "govuk-!-width-two-thirds",
+    value: data[prefix + "-line-2"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "town_city" | translate
+    },
+    id:  prefix + "-town-city",
+    name:  prefix + "-town-city",
+    classes: "govuk-!-width-two-thirds",
+    value: data[prefix + "-town-city"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "county" | translate
+    },
+    id:  prefix + "-county",
+    name:  prefix + "-county",
+    classes: "govuk-!-width-two-thirds",
+    value: data[prefix + "-county"]
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "postcode" | translate
+    },
+    id:  prefix + "-postcode",
+    name:  prefix + "-postcode",
+    classes: "govuk-!-width-two-thirds",
+    value: data[prefix + "-postcode"]
+  }) }}
+{% endcall %}

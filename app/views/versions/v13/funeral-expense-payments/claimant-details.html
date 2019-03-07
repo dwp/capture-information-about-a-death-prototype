@@ -1,0 +1,71 @@
+{% extends "versions/" + version + "/funeral-expense-payments/layout.html" %}
+
+{% block formContent %}
+  {% if data.funeralLocationError %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: data.funeralLocationError,
+          href: "#fep-funeral-location-1"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form method="post" action="check">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            About the claimant
+          </h1>
+        </legend>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="fep-nino">
+            <b>National Insurance number</b>
+          </label>
+          <input class="govuk-input govuk-input--width-20" id="fep-nino" name="fep-nino" type="text" value="{{ data['fep-nino'] }}">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="fep-address-line-one">
+            <b>Address</b><br>
+            Building and street
+          </label>
+          <input class="govuk-input govuk-input--width-20" id="fep-address-line-one" name="fep-address-line-one" type="text" value="{{ data['fep-address-line-one'] }}">
+        </div>
+
+        <div class="fep-address-line-two">
+          <input class="govuk-input govuk-input--width-20" id="fep-address-line-two" name="fep-address-line-two" type="text" value="{{ data['fep-address-line-two'] }}">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="fep-address-line-town">
+            Town or city
+          </label>
+          <input class="govuk-input govuk-input--width-20" id="fep-address-line-town" name="fep-address-line-town" type="text" value="{{ data['fep-address-line-town'] }}">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="fep-address-line-county">
+            County
+          </label>
+          <input class="govuk-input govuk-input--width-20" id="fep-address-line-county" name="fep-address-line-county" type="text" value="{{ data['fep-address-line-county'] }}">
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="fep-address-line-postcode">
+            Postcode
+          </label>
+          <input class="govuk-input govuk-input--width-10" id="fep-address-line-postcode" name="fep-address-line-postcode" type="text" value="{{ data['fep-address-line-postcode'] }}">
+        </div>
+        
+      </fieldset>
+    </div>
+    {{ govukButton({
+      text: "continue" | translate,
+      id: "continue-eligibility"
+    }) }}
+  </form>
+{% endblock %}
